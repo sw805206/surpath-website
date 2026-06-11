@@ -1,0 +1,378 @@
+/* ==========================================================================
+   Surpath — shared stylesheet
+   Single source of CSS for all pages. Values mirror style/style.md.
+   When adding new patterns, document them in style/style.md first.
+   ========================================================================== */
+
+/* ---------- Design tokens (color variables — see style.md › Brand Colors) ---------- */
+:root {
+  /* Core brand */
+  --color-primary:        #2C4F5C; /* nav text/wordmark, hero, spec bar, CTA band */
+  --color-lime:           #A8D44F; /* slogan, accent, stats numbers, lime button */
+  --color-mid-teal:       #4A9E8E; /* eyebrow, logo mark, flow arrows */
+
+  /* Surfaces */
+  --color-nav-bg:         #F2F2F2;
+  --color-section-white:  #ffffff;
+  --color-section-sage:   #F5F9F0; /* alternate section + card background */
+  --color-card-bg:        #F5F9F0;
+  --color-card-border:    #d4e8c8;
+  --color-deep:           #1e3a45; /* stats bar + footer background */
+
+  /* Text */
+  --color-text:           #1E1E1E; /* body text */
+  --color-text-secondary: #555;    /* body text secondary */
+  --color-nav-link:       #444;
+  --color-white:          #fff;
+  --color-text-on-dark:   #c8dde3; /* hero body, spec text, CTA band body */
+  --color-text-muted:     #7aabb8; /* stats labels, footer text */
+  --color-footnote:       #888;
+  --color-icon:           #3a6b1a; /* card icons */
+
+  /* Lines / overlays */
+  --color-divider:        rgba(255,255,255,0.08); /* stat dividers */
+  --color-ghost-border:   rgba(255,255,255,0.35); /* ghost button border */
+}
+
+/* ---------- Reset & Base ---------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Avenir', 'Avenir Next', 'Nunito', sans-serif;
+  color: var(--color-text);
+  background: var(--color-section-white);
+}
+a { text-decoration: none; }
+
+/* ---------- Typography ---------- */
+/* Type scale is applied per component below; see style.md › Typography. */
+
+/* ---------- Buttons (style.md › Buttons) ---------- */
+.btn {
+  display: inline-block;
+  border-radius: 6px;
+  padding: 11px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+}
+.btn-dark    { background: var(--color-primary); color: var(--color-white); }
+.btn-lime    { background: var(--color-lime); color: var(--color-primary); }
+.btn-ghost   { background: transparent; border: 1px solid var(--color-ghost-border); color: var(--color-white); }
+.btn-outline { background: transparent; border: 1.5px solid var(--color-primary); color: var(--color-primary); }
+/* Hover states: PLACEHOLDER in style.md — intentionally not styled. */
+
+/* ---------- Navigation (style.md › Navigation) ---------- */
+.nav {
+  background: var(--color-nav-bg);
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+.nav-brand { display: flex; align-items: center; gap: 8px; }
+.nav-icon { width: 32px; height: 32px; border-radius: 6px; display: block; }
+.nav-wordmark { color: var(--color-primary); font-size: 16px; font-weight: 600; }
+.nav-menu { display: flex; align-items: center; gap: 20px; }
+.nav-link {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--color-nav-link);
+}
+.nav-link:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--color-lime);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+.nav-link.active {
+  color: var(--color-primary);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: var(--color-lime);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+.nav-cta {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-radius: 5px;
+  padding: 7px 16px;
+  font-size: 13px;
+}
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* ---------- Hero (style.md › Hero Section) ---------- */
+.hero {
+  background: var(--color-primary);
+  padding: 52px 28px;
+  color: var(--color-white);
+}
+.hero-slogan {
+  color: var(--color-lime);
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 14px;
+}
+.hero-eyebrow {
+  color: var(--color-mid-teal);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+.hero h1 {
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+.hero h1 .accent { color: var(--color-lime); }
+.hero-body {
+  color: var(--color-text-on-dark);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.7;
+  max-width: 500px;
+  margin-bottom: 24px;
+}
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ---------- Stats Bar (style.md › Stats Bar) ---------- */
+.stats {
+  background: var(--color-deep);
+  display: flex;
+  width: 100%;
+}
+.stat {
+  flex: 1;
+  padding: 16px 18px;
+  text-align: center;
+}
+.stat + .stat { border-left: 0.5px solid var(--color-divider); }
+.stat-number {
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--color-lime);
+  margin-bottom: 2px;
+}
+.stat-label {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}
+
+/* ---------- Sections (style.md › Section Layout / Layout) ---------- */
+.section { padding: 40px 28px; }
+.section-white { background: var(--color-section-white); }
+.section-sage  { background: var(--color-section-sage); }
+.eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-mid-teal);
+  margin-bottom: 8px;
+}
+.section-title {
+  font-size: 21px;
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: 8px;
+}
+.section-subtitle {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  margin-bottom: 28px;
+}
+
+/* ---------- Cards — Why Surpath (style.md › Cards) ---------- */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.card {
+  background: var(--color-card-bg);
+  border: 0.5px solid var(--color-card-border);
+  border-radius: 8px;
+  padding: 20px;
+}
+.card i {
+  font-size: 20px;
+  color: var(--color-icon);
+  display: block;
+  margin-bottom: 10px;
+}
+.card-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: 6px;
+}
+.card-body {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+.card-footnote {
+  font-size: 11px;
+  color: var(--color-footnote);
+  margin-top: 6px;
+}
+
+/* ---------- Service Lifecycle (style.md › Service Lifecycle Flow) ---------- */
+.flow { display: flex; align-items: stretch; }
+.flow-card {
+  flex: 1;
+  background: var(--color-white);
+  border: 0.5px solid var(--color-card-border);
+  border-radius: 8px;
+  padding: 20px 16px;
+  text-align: center;
+  position: relative;
+}
+.flow-card:not(:last-child)::after {
+  content: "\2192";
+  color: var(--color-mid-teal);
+  font-size: 14px;
+  position: absolute;
+  right: -7px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+.flow-emoji { font-size: 22px; margin-bottom: 8px; }
+.flow-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: 4px;
+}
+.flow-body {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+/* Text link (reuses style.md nav underline treatment) */
+.text-link { color: var(--color-primary); font-size: 14px; font-weight: 500; }
+.text-link:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--color-lime);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+.services-link { text-align: center; padding-top: 24px; }
+
+/* ---------- Spec Bar (style.md › Spec Bar) ---------- */
+.spec-bar {
+  background: var(--color-primary);
+  padding: 14px 28px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.spec-item {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: var(--color-text-on-dark);
+}
+.spec-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-lime);
+  margin-right: 6px;
+  flex-shrink: 0;
+}
+
+/* ---------- CTA Band (style.md › CTA Band) ---------- */
+.cta-band {
+  background: var(--color-primary);
+  padding: 40px 28px;
+  text-align: center;
+}
+.cta-band h2 {
+  font-size: 21px;
+  font-weight: 500;
+  color: var(--color-white);
+  margin-bottom: 8px;
+}
+.cta-band p {
+  font-size: 14px;
+  color: var(--color-text-on-dark);
+  margin-bottom: 20px;
+}
+
+/* ---------- Footer (style.md › Footer) ---------- */
+.footer {
+  background: var(--color-deep);
+  padding: 16px 28px;
+  text-align: center;
+}
+.footer p { font-size: 12px; color: var(--color-text-muted); }
+
+/* ---------- Utilities ---------- */
+/* (none yet — reserved for shared helper classes) */
+
+/* ---------- Mobile — max-width 768px ---------- */
+@media (max-width: 768px) {
+  .nav-toggle { display: block; }
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: var(--color-nav-bg);
+    z-index: 10;
+  }
+  .nav-menu.open { display: flex; }
+  .nav-menu .nav-link,
+  .nav-menu .nav-cta {
+    display: block;
+    width: 100%;
+    padding: 16px;
+  }
+  .nav-cta { border-radius: 0; text-align: left; }
+
+  .stats { flex-wrap: wrap; }
+  .stat { flex: 1 1 50%; }
+  .stat:nth-child(odd)  { border-left: none; }
+  .stat:nth-child(n+3)  { border-top: 0.5px solid var(--color-divider); }
+
+  .card-grid { grid-template-columns: 1fr; }
+
+  .flow { flex-direction: column; }
+  .flow-card:not(:last-child)::after {
+    right: 50%;
+    top: auto;
+    bottom: -10px;
+    transform: translateX(50%) rotate(90deg);
+  }
+}
