@@ -339,13 +339,19 @@ a { text-decoration: none; }
 }
 
 /* ---------- Stats Footnote ---------- */
+/* Full-bleed background; inner wrapper aligns the text to the first stat
+   column (max-width 1280 centered + 18px left padding = the stat's padding). */
 .stats-footnote {
   background: var(--color-deep);
-  text-align: center;
+  margin: 0;
+}
+.stats-footnote-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 6px 18px 10px;
+  text-align: left;
   font-size: 11px;
   color: var(--color-footnote);
-  padding: 6px 28px 10px;
-  margin: 0;
 }
 .stats-footnote a {
   color: var(--color-footnote);
@@ -373,7 +379,10 @@ a { text-decoration: none; }
   object-position: center;
   display: block;
 }
-/* nth-of-type targets the 3rd card <a>, surviving the interleaved arrow spans */
+/* nth-of-type targets the card <a>, surviving the interleaved arrow spans */
+.service-card:nth-of-type(1) img {
+  object-position: 65% center; /* Global Freight Forwarding — nudged 15% right */
+}
 .service-card:nth-of-type(3) img {
   object-position: center 40%;
 }
@@ -494,9 +503,11 @@ a { text-decoration: none; }
 .map-section {
   background: var(--color-map-bg);
 }
-#map {
+/* Static inline SVG network map (no Leaflet/JS) */
+.svc-map {
+  display: block;
   width: 100%;
-  height: 420px;
+  height: 360px;
 }
 .map-legend {
   background: var(--color-deep);
@@ -539,6 +550,14 @@ a { text-decoration: none; }
   align-items: start;
 }
 .sc-layout .whitepaper-peek { margin-top: 0; }
+/* Right column: preview link sits above the peek box (outside its border) */
+.sc-peek-link {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--color-mid-teal);
+  font-size: 12px;
+  text-decoration: underline;
+}
 
 /* ---------- Supply Chain Design Bullets (style.md › Supply Chain Design Bullets) ---------- */
 .sc-bullets {
@@ -664,11 +683,11 @@ a { text-decoration: none; }
 .svc-block--reverse { flex-direction: row-reverse; }
 .svc-block-media {
   width: 40%;
-  min-height: 240px;
+  min-height: 360px;
 }
 .svc-block-media img {
   width: 100%;
-  height: 100%;
+  height: 360px;
   object-fit: cover;
   display: block;
 }
@@ -771,5 +790,6 @@ a { text-decoration: none; }
     min-height: 200px;
     height: 200px;
   }
+  .svc-block-media img { height: 200px; }
   .svc-block-content { padding: 24px 16px; }
 }
