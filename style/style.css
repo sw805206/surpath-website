@@ -381,6 +381,16 @@ a { text-decoration: none; }
   margin: 0;
 }
 
+/* ---------- Service Block Bullets ---------- */
+/* Explicit left alignment prevents inherited center alignment.
+   Full styles to be added when the Services page is built. */
+.svc-bullets {
+  text-align: left;
+}
+.svc-bullets li {
+  text-align: left;
+}
+
 /* ---------- See All Services Link ---------- */
 .services-see-all {
   display: inline-flex;
