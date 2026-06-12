@@ -6,6 +6,7 @@
   <title>Surpath — Services</title>
   <link rel="icon" type="image/png" href="asset/surpath-favicon.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
@@ -42,58 +43,9 @@
     </div>
   </section>
 
-  <!-- ===== 3. Map (static SVG — Asia left, US right) ===== -->
+  <!-- ===== 3. Map (Leaflet — Stadia dark tiles) ===== -->
   <section class="map-section">
-    <svg class="svc-map" viewBox="0 0 1000 300" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Surpath network: HQ, offices, and warehouses across Asia and the US">
-      <rect x="0" y="0" width="1000" height="300" fill="#1a2b3c"/>
-
-      <!-- Simplified landmasses -->
-      <g fill="#22394b" stroke="#33576a" stroke-width="1.2">
-        <!-- China -->
-        <path d="M150,150 C140,112 178,82 232,80 C288,80 322,102 332,138 C338,168 322,192 286,198 C250,202 214,202 184,190 C160,180 152,170 150,150 Z"/>
-        <!-- Vietnam / SE Asia -->
-        <path d="M240,196 C252,212 250,230 232,244 C212,258 190,264 172,260 C184,250 198,238 207,222 C214,210 222,200 240,196 Z"/>
-        <!-- Continental US -->
-        <path d="M560,150 C600,122 690,114 770,120 C850,124 905,130 918,152 C910,170 884,178 858,180 L852,206 L840,184 C782,184 690,186 620,182 C588,180 560,170 560,150 Z"/>
-      </g>
-
-      <!-- Warehouses (bottom layer) -->
-      <g fill="#7aabb8" stroke="#1a2b3c" stroke-width="1.5">
-        <circle cx="600" cy="160" r="5"><title>City of Industry, CA — Warehouse</title></circle>
-        <circle cx="610" cy="156" r="5"><title>Walnut, CA — Warehouse</title></circle>
-        <circle cx="620" cy="152" r="5"><title>Fontana, CA — Warehouse</title></circle>
-        <circle cx="606" cy="167" r="5"><title>Pomona, CA — Warehouse</title></circle>
-        <circle cx="616" cy="163" r="5"><title>Ontario, CA — Warehouse</title></circle>
-        <circle cx="598" cy="170" r="5"><title>Eastvale, CA — Warehouse</title></circle>
-        <circle cx="750" cy="179" r="5"><title>Houston, TX — Warehouse</title></circle>
-        <circle cx="745" cy="184" r="5"><title>Missouri City, TX — Warehouse</title></circle>
-        <circle cx="800" cy="127" r="5"><title>Montgomery, IL — Warehouse</title></circle>
-        <circle cx="852" cy="170" r="5"><title>Ellabell, GA — Warehouse</title></circle>
-        <circle cx="832" cy="160" r="5"><title>Hoschton, GA — Warehouse</title></circle>
-        <circle cx="826" cy="162" r="5"><title>Atlanta, GA — Warehouse</title></circle>
-        <circle cx="856" cy="171" r="5"><title>Pooler, GA — Warehouse</title></circle>
-        <circle cx="893" cy="132" r="5"><title>Robbinsville, NJ — Warehouse</title></circle>
-        <circle cx="900" cy="130" r="5"><title>Cranbury, NJ — Warehouse</title></circle>
-        <circle cx="890" cy="138" r="5"><title>Burlington, NJ — Warehouse</title></circle>
-        <circle cx="898" cy="137" r="5"><title>Florence, NJ — Warehouse</title></circle>
-        <circle cx="905" cy="133" r="5"><title>Hamilton, NJ — Warehouse</title></circle>
-        <circle cx="886" cy="135" r="5"><title>Mercer, NJ — Warehouse</title></circle>
-      </g>
-
-      <!-- Offices (middle layer — above warehouse) -->
-      <g fill="#4A9E8E" stroke="#1a2b3c" stroke-width="1.8">
-        <circle cx="610" cy="156" r="6"><title>Walnut, CA — Office</title></circle>
-        <circle cx="255" cy="192" r="6"><title>Shenzhen, China — Office</title></circle>
-        <circle cx="250" cy="95" r="6"><title>Beijing, China — Office</title></circle>
-        <circle cx="175" cy="250" r="6"><title>Ho Chi Minh City, Vietnam — Office</title></circle>
-      </g>
-
-      <!-- HQ (top layer) -->
-      <g fill="#A8D44F" stroke="#1a2b3c" stroke-width="2">
-        <circle cx="588" cy="160" r="7"><title>Brea, CA — Headquarter</title></circle>
-        <circle cx="300" cy="150" r="7"><title>Shanghai, China — Headquarter</title></circle>
-      </g>
-    </svg>
+    <div id="map"></div>
     <div class="map-legend">
       <span class="map-legend-item"><span class="legend-dot legend-dot--hq"></span>Headquarter</span>
       <span class="map-legend-item"><span class="legend-dot legend-dot--office"></span>Office</span>
@@ -133,15 +85,14 @@
       </ul>
 
       <div class="sc-peek-col">
-      <a class="sc-peek-link" href="contact.html">Preview a sample we prepared for a client — contact us to get yours ↗</a>
+      <a class="sc-peek-link" href="contact.html">Preview a sample we prepared for a client — contact us to get yours</a>
       <div class="whitepaper-peek">
         <p class="whitepaper-title">Supply Chain Design for E-Commerce Sellers — Sample</p>
         <p class="whitepaper-abstract">This document outlines a framework for optimizing cross-border supply chains for e-commerce sellers sourcing from China. It covers landed cost modeling, 3PL selection criteria, warehouse network design, and last-mile cost reduction strategies...</p>
         <p class="whitepaper-toc">Contents: 1. Introduction · 2. Landed Cost Analysis · 3. 3PL Cost Benchmarking · 4. Network Design · 5. Case Studies · 6. Recommendations</p>
-        <div class="whitepaper-fade">
-          <a class="whitepaper-cta" href="contact.html">Contact us to get your customized analysis ↗</a>
-        </div>
+        <div class="whitepaper-fade"></div>
       </div>
+      <a class="whitepaper-cta" href="contact.html">Contact us to get your customized analysis ↗</a>
       </div>
       </div>
     </div>
@@ -268,6 +219,7 @@
     </div>
   </footer>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
     // Hamburger menu toggle (vanilla JS)
     (function () {
@@ -282,6 +234,72 @@
           menu.classList.remove('open');
           toggle.setAttribute('aria-expanded', 'false');
         });
+      });
+    })();
+
+    // Interactive network map (Leaflet + Stadia dark tiles)
+    (function () {
+      if (typeof L === 'undefined') return; // CDN unavailable — fail gracefully
+
+      var map = L.map('map', {
+        center: [39.5, -98.5],
+        zoom: 4,
+        scrollWheelZoom: false
+      });
+
+      // Enable scroll zoom only while the map is focused (click)
+      map.on('focus', function () { map.scrollWheelZoom.enable(); });
+      map.on('blur', function () { map.scrollWheelZoom.disable(); });
+
+      L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
+        attribution: '© Stadia Maps © OpenMapTiles © OpenStreetMap contributors',
+        maxZoom: 20
+      }).addTo(map);
+
+      var styles = {
+        hq:        { color: '#1a2b3c', weight: 2,   fillColor: '#A8D44F', fillOpacity: 0.95, radius: 8 },
+        office:    { color: '#1a2b3c', weight: 2,   fillColor: '#4A9E8E', fillOpacity: 0.9,  radius: 6 },
+        warehouse: { color: '#1a2b3c', weight: 1.5, fillColor: '#7aabb8', fillOpacity: 0.85, radius: 5 }
+      };
+
+      var labels = { hq: 'HQ', office: 'Office', warehouse: 'Warehouse' };
+
+      var locations = [
+        // HQ
+        { name: 'Brea, CA', type: 'hq', lat: 33.9167, lng: -117.9000 },
+
+        // Offices
+        { name: 'Walnut, CA', type: 'office', lat: 34.0219, lng: -117.8672 },
+        { name: 'Shenzhen, China', type: 'office', lat: 22.5431, lng: 114.0579 },
+        { name: 'Beijing, China', type: 'office', lat: 39.9042, lng: 116.4074 },
+        { name: 'Ho Chi Minh City, Vietnam', type: 'office', lat: 10.8231, lng: 106.6297 },
+
+        // Warehouses
+        { name: 'City of Industry, CA', type: 'warehouse', lat: 34.0181, lng: -117.9514 },
+        { name: 'Walnut, CA', type: 'warehouse', lat: 34.0219, lng: -117.8672 },
+        { name: 'Fontana, CA', type: 'warehouse', lat: 34.0922, lng: -117.4350 },
+        { name: 'Pomona, CA', type: 'warehouse', lat: 34.0553, lng: -117.7500 },
+        { name: 'Ontario, CA', type: 'warehouse', lat: 34.0633, lng: -117.6509 },
+        { name: 'Eastvale, CA', type: 'warehouse', lat: 33.9525, lng: -117.5820 },
+        { name: 'Houston, TX', type: 'warehouse', lat: 29.7604, lng: -95.3698 },
+        { name: 'Missouri City, TX', type: 'warehouse', lat: 29.6185, lng: -95.5377 },
+        { name: 'Montgomery, IL', type: 'warehouse', lat: 41.7320, lng: -88.3554 },
+        { name: 'Ellabell, GA', type: 'warehouse', lat: 32.1454, lng: -81.5124 },
+        { name: 'Hoschton, GA', type: 'warehouse', lat: 34.0973, lng: -83.7577 },
+        { name: 'Atlanta, GA', type: 'warehouse', lat: 33.7490, lng: -84.3880 },
+        { name: 'Pooler, GA', type: 'warehouse', lat: 32.1157, lng: -81.2479 },
+        { name: 'Robbinsville, NJ', type: 'warehouse', lat: 40.2204, lng: -74.6274 },
+        { name: 'Cranbury, NJ', type: 'warehouse', lat: 40.3115, lng: -74.5132 },
+        { name: 'Burlington, NJ', type: 'warehouse', lat: 40.0723, lng: -74.8605 },
+        { name: 'Florence, NJ', type: 'warehouse', lat: 40.1143, lng: -74.7896 },
+        { name: 'Hamilton, NJ', type: 'warehouse', lat: 40.2429, lng: -74.7596 },
+        { name: 'Mercer, NJ', type: 'warehouse', lat: 40.2260, lng: -74.7596 }
+      ];
+
+      locations.forEach(function (loc) {
+        L.circleMarker([loc.lat, loc.lng], styles[loc.type])
+          .addTo(map)
+          .bindPopup('<strong>' + loc.name + '</strong><br>' + labels[loc.type]);
       });
     })();
   </script>
