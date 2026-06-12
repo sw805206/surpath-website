@@ -510,9 +510,12 @@ a { text-decoration: none; }
 }
 .map-legend {
   background: var(--color-deep);
-  padding: 10px 28px;
+  padding: 10px 0;
+}
+.map-legend-inner {
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-start;
   gap: 20px;
 }
 .map-legend-item {
@@ -781,7 +784,7 @@ a { text-decoration: none; }
     transform: translateX(50%) rotate(90deg);
   }
 
-  .map-legend { padding: 10px 16px; }
+  .map-legend { padding: 10px 0; }
 
   /* Service blocks stack; image full width above content */
   .svc-block,

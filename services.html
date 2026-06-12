@@ -47,9 +47,11 @@
   <section class="map-section">
     <div id="map"></div>
     <div class="map-legend">
-      <span class="map-legend-item"><span class="legend-dot legend-dot--hq"></span>Headquarter</span>
-      <span class="map-legend-item"><span class="legend-dot legend-dot--office"></span>Office</span>
-      <span class="map-legend-item"><span class="legend-dot legend-dot--warehouse"></span>Warehouse</span>
+      <div class="container map-legend-inner">
+        <span class="map-legend-item"><span class="legend-dot legend-dot--hq"></span>Headquarter</span>
+        <span class="map-legend-item"><span class="legend-dot legend-dot--office"></span>Office</span>
+        <span class="map-legend-item"><span class="legend-dot legend-dot--warehouse"></span>Warehouse</span>
+      </div>
     </div>
   </section>
 
@@ -242,8 +244,8 @@
       if (typeof L === 'undefined') return; // CDN unavailable — fail gracefully
 
       var map = L.map('map', {
-        center: [39.5, -98.5],
-        zoom: 4,
+        center: [20, 160],
+        zoom: 2,
         scrollWheelZoom: false
       });
 
@@ -267,6 +269,7 @@
       var locations = [
         // HQ
         { name: 'Brea, CA', type: 'hq', lat: 33.9167, lng: -117.9000 },
+        { name: 'Shanghai, China', type: 'hq', lat: 31.2304, lng: 121.4737 },
 
         // Offices
         { name: 'Walnut, CA', type: 'office', lat: 34.0219, lng: -117.8672 },
