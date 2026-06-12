@@ -18,6 +18,7 @@
   --color-card-bg:        #F5F9F0;
   --color-card-border:    #d4e8c8;
   --color-deep:           #1e3a45; /* stats bar + footer background */
+  --color-map-bg:         #1a2b3c; /* services map section background */
 
   /* Text */
   --color-text:           #1E1E1E; /* body text */
@@ -381,14 +382,34 @@ a { text-decoration: none; }
   margin: 0;
 }
 
-/* ---------- Service Block Bullets ---------- */
-/* Explicit left alignment prevents inherited center alignment.
-   Full styles to be added when the Services page is built. */
+/* ---------- Service Block Bullets (style.md › Service Blocks) ---------- */
+/* Explicit left alignment prevents inherited center alignment. */
 .svc-bullets {
+  list-style: none;
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
 }
 .svc-bullets li {
   text-align: left;
+  position: relative;
+  padding-left: 16px;
+  font-size: 12px;
+  color: var(--color-nav-link);
+  line-height: 1.55;
+}
+.svc-bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-mid-teal);
 }
 
 /* ---------- See All Services Link ---------- */
@@ -448,6 +469,218 @@ a { text-decoration: none; }
   font-weight: 500;
 }
 
+/* ==========================================================================
+   Services page
+   ========================================================================== */
+
+/* ---------- Map Section (style.md › Map Section) ---------- */
+.map-section {
+  background: var(--color-map-bg);
+}
+#map {
+  width: 100%;
+  height: 420px;
+}
+.map-legend {
+  background: var(--color-deep);
+  padding: 10px 28px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.map-legend-item {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: var(--color-text-on-dark);
+}
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+.legend-dot--hq        { background: var(--color-lime); }
+.legend-dot--office    { background: var(--color-mid-teal); }
+.legend-dot--warehouse { background: var(--color-text-muted); }
+
+/* ---------- Section Note (style.md › Section Note) ---------- */
+.section-note {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  margin-bottom: 24px;
+}
+
+/* ---------- Supply Chain Design Bullets (style.md › Supply Chain Design Bullets) ---------- */
+.sc-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+}
+.sc-bullet {
+  position: relative;
+  padding-left: 18px;
+}
+.sc-bullet::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-lime);
+}
+.sc-bullet-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 2px;
+}
+.sc-bullet-sub {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+.sc-bullet-link {
+  display: inline-block;
+  margin-top: 4px;
+  color: var(--color-mid-teal);
+  font-size: 12px;
+  text-decoration: underline;
+}
+
+/* ---------- Whitepaper Sneak Peek (style.md › Whitepaper Sneak Peek) ---------- */
+.whitepaper-peek {
+  position: relative;
+  margin-top: 24px;
+  max-height: 130px;
+  overflow: hidden;
+  background: var(--color-white);
+  border: 0.5px solid var(--color-card-border);
+  border-radius: 8px;
+  padding: 16px 20px;
+}
+.whitepaper-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-primary);
+  margin-bottom: 6px;
+}
+.whitepaper-abstract {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+.whitepaper-toc {
+  font-size: 11px;
+  color: var(--color-footnote);
+  margin-top: 6px;
+}
+.whitepaper-fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 56px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: linear-gradient(rgba(255,255,255,0), var(--color-white));
+}
+.whitepaper-cta {
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-size: 11px;
+  padding: 5px 16px;
+  border-radius: 5px;
+  margin-bottom: 6px;
+}
+
+/* ---------- Core Services Header Bar (style.md › Core Services Header Bar) ---------- */
+.core-bar {
+  background: var(--color-text); /* #1E1E1E */
+  padding: 20px 0;
+}
+.core-bar-eyebrow {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-mid-teal);
+  margin-bottom: 6px;
+}
+.core-bar-title {
+  font-size: 19px;
+  font-weight: 500;
+  color: var(--color-white);
+  margin-bottom: 6px;
+}
+.core-bar-body {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+/* ---------- Service Blocks (style.md › Service Blocks) ---------- */
+.band-white { background: var(--color-section-white); }
+.band-sage  { background: var(--color-section-sage); }
+.svc-block {
+  display: flex;
+  align-items: stretch;
+  min-height: 240px;
+}
+.svc-block--reverse { flex-direction: row-reverse; }
+.svc-block-media {
+  width: 40%;
+  min-height: 240px;
+}
+.svc-block-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.svc-block-content {
+  flex: 1;
+  padding: 32px 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.svc-block-eyebrow {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-mid-teal);
+  margin-bottom: 8px;
+}
+.svc-block-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: 8px;
+}
+.svc-block-desc {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  line-height: 1.65;
+  margin-bottom: 14px;
+}
+
+/* ---------- CTA Band — multi-button row (style.md › CTA Band — multi-button row) ---------- */
+.cta-band-cta {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 /* ---------- Mobile — max-width 768px ---------- */
 @media (max-width: 768px) {
   .nav-toggle { display: block; }
@@ -494,4 +727,16 @@ a { text-decoration: none; }
     bottom: -10px;
     transform: translateX(50%) rotate(90deg);
   }
+
+  .map-legend { padding: 10px 16px; }
+
+  /* Service blocks stack; image full width above content */
+  .svc-block,
+  .svc-block--reverse { flex-direction: column; }
+  .svc-block-media {
+    width: 100%;
+    min-height: 200px;
+    height: 200px;
+  }
+  .svc-block-content { padding: 24px 16px; }
 }
