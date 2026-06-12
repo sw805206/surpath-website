@@ -307,6 +307,68 @@ a { text-decoration: none; }
   flex-shrink: 0;
 }
 
+/* ---------- Stats Footnote ---------- */
+.stats-footnote {
+  background: var(--color-deep);
+  text-align: center;
+  font-size: 11px;
+  color: var(--color-footnote);
+  padding: 6px 28px 10px;
+  margin: 0;
+}
+.stats-footnote a {
+  color: var(--color-footnote);
+  text-decoration: underline;
+}
+
+/* ---------- Service Image Cards ---------- */
+.service-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 2rem;
+}
+.service-card {
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--color-white);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+.service-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+.service-card-body {
+  padding: 14px 16px;
+}
+.service-card-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 4px;
+  color: var(--color-text);
+}
+.service-card-sub {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* ---------- See All Services Link ---------- */
+.services-see-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 500;
+}
+.see-all-arrow {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1;
+}
+
 /* ---------- CTA Band (style.md › CTA Band) ---------- */
 .cta-band {
   background: var(--color-primary);
@@ -362,11 +424,12 @@ a { text-decoration: none; }
   .nav-cta { border-radius: 0; text-align: left; }
 
   .stats { flex-wrap: wrap; }
-  .stat { flex: 1 1 50%; }
+  .stat { flex: 1 1 33.33%; }
   .stat:nth-child(odd)  { border-left: none; }
   .stat:nth-child(n+3)  { border-top: 0.5px solid var(--color-divider); }
 
   .card-grid { grid-template-columns: 1fr; }
+  .service-cards { grid-template-columns: 1fr; }
 
   .flow { flex-direction: column; }
   .flow-card:not(:last-child)::after {
