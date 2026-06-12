@@ -364,7 +364,7 @@ a { text-decoration: none; }
   display: block;
 }
 .service-card:nth-child(3) img {
-  object-position: center 30%;
+  object-position: center 40%;
 }
 .service-card-body {
   padding: 14px 16px;
