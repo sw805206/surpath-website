@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surpath — Services</title>
+  <link rel="icon" type="image/png" href="asset/surpath-favicon.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+
+  <!-- ===== 1. Nav ===== -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="nav-brand" href="index.html" aria-label="Surpath">
+        <svg class="nav-icon" width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Surpath">
+          <rect width="32" height="32" rx="6" fill="#4A9E8E"/>
+          <text x="16" y="22" text-anchor="middle" font-family="'Avenir','Avenir Next','Nunito',sans-serif" font-size="18" font-weight="600" fill="#ffffff">S</text>
+        </svg>
+        <span class="nav-wordmark">surpath.</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+        <i class="ti ti-menu-2"></i>
+      </button>
+      <div class="nav-menu" id="navMenu">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link active" href="services.html">Services</a>
+        <a class="nav-link" href="partners.html">Partners</a>
+        <a class="nav-link" href="contact.html">Contact</a>
+        <a class="nav-cta" href="contact.html">Get started</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== 2. Hero ===== -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-slogan">One world. Connected.</p>
+      <p class="hero-eyebrow">Services</p>
+      <h1>End-to-end logistics, built for <span class="accent">retailers of all sizes</span>.</h1>
+      <p class="hero-body">Online or offline. From origin to doorstep — freight forwarding, warehousing, last-mile delivery, and everything in between.</p>
+    </div>
+  </section>
+
+  <!-- ===== 3. Map ===== -->
+  <section class="map-section">
+    <div id="map"></div>
+    <div class="map-legend">
+      <span class="map-legend-item"><span class="legend-dot legend-dot--hq"></span>HQ — Brea CA · Shanghai</span>
+      <span class="map-legend-item"><span class="legend-dot legend-dot--office"></span>Office — Walnut CA · Shenzhen · Beijing · HCMC</span>
+      <span class="map-legend-item"><span class="legend-dot legend-dot--warehouse"></span>Warehouse — 25+ US locations</span>
+    </div>
+  </section>
+
+  <!-- ===== 4. Supply chain design ===== -->
+  <section class="section section-white">
+    <div class="container">
+      <p class="eyebrow">Supply chain design and execution</p>
+      <h2 class="section-title">We go beyond standard 3PL</h2>
+      <p class="section-subtitle">We measure success by how much we save you, not how much we bill you.</p>
+      <p class="section-note">Customer-centric logistics operations and extended services — designed around your outcomes, delivered beyond what you pay for.</p>
+
+      <ul class="sc-bullets">
+        <li class="sc-bullet">
+          <p class="sc-bullet-title"><span class="highlight-keyword">Free</span> cost analysis</p>
+          <p class="sc-bullet-sub">Two standalone deliverables — request one or both: (1) landed cost analysis, (2) logistics cost analysis.</p>
+        </li>
+        <li class="sc-bullet">
+          <p class="sc-bullet-title"><span class="highlight-keyword">Free</span> &amp; paid supply chain design consultation</p>
+          <p class="sc-bullet-sub">Remote session via phone or video call. Includes customized 3PL, 4PL, and 5PL solution design.</p>
+          <a class="sc-bullet-link" href="contact.html">Preview a sample we prepared for a client — contact us to get yours ↗</a>
+        </li>
+        <li class="sc-bullet">
+          <p class="sc-bullet-title">Targeted <span class="highlight-keyword">8%</span> YOY cost reduction</p>
+          <p class="sc-bullet-sub">Achieved when using Surpath 3PL services under agreed conditions. We track it and show you the numbers.</p>
+        </li>
+        <li class="sc-bullet">
+          <p class="sc-bullet-title"><span class="highlight-keyword">Specialized</span> operations</p>
+          <p class="sc-bullet-sub">Licensed for dangerous goods (DG) and lithium batteries. Experienced in heavy/bulky (25–100 lbs) and high-value product handling.</p>
+        </li>
+        <li class="sc-bullet">
+          <p class="sc-bullet-title"><span class="highlight-keyword">Trusted</span> partner network</p>
+          <p class="sc-bullet-sub">Curated VAS partners for assembly, kitting, refurbishment, and services beyond core 3PL.</p>
+        </li>
+      </ul>
+
+      <div class="whitepaper-peek">
+        <p class="whitepaper-title">Supply Chain Design for E-Commerce Sellers — Sample</p>
+        <p class="whitepaper-abstract">This document outlines a framework for optimizing cross-border supply chains for e-commerce sellers sourcing from China. It covers landed cost modeling, 3PL selection criteria, warehouse network design, and last-mile cost reduction strategies...</p>
+        <p class="whitepaper-toc">Contents: 1. Introduction · 2. Landed Cost Analysis · 3. 3PL Cost Benchmarking · 4. Network Design · 5. Case Studies · 6. Recommendations</p>
+        <div class="whitepaper-fade">
+          <a class="whitepaper-cta" href="contact.html">Contact us to get your customized analysis ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 5. Core services header bar ===== -->
+  <section class="core-bar">
+    <div class="container">
+      <p class="core-bar-eyebrow">Core services</p>
+      <p class="core-bar-title">Four capabilities. One network.</p>
+      <p class="core-bar-body">Every service operates from Surpath's owned warehouse network and carrier relationships — not brokered out.</p>
+    </div>
+  </section>
+
+  <!-- ===== 6. Service blocks ===== -->
+
+  <!-- Service 01 — Freight -->
+  <section class="band-white" id="freight">
+    <div class="container">
+      <div class="svc-block">
+        <div class="svc-block-media">
+          <img src="asset/container-yard-03.webp" alt="Global Freight Forwarding" />
+        </div>
+        <div class="svc-block-content">
+          <p class="svc-block-eyebrow">Service 01</p>
+          <h3 class="svc-block-title">Global Freight Forwarding</h3>
+          <p class="svc-block-desc">Competitive transpacific freight from origin to your door — ocean or air, port-to-port or door-to-door, no fixed rates, no volume commitments.</p>
+          <ul class="svc-bullets">
+            <li>Transpacific ocean &amp; air — <span class="highlight-keyword">market-matched rates</span> on every shipment. No fixed contracts, no minimum volumes.</li>
+            <li><span class="highlight-keyword">Port-to-door</span> and <span class="highlight-keyword">door-to-door</span> — one flat rate, fully coordinated. No handoff headaches.</li>
+            <li>Multi-mode speed options — combine airfreight with express delivery to accelerate your inbound.</li>
+            <li>Customs brokerage, connected — you retain direct control of your POA and tariff payments.</li>
+            <li><span class="highlight-keyword">Supplier-paid inbound</span> — we coordinate with your supplier to have them cover global freight and tariff costs to your door, subject to their capabilities.</li>
+            <li><span class="highlight-keyword">Free</span> ocean freight tracking via <a href="https://www.alpha-grid.com" target="_blank" style="color:#4A9E8E;">Alpha Grid</a> — sign up at alpha-grid.com.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service 02 — Warehouse -->
+  <section class="band-sage" id="warehouse">
+    <div class="container">
+      <div class="svc-block svc-block--reverse">
+        <div class="svc-block-media">
+          <img src="asset/warehouse-03.webp" alt="Warehouse & Storage" />
+        </div>
+        <div class="svc-block-content">
+          <p class="svc-block-eyebrow">Service 02</p>
+          <h3 class="svc-block-title">Warehouse &amp; Storage</h3>
+          <p class="svc-block-desc">30+ warehouses at major US gateways — purpose-built for e-commerce volume, with specialized handling and origin consolidation built in.</p>
+          <ul class="svc-bullets">
+            <li><span class="highlight-keyword">30+</span> self-operated and partnered warehouses at strategic US gateways. Network expanding — check with us for the latest footprint.</li>
+            <li>Freight consolidation at China and Vietnam origin ports — labeling, assembly, and value-added services before your cargo ships.</li>
+            <li><span class="highlight-keyword">Specialized</span> handling for DG/lithium batteries, heavy and bulky goods, high-value products, and food-grade requirements.</li>
+            <li>Dedicated customer service handles data entry on your behalf — view your inventory and order status anytime on the client portal.</li>
+            <li>Not sure where to position your inventory to minimize total logistics cost? We provide a <span class="highlight-keyword">free</span> consultation and data analysis.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service 03 — Parcel -->
+  <section class="band-white" id="parcel">
+    <div class="container">
+      <div class="svc-block">
+        <div class="svc-block-media">
+          <img src="asset/parcel-delivery-03.webp" alt="Parcel & Last Mile Delivery" />
+        </div>
+        <div class="svc-block-content">
+          <p class="svc-block-eyebrow">Service 03</p>
+          <h3 class="svc-block-title">Parcel &amp; Last Mile Delivery</h3>
+          <p class="svc-block-desc">Deeply discounted parcel and freight delivery across the US and internationally — through a carrier network built for e-commerce volume.</p>
+          <ul class="svc-bullets">
+            <li>Up to <span class="highlight-keyword">70% off</span> published carrier rates — passed directly to you.</li>
+            <li>Delivered via UPS, FedEx, USPS, Amazon Delivery, OnTrac, and more.</li>
+            <li>International parcel shipping via UPS and FedEx global services.</li>
+            <li>Too heavy or bulky for parcel? We work with trusted trucking carriers to handle your freight.</li>
+            <li><span class="highlight-keyword">Free</span> ground delivery tracking via <a href="https://www.alpha-grid.com" target="_blank" style="color:#4A9E8E;">Alpha Grid</a> — sign up at alpha-grid.com.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service 04 — Assembly -->
+  <section class="band-sage" id="assembly">
+    <div class="container">
+      <div class="svc-block svc-block--reverse">
+        <div class="svc-block-media">
+          <img src="asset/handyman-01.webp" alt="Assembly, Refurbishment, and More" />
+        </div>
+        <div class="svc-block-content">
+          <p class="svc-block-eyebrow">Service 04</p>
+          <h3 class="svc-block-title">Assembly, Refurbishment, and More</h3>
+          <p class="svc-block-desc">Your warehouse can do more than hold inventory — the right operations partner can make it a competitive advantage.</p>
+          <ul class="svc-bullets">
+            <li>E-commerce <span class="highlight-keyword">returns</span> handled end-to-end — restock, open-box inspection, or disposal, your call.</li>
+            <li><span class="highlight-keyword">Dedicated</span> space and operators for highly customized work — assembled-in-USA products, print-on-demand, holiday gift packs, and more.</li>
+            <li>A professional team ready for whatever your product needs. Contact us to discuss — subject to <span class="highlight-keyword">terms and conditions</span>.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 7. CTA band ===== -->
+  <section class="cta-band">
+    <div class="cta-band-inner">
+      <h2>Ready to cut your logistics costs?</h2>
+      <p>Start with a free supply chain analysis. No commitment required.</p>
+      <div class="cta-band-cta">
+        <a class="btn btn-lime" href="contact.html">Request a free consultation</a>
+        <a class="btn btn-ghost" href="contact.html">Contact us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 8. Footer ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p>© 2025 Surpath Inc.</p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    // Hamburger menu toggle (vanilla JS)
+    (function () {
+      var toggle = document.getElementById('navToggle');
+      var menu = document.getElementById('navMenu');
+      toggle.addEventListener('click', function () {
+        var open = menu.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      menu.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          menu.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    })();
+
+    // Interactive network map (Leaflet)
+    (function () {
+      if (typeof L === 'undefined') return; // CDN unavailable — fail gracefully
+
+      var map = L.map('map', {
+        center: [39.5, -98.5],
+        zoom: 4,
+        scrollWheelZoom: false
+      });
+
+      // Enable scroll zoom only while the map is focused
+      map.on('focus', function () { map.scrollWheelZoom.enable(); });
+      map.on('blur', function () { map.scrollWheelZoom.disable(); });
+
+      L.tileLayer('https://{s}.basemap.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+        attribution: '© OpenStreetMap contributors © CARTO',
+        subdomains: 'abcd',
+        maxZoom: 19
+      }).addTo(map);
+
+      var styles = {
+        hq:        { color: '#1a2b3c', weight: 2,   fillColor: '#A8D44F', fillOpacity: 0.95, radius: 8 },
+        office:    { color: '#1a2b3c', weight: 2,   fillColor: '#4A9E8E', fillOpacity: 0.9,  radius: 6 },
+        warehouse: { color: '#1a2b3c', weight: 1.5, fillColor: '#7aabb8', fillOpacity: 0.85, radius: 5 }
+      };
+
+      var labels = { hq: 'HQ', office: 'Office', warehouse: 'Warehouse' };
+
+      var locations = [
+        // HQ
+        { name: 'Brea, CA', type: 'hq', lat: 33.9167, lng: -117.9000 },
+
+        // Offices
+        { name: 'Walnut, CA', type: 'office', lat: 34.0219, lng: -117.8672 },
+        { name: 'Shenzhen, China', type: 'office', lat: 22.5431, lng: 114.0579 },
+        { name: 'Beijing, China', type: 'office', lat: 39.9042, lng: 116.4074 },
+        { name: 'Ho Chi Minh City, Vietnam', type: 'office', lat: 10.8231, lng: 106.6297 },
+
+        // Warehouses
+        { name: 'City of Industry, CA', type: 'warehouse', lat: 34.0181, lng: -117.9514 },
+        { name: 'Walnut, CA', type: 'warehouse', lat: 34.0219, lng: -117.8672 },
+        { name: 'Fontana, CA', type: 'warehouse', lat: 34.0922, lng: -117.4350 },
+        { name: 'Pomona, CA', type: 'warehouse', lat: 34.0553, lng: -117.7500 },
+        { name: 'Ontario, CA', type: 'warehouse', lat: 34.0633, lng: -117.6509 },
+        { name: 'Eastvale, CA', type: 'warehouse', lat: 33.9525, lng: -117.5820 },
+        { name: 'Houston, TX', type: 'warehouse', lat: 29.7604, lng: -95.3698 },
+        { name: 'Missouri City, TX', type: 'warehouse', lat: 29.6185, lng: -95.5377 },
+        { name: 'Montgomery, IL', type: 'warehouse', lat: 41.7320, lng: -88.3554 },
+        { name: 'Ellabell, GA', type: 'warehouse', lat: 32.1454, lng: -81.5124 },
+        { name: 'Hoschton, GA', type: 'warehouse', lat: 34.0973, lng: -83.7577 },
+        { name: 'Atlanta, GA', type: 'warehouse', lat: 33.7490, lng: -84.3880 },
+        { name: 'Pooler, GA', type: 'warehouse', lat: 32.1157, lng: -81.2479 },
+        { name: 'Robbinsville, NJ', type: 'warehouse', lat: 40.2204, lng: -74.6274 },
+        { name: 'Cranbury, NJ', type: 'warehouse', lat: 40.3115, lng: -74.5132 },
+        { name: 'Burlington, NJ', type: 'warehouse', lat: 40.0723, lng: -74.8605 },
+        { name: 'Florence, NJ', type: 'warehouse', lat: 40.1143, lng: -74.7896 },
+        { name: 'Hamilton, NJ', type: 'warehouse', lat: 40.2429, lng: -74.7596 },
+        { name: 'Mercer, NJ', type: 'warehouse', lat: 40.2260, lng: -74.7596 }
+      ];
+
+      locations.forEach(function (loc) {
+        L.circleMarker([loc.lat, loc.lng], styles[loc.type])
+          .addTo(map)
+          .bindPopup('<strong>' + loc.name + '</strong><br>' + labels[loc.type]);
+      });
+    })();
+  </script>
+
+</body>
+</html>
