@@ -503,9 +503,8 @@ a { text-decoration: none; }
 .map-section {
   background: var(--color-map-bg);
 }
-/* Static inline SVG network map (no Leaflet/JS) */
-.svc-map {
-  display: block;
+/* Leaflet tile map */
+#map {
   width: 100%;
   height: 360px;
 }
@@ -640,13 +639,15 @@ a { text-decoration: none; }
   justify-content: center;
   background: linear-gradient(rgba(255,255,255,0), var(--color-white));
 }
+/* Standalone button below the peek box (not overlapping the clipped content) */
 .whitepaper-cta {
+  display: inline-block;
+  margin-top: 12px;
   background: var(--color-primary);
   color: var(--color-white);
   font-size: 11px;
   padding: 5px 16px;
   border-radius: 5px;
-  margin-bottom: 6px;
 }
 
 /* ---------- Core Services Header Bar (style.md › Core Services Header Bar) ---------- */
