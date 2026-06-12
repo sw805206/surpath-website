@@ -244,9 +244,12 @@
       if (typeof L === 'undefined') return; // CDN unavailable — fail gracefully
 
       var map = L.map('map', {
-        center: [20, 160],
+        center: [20, 155],
         zoom: 2,
-        scrollWheelZoom: false
+        scrollWheelZoom: false,
+        maxBounds: [[-60, 60], [75, 260]],
+        maxBoundsViscosity: 1.0,
+        worldCopyJump: false
       });
 
       // Enable scroll zoom only while the map is focused (click)
@@ -268,35 +271,35 @@
 
       var locations = [
         // HQ
-        { name: 'Brea, CA', type: 'hq', lat: 33.9167, lng: -117.9000 },
+        { name: 'Brea, CA', type: 'hq', lat: 33.9167, lng: 242.1000 },
         { name: 'Shanghai, China', type: 'hq', lat: 31.2304, lng: 121.4737 },
 
         // Offices
-        { name: 'Walnut, CA', type: 'office', lat: 34.0219, lng: -117.8672 },
+        { name: 'Walnut, CA', type: 'office', lat: 34.0219, lng: 242.1328 },
         { name: 'Shenzhen, China', type: 'office', lat: 22.5431, lng: 114.0579 },
         { name: 'Beijing, China', type: 'office', lat: 39.9042, lng: 116.4074 },
         { name: 'Ho Chi Minh City, Vietnam', type: 'office', lat: 10.8231, lng: 106.6297 },
 
         // Warehouses
-        { name: 'City of Industry, CA', type: 'warehouse', lat: 34.0181, lng: -117.9514 },
-        { name: 'Walnut, CA', type: 'warehouse', lat: 34.0219, lng: -117.8672 },
-        { name: 'Fontana, CA', type: 'warehouse', lat: 34.0922, lng: -117.4350 },
-        { name: 'Pomona, CA', type: 'warehouse', lat: 34.0553, lng: -117.7500 },
-        { name: 'Ontario, CA', type: 'warehouse', lat: 34.0633, lng: -117.6509 },
-        { name: 'Eastvale, CA', type: 'warehouse', lat: 33.9525, lng: -117.5820 },
-        { name: 'Houston, TX', type: 'warehouse', lat: 29.7604, lng: -95.3698 },
-        { name: 'Missouri City, TX', type: 'warehouse', lat: 29.6185, lng: -95.5377 },
-        { name: 'Montgomery, IL', type: 'warehouse', lat: 41.7320, lng: -88.3554 },
-        { name: 'Ellabell, GA', type: 'warehouse', lat: 32.1454, lng: -81.5124 },
-        { name: 'Hoschton, GA', type: 'warehouse', lat: 34.0973, lng: -83.7577 },
-        { name: 'Atlanta, GA', type: 'warehouse', lat: 33.7490, lng: -84.3880 },
-        { name: 'Pooler, GA', type: 'warehouse', lat: 32.1157, lng: -81.2479 },
-        { name: 'Robbinsville, NJ', type: 'warehouse', lat: 40.2204, lng: -74.6274 },
-        { name: 'Cranbury, NJ', type: 'warehouse', lat: 40.3115, lng: -74.5132 },
-        { name: 'Burlington, NJ', type: 'warehouse', lat: 40.0723, lng: -74.8605 },
-        { name: 'Florence, NJ', type: 'warehouse', lat: 40.1143, lng: -74.7896 },
-        { name: 'Hamilton, NJ', type: 'warehouse', lat: 40.2429, lng: -74.7596 },
-        { name: 'Mercer, NJ', type: 'warehouse', lat: 40.2260, lng: -74.7596 }
+        { name: 'City of Industry, CA', type: 'warehouse', lat: 34.0181, lng: 242.0486 },
+        { name: 'Walnut, CA', type: 'warehouse', lat: 34.0219, lng: 242.1328 },
+        { name: 'Fontana, CA', type: 'warehouse', lat: 34.0922, lng: 242.5650 },
+        { name: 'Pomona, CA', type: 'warehouse', lat: 34.0553, lng: 242.2500 },
+        { name: 'Ontario, CA', type: 'warehouse', lat: 34.0633, lng: 242.3491 },
+        { name: 'Eastvale, CA', type: 'warehouse', lat: 33.9525, lng: 242.4180 },
+        { name: 'Houston, TX', type: 'warehouse', lat: 29.7604, lng: 264.6302 },
+        { name: 'Missouri City, TX', type: 'warehouse', lat: 29.6185, lng: 264.4623 },
+        { name: 'Montgomery, IL', type: 'warehouse', lat: 41.7320, lng: 271.6446 },
+        { name: 'Ellabell, GA', type: 'warehouse', lat: 32.1454, lng: 278.4876 },
+        { name: 'Hoschton, GA', type: 'warehouse', lat: 34.0973, lng: 276.2423 },
+        { name: 'Atlanta, GA', type: 'warehouse', lat: 33.7490, lng: 275.6120 },
+        { name: 'Pooler, GA', type: 'warehouse', lat: 32.1157, lng: 278.7521 },
+        { name: 'Robbinsville, NJ', type: 'warehouse', lat: 40.2204, lng: 285.3726 },
+        { name: 'Cranbury, NJ', type: 'warehouse', lat: 40.3115, lng: 285.4868 },
+        { name: 'Burlington, NJ', type: 'warehouse', lat: 40.0723, lng: 285.1395 },
+        { name: 'Florence, NJ', type: 'warehouse', lat: 40.1143, lng: 285.2104 },
+        { name: 'Hamilton, NJ', type: 'warehouse', lat: 40.2429, lng: 285.2404 },
+        { name: 'Mercer, NJ', type: 'warehouse', lat: 40.2260, lng: 285.2404 }
       ];
 
       locations.forEach(function (loc) {
