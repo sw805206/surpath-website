@@ -149,6 +149,7 @@
 - Tabler outline icons used in Why Surpath cards
 - Service image cards: object-position center on all four cards
 - If a specific card image crops poorly, override with object-position: top or object-position: center top
+- Third service card (parcel / last-mile) overridden to object-position: center bottom to fix its crop
 
 ## Stats Footnote
 - Background: #1e3a45 (same as stats bar, sits flush below it)
