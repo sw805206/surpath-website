@@ -261,6 +261,14 @@ a { text-decoration: none; }
   margin-top: 6px;
 }
 
+/* ---------- Why Surpath — 2-column layout (style.md › Why Surpath — 2-column layout) ---------- */
+.why-grid {
+  display: grid;
+  grid-template-columns: 35% 65%;
+  gap: 32px;
+  align-items: start;
+}
+
 /* ---------- Service Lifecycle (style.md › Service Lifecycle Flow) ---------- */
 .flow { display: flex; align-items: stretch; }
 .flow-card {
@@ -344,14 +352,15 @@ a { text-decoration: none; }
   text-decoration: underline;
 }
 
-/* ---------- Service Image Cards ---------- */
+/* ---------- Service Image Cards (4-up row with flow arrows) ---------- */
 .service-cards {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
   margin-top: 2rem;
 }
 .service-card {
+  flex: 1;
   border-radius: 12px;
   overflow: hidden;
   background: var(--color-white);
@@ -364,8 +373,16 @@ a { text-decoration: none; }
   object-position: center;
   display: block;
 }
-.service-card:nth-child(3) img {
+/* nth-of-type targets the 3rd card <a>, surviving the interleaved arrow spans */
+.service-card:nth-of-type(3) img {
   object-position: center 40%;
+}
+.service-arrow {
+  align-self: center;
+  flex-shrink: 0;
+  color: var(--color-mid-teal);
+  font-size: 16px;
+  line-height: 1;
 }
 .service-card-body {
   padding: 14px 16px;
@@ -513,6 +530,15 @@ a { text-decoration: none; }
   color: var(--color-text-secondary);
   margin-bottom: 24px;
 }
+
+/* ---------- Supply Chain Design — 2-column layout (style.md › Supply Chain Design — 2-column layout) ---------- */
+.sc-layout {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  gap: 32px;
+  align-items: start;
+}
+.sc-layout .whitepaper-peek { margin-top: 0; }
 
 /* ---------- Supply Chain Design Bullets (style.md › Supply Chain Design Bullets) ---------- */
 .sc-bullets {
@@ -718,7 +744,14 @@ a { text-decoration: none; }
   .stat:nth-child(n+3)  { border-top: 0.5px solid var(--color-divider); }
 
   .card-grid { grid-template-columns: 1fr; }
-  .service-cards { grid-template-columns: 1fr; }
+
+  /* Why Surpath + Supply Chain Design 2-col layouts stack on mobile */
+  .why-grid,
+  .sc-layout { grid-template-columns: 1fr; gap: 24px; }
+
+  /* Service cards stack; flow arrows hidden */
+  .service-cards { flex-direction: column; }
+  .service-arrow { display: none; }
 
   .flow { flex-direction: column; }
   .flow-card:not(:last-child)::after {
