@@ -66,11 +66,16 @@ a { text-decoration: none; }
 /* ---------- Navigation (style.md › Navigation) ---------- */
 .nav {
   background: var(--color-nav-bg);
-  padding: 14px 28px;
+  padding: 14px 0;
+  position: relative;
+}
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: relative;
 }
 .nav-brand { display: flex; align-items: center; gap: 8px; }
 .nav-icon { width: 32px; height: 32px; border-radius: 6px; display: block; }
@@ -115,8 +120,13 @@ a { text-decoration: none; }
 /* ---------- Hero (style.md › Hero Section) ---------- */
 .hero {
   background: var(--color-primary);
-  padding: 52px 28px;
+  padding: 52px 0;
   color: var(--color-white);
+}
+.hero-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 28px;
 }
 .hero-slogan {
   color: var(--color-lime);
@@ -154,6 +164,10 @@ a { text-decoration: none; }
 /* ---------- Stats Bar (style.md › Stats Bar) ---------- */
 .stats {
   background: var(--color-deep);
+}
+.stats-inner {
+  max-width: 1280px;
+  margin: 0 auto;
   display: flex;
   width: 100%;
 }
@@ -176,8 +190,16 @@ a { text-decoration: none; }
   line-height: 1.4;
 }
 
+/* ---------- Container (style.md › Layout) ---------- */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 28px;
+  width: 100%;
+}
+
 /* ---------- Sections (style.md › Section Layout / Layout) ---------- */
-.section { padding: 40px 28px; }
+.section { padding: 40px 0; }
 .section-white { background: var(--color-section-white); }
 .section-sage  { background: var(--color-section-sage); }
 .eyebrow {
@@ -338,6 +360,7 @@ a { text-decoration: none; }
   width: 100%;
   height: 180px;
   object-fit: cover;
+  object-position: center;
   display: block;
 }
 .service-card-body {
@@ -372,7 +395,12 @@ a { text-decoration: none; }
 /* ---------- CTA Band (style.md › CTA Band) ---------- */
 .cta-band {
   background: var(--color-primary);
-  padding: 40px 28px;
+  padding: 40px 0;
+}
+.cta-band-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 28px;
   text-align: center;
 }
 .cta-band h2 {
@@ -390,7 +418,12 @@ a { text-decoration: none; }
 /* ---------- Footer (style.md › Footer) ---------- */
 .footer {
   background: var(--color-deep);
-  padding: 16px 28px;
+  padding: 16px 0;
+}
+.footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 28px;
   text-align: center;
 }
 .footer p { font-size: 12px; color: var(--color-text-muted); }
@@ -423,7 +456,13 @@ a { text-decoration: none; }
   }
   .nav-cta { border-radius: 0; text-align: left; }
 
-  .stats { flex-wrap: wrap; }
+  .nav-inner,
+  .hero-inner,
+  .container,
+  .cta-band-inner,
+  .footer-inner { padding: 0 16px; }
+
+  .stats-inner { flex-wrap: wrap; }
   .stat { flex: 1 1 33.33%; }
   .stat:nth-child(odd)  { border-left: none; }
   .stat:nth-child(n+3)  { border-top: 0.5px solid var(--color-divider); }
