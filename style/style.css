@@ -154,12 +154,12 @@ a { text-decoration: none; }
   max-width: 980px;
 }
 .hero h1 .accent { color: var(--color-lime); }
+.hero-text { max-width: 580px; } /* constrains H1 + body together (style.md › Hero Section) */
 .hero-body {
   color: var(--color-text-on-dark);
   font-size: 14px;
   font-weight: 400;
   line-height: 1.7;
-  max-width: 500px;
   margin-bottom: 24px;
 }
 .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
