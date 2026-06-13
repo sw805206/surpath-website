@@ -571,6 +571,89 @@ a { text-decoration: none; }
   text-decoration: underline;
 }
 
+/* Interactive document preview — Services supply chain right column (iframe peek of whitepaper-sample.html) */
+.sc-doc-layout {
+  display: flex;
+  align-items: stretch;
+  gap: 32px;
+}
+.sc-doc-layout > .sc-bullets { flex: 6; }
+.sc-doc-col {
+  flex: 4;
+  min-width: 0; /* allow the column to shrink below the 720px iframe's intrinsic width */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16px;
+}
+/* A. Label — matches the bullet header (.sc-bullet-title): 14px / weight 600 / body text */
+.sc-doc-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+/* B. Iframe peek box — card border + radius (per .card); fixed height, clipped */
+.sc-doc-peek {
+  position: relative;
+  height: 280px;
+  flex: 0 0 auto;
+  overflow: hidden;
+  background: var(--color-white);
+  border: 0.5px solid var(--color-card-border);
+  border-radius: 8px;
+  cursor: pointer;
+}
+.sc-doc-iframe {
+  width: 720px;
+  height: 1000px;
+  border: none;
+  transform-origin: top left;
+  pointer-events: none;
+  /* transform: scale(...) applied via JS to fit the container width */
+}
+/* Bottom fade — same treatment as .whitepaper-fade, taller (70px) */
+.sc-doc-fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 70px;
+  pointer-events: none;
+  background: linear-gradient(rgba(255, 255, 255, 0), var(--color-white));
+}
+/* Hover overlay — faint teal tint with a centered pill CTA */
+.sc-doc-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(44, 79, 92, 0.06);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.sc-doc-peek:hover .sc-doc-overlay { opacity: 1; }
+/* Pill CTA inside the overlay — small button pattern (matches .nav-cta sizing) */
+.sc-doc-overlay-label {
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 7px 16px;
+  border-radius: 5px;
+}
+/* C. CTA — reuses .btn.btn-dark (primary dark); full width, pinned to column bottom */
+.sc-doc-cta {
+  width: 100%;
+  margin-top: auto;
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .sc-doc-layout { flex-direction: column; gap: 24px; }
+  .sc-doc-layout > .sc-bullets,
+  .sc-doc-col { flex: 1 1 auto; }
+}
+
 /* ---------- Supply Chain Design Bullets (style.md › Supply Chain Design Bullets) ---------- */
 .sc-bullets {
   list-style: none;

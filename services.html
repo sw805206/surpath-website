@@ -62,7 +62,7 @@
       <h2 class="section-title">We go beyond standard 3PL</h2>
       <p class="section-subtitle">We measure success by how much we save you, not how much we bill you.</p>
 
-      <div class="sc-layout">
+      <div class="sc-doc-layout">
       <ul class="sc-bullets">
         <li class="sc-bullet">
           <p class="sc-bullet-title">Free cost analysis</p>
@@ -86,15 +86,14 @@
         </li>
       </ul>
 
-      <div class="sc-peek-col">
-      <a class="sc-peek-link" href="whitepaper-sample.html">Preview a sample we prepared for a client — contact us to get yours</a>
-      <div class="whitepaper-peek">
-        <p class="whitepaper-title">Preview a sample we prepared for a client</p>
-        <p class="whitepaper-abstract">This document outlines a framework for optimizing cross-border supply chains for e-commerce sellers sourcing from China. It covers landed cost modeling, 3PL selection criteria, warehouse network design, and last-mile cost reduction strategies...</p>
-        <p class="whitepaper-toc">Contents: 1. Introduction · 2. Landed Cost Analysis · 3. 3PL Cost Benchmarking · 4. Network Design · 5. Case Studies · 6. Recommendations</p>
-        <div class="whitepaper-fade"></div>
-      </div>
-      <a class="whitepaper-cta" href="contact.html">Contact us to get your customized white paper ↗</a>
+      <div class="sc-doc-col">
+        <p class="sc-doc-label">See how we approach supply chain design.</p>
+        <div class="sc-doc-peek" id="scDocPeek" onclick="location.href='whitepaper-sample.html'">
+          <iframe class="sc-doc-iframe" id="scDocIframe" src="whitepaper-sample.html" title="Supply chain sample document preview" scrolling="no" tabindex="-1"></iframe>
+          <div class="sc-doc-fade"></div>
+          <div class="sc-doc-overlay"><span class="sc-doc-overlay-label">View sample document →</span></div>
+        </div>
+        <a class="btn btn-dark sc-doc-cta" href="contact.html">Contact us to get your customized white paper</a>
       </div>
       </div>
     </div>
@@ -313,6 +312,21 @@
             .addTo(map)
             .bindPopup('<strong>' + loc.name + '</strong> — ' + labels[loc.type]);
         });
+    })();
+  </script>
+
+  <!-- Scale the supply-chain document preview iframe to fit its container width -->
+  <script>
+    (function () {
+      var box = document.getElementById('scDocPeek');
+      var frame = document.getElementById('scDocIframe');
+      if (!box || !frame) return;
+      function scaleFrame() {
+        frame.style.transform = 'scale(' + (box.clientWidth / 720) + ')';
+      }
+      scaleFrame();
+      window.addEventListener('resize', scaleFrame);
+      window.addEventListener('DOMContentLoaded', scaleFrame);
     })();
   </script>
 
