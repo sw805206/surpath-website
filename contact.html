@@ -8,272 +8,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
   <link rel="stylesheet" href="style/style.css">
 
-  <!-- ===== Page-specific styles (Contact only — shared patterns live in style/style.css) ===== -->
-  <style>
-    /* ---------- Zone layout ---------- */
-    /* Zone 1: two equal columns. Zone 2: single column matching Zone 1's left column width. */
-    .zone1 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      align-items: stretch;
-    }
-    .zone2 {
-      width: calc(50% - 12px); /* matches Zone 1 left column (half of container minus half the 24px gap) */
-    }
-
-    /* ---------- Panels / cards ---------- */
-    .panel {
-      background: var(--color-white);
-      border: 0.5px solid var(--color-card-border);
-      border-radius: 8px;
-      padding: 22px 22px 24px;
-    }
-    .panel-title {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--color-text);
-      margin-bottom: 16px;
-    }
-    .col-right {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-    .team-photo {
-      flex: 1;
-      width: 100%;
-      min-height: 220px;
-      object-fit: cover;
-      border-radius: 12px;
-      display: block;
-      background: var(--color-primary); /* placeholder tint while the photo loads */
-    }
-
-    /* ---------- Trust card ---------- */
-    .trust-card {
-      background: var(--color-section-sage);
-      border: 0.5px solid var(--color-card-border);
-      border-radius: 8px;
-      padding: 14px;
-    }
-    .trust-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 12.5px;
-      line-height: 1.5;
-      color: var(--color-text-secondary);
-    }
-    .trust-item + .trust-item { margin-top: 10px; }
-    .trust-item i {
-      color: var(--color-icon);
-      font-size: 18px;
-      line-height: 1.4;
-      flex-shrink: 0;
-    }
-
-    /* ---------- Generic fields ---------- */
-    .field { margin-bottom: 16px; }
-    .field:last-child { margin-bottom: 0; }
-    .field-label {
-      display: block;
-      font-size: 12.5px;
-      font-weight: 500;
-      color: var(--color-primary);
-      margin-bottom: 6px;
-    }
-    .field-label .req { color: var(--color-mid-teal); margin-left: 2px; }
-    .field-hint {
-      font-size: 11px;
-      font-weight: 400;
-      color: var(--color-footnote);
-      margin-bottom: 6px;
-    }
-    .text-input,
-    textarea.text-input,
-    select.text-input {
-      width: 100%;
-      padding: 9px 12px;
-      font-family: inherit;
-      font-size: 14px;
-      color: var(--color-text);
-      background: var(--color-white);
-      border: 1px solid var(--color-card-border);
-      border-radius: 6px;
-      transition: border-color 0.15s ease, box-shadow 0.15s ease;
-    }
-    textarea.text-input { min-height: 92px; resize: vertical; line-height: 1.6; }
-    .text-input:focus {
-      outline: none;
-      border-color: var(--color-mid-teal);
-      box-shadow: 0 0 0 3px rgba(74, 158, 142, 0.15);
-    }
-    .text-input::placeholder { color: #9aa7a3; }
-    .text-input.invalid { border-color: #c0392b; }
-    .text-input.invalid:focus { box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.15); }
-
-    .field-error {
-      display: none;
-      font-size: 11.5px;
-      color: #c0392b;
-      margin-top: 5px;
-    }
-    .field-error.show { display: block; }
-
-    /* ---------- Checkbox groups (chips with a real checkbox) ---------- */
-    .checks { display: flex; flex-wrap: wrap; gap: 8px; }
-    .check {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 8px 12px;
-      font-size: 13px;
-      color: var(--color-primary);
-      background: var(--color-section-sage);
-      border: 1px solid var(--color-card-border);
-      border-radius: 6px;
-      cursor: pointer;
-      user-select: none;
-      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
-    }
-    .check input { accent-color: var(--color-mid-teal); margin: 0; cursor: pointer; }
-    .check:has(input:checked) {
-      background: #e8f3dd;
-      border-color: #bcd9a3;
-      color: var(--color-primary);
-    }
-    .check:hover { border-color: #bcd9a3; }
-
-    /* ---------- Topic selector (multi-select pill/card buttons) ---------- */
-    .topics {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 14px;
-    }
-    .topic-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      padding: 11px 16px;
-      font-family: inherit;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--color-primary);
-      background: var(--color-section-sage);
-      border: 1px solid var(--color-card-border);
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
-    }
-    .topic-btn i { font-size: 17px; }
-    .topic-btn:hover { border-color: #bcd9a3; }
-    .topic-btn.selected {
-      background: var(--color-primary);
-      border-color: var(--color-primary);
-      color: var(--color-white);
-    }
-
-    /* ---------- Dynamic question blocks ---------- */
-    .qblock {
-      border: 0.5px solid var(--color-card-border);
-      border-radius: 8px;
-      padding: 18px 20px 20px;
-      margin-top: 16px;
-      background: var(--color-white);
-    }
-    .qblock-title {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--color-primary);
-      margin-bottom: 14px;
-    }
-    [hidden] { display: none !important; }
-
-    /* ---------- Contact preference (dark band) ---------- */
-    .pref-band {
-      background: var(--color-primary);
-      border-radius: 8px;
-      padding: 16px;
-      margin-top: 20px;
-    }
-    .pref-intro {
-      font-size: 13px;
-      line-height: 1.6;
-      color: var(--color-text-on-dark);
-      margin-bottom: 14px;
-    }
-    .pref-label {
-      display: block;
-      font-size: 12.5px;
-      font-weight: 500;
-      color: var(--color-text-on-dark);
-      margin-bottom: 6px;
-    }
-    .pref-label .req { color: var(--color-lime); margin-left: 2px; }
-    .methods { display: flex; flex-wrap: wrap; gap: 9px; }
-    .method-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 9px 16px;
-      font-family: inherit;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--color-white);
-      background: transparent;
-      border: 1px solid var(--color-ghost-border);
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
-    }
-    .method-btn i { font-size: 16px; }
-    .method-btn:hover { border-color: var(--color-lime); }
-    .method-btn.selected {
-      background: var(--color-lime);
-      border-color: var(--color-lime);
-      color: var(--color-primary);
-    }
-    .pref-conditional { margin-top: 14px; }
-    .pref-conditional .field-label { color: var(--color-text-on-dark); }
-    .pref-conditional .field-label .req { color: var(--color-lime); }
-    .pref-band .field-error { color: #ffd2cc; }
-
-    /* ---------- Submit ---------- */
-    .submit-btn {
-      width: 100%;
-      margin-top: 22px;
-      padding: 11px 24px;
-      font-family: inherit;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--color-primary);
-      background: var(--color-lime);
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    .submit-btn:hover { filter: brightness(0.97); }
-
-    /* ---------- Success message ---------- */
-    .success-msg {
-      border: 0.5px solid var(--color-card-border);
-      border-radius: 8px;
-      background: var(--color-section-sage);
-      padding: 32px 28px;
-      text-align: center;
-    }
-    .success-msg i { font-size: 34px; color: var(--color-icon); margin-bottom: 12px; display: block; }
-    .success-msg p { font-size: 15px; color: var(--color-text); line-height: 1.6; }
-
-    /* ---------- Mobile ---------- */
-    @media (max-width: 768px) {
-      .zone1 { grid-template-columns: 1fr; gap: 18px; }
-      .zone2 { width: 100%; }
-      .col-right { order: -1; } /* photo + trust above the form on small screens */
-    }
-  </style>
 </head>
 <body>
 
@@ -293,7 +27,7 @@
       <div class="nav-menu" id="navMenu">
         <a class="nav-link" href="index.html">Home</a>
         <a class="nav-link" href="services.html">Services</a>
-        <a class="nav-link" href="partners.html">Partners</a>
+        <a class="nav-link" href="partners.html" style="display:none">Partners</a>
         <a class="nav-link active" href="contact.html">Contact</a>
         <a class="nav-cta" href="contact.html">Get started</a>
       </div>
@@ -553,7 +287,7 @@
           </div>
 
           <!-- Submit -->
-          <button type="submit" class="submit-btn">Send inquiry →</button>
+          <button type="submit" class="btn btn-lime btn-block" style="margin-top:22px;">Send inquiry →</button>
 
         </div>
       </div>
@@ -564,7 +298,7 @@
   <!-- ===== 5. Footer ===== -->
   <footer class="footer">
     <div class="footer-inner">
-      <p>© 2025 Surpath Inc.</p>
+      <p>© 2026 Surpath Inc.</p>
     </div>
   </footer>
 
