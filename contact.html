@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surpath — Contact</title>
+  <link rel="icon" type="image/png" href="asset/surpath-favicon.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="stylesheet" href="style/style.css">
+
+  <!-- ===== Page-specific styles (Contact only — shared patterns live in style/style.css) ===== -->
+  <style>
+    /* ---------- Zone layout ---------- */
+    /* Zone 1: two equal columns. Zone 2: single column matching Zone 1's left column width. */
+    .zone1 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+    .zone2 {
+      width: calc(50% - 12px); /* matches Zone 1 left column (half of container minus half the 24px gap) */
+    }
+
+    /* ---------- Panels / cards ---------- */
+    .panel {
+      background: var(--color-white);
+      border: 0.5px solid var(--color-card-border);
+      border-radius: 8px;
+      padding: 22px 22px 24px;
+    }
+    .panel-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 16px;
+    }
+    .col-right {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .team-photo {
+      flex: 1;
+      width: 100%;
+      min-height: 220px;
+      object-fit: cover;
+      border-radius: 12px;
+      display: block;
+      background: var(--color-primary); /* placeholder tint while the photo loads */
+    }
+
+    /* ---------- Trust card ---------- */
+    .trust-card {
+      background: var(--color-section-sage);
+      border: 0.5px solid var(--color-card-border);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .trust-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 12.5px;
+      line-height: 1.5;
+      color: var(--color-text-secondary);
+    }
+    .trust-item + .trust-item { margin-top: 10px; }
+    .trust-item i {
+      color: var(--color-icon);
+      font-size: 18px;
+      line-height: 1.4;
+      flex-shrink: 0;
+    }
+
+    /* ---------- Generic fields ---------- */
+    .field { margin-bottom: 16px; }
+    .field:last-child { margin-bottom: 0; }
+    .field-label {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--color-primary);
+      margin-bottom: 6px;
+    }
+    .field-label .req { color: var(--color-mid-teal); margin-left: 2px; }
+    .field-hint {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--color-footnote);
+      margin-bottom: 6px;
+    }
+    .text-input,
+    textarea.text-input,
+    select.text-input {
+      width: 100%;
+      padding: 9px 12px;
+      font-family: inherit;
+      font-size: 14px;
+      color: var(--color-text);
+      background: var(--color-white);
+      border: 1px solid var(--color-card-border);
+      border-radius: 6px;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    textarea.text-input { min-height: 92px; resize: vertical; line-height: 1.6; }
+    .text-input:focus {
+      outline: none;
+      border-color: var(--color-mid-teal);
+      box-shadow: 0 0 0 3px rgba(74, 158, 142, 0.15);
+    }
+    .text-input::placeholder { color: #9aa7a3; }
+    .text-input.invalid { border-color: #c0392b; }
+    .text-input.invalid:focus { box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.15); }
+
+    .field-error {
+      display: none;
+      font-size: 11.5px;
+      color: #c0392b;
+      margin-top: 5px;
+    }
+    .field-error.show { display: block; }
+
+    /* ---------- Checkbox groups (chips with a real checkbox) ---------- */
+    .checks { display: flex; flex-wrap: wrap; gap: 8px; }
+    .check {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 12px;
+      font-size: 13px;
+      color: var(--color-primary);
+      background: var(--color-section-sage);
+      border: 1px solid var(--color-card-border);
+      border-radius: 6px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    }
+    .check input { accent-color: var(--color-mid-teal); margin: 0; cursor: pointer; }
+    .check:has(input:checked) {
+      background: #e8f3dd;
+      border-color: #bcd9a3;
+      color: var(--color-primary);
+    }
+    .check:hover { border-color: #bcd9a3; }
+
+    /* ---------- Topic selector (multi-select pill/card buttons) ---------- */
+    .topics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .topic-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 11px 16px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-primary);
+      background: var(--color-section-sage);
+      border: 1px solid var(--color-card-border);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    }
+    .topic-btn i { font-size: 17px; }
+    .topic-btn:hover { border-color: #bcd9a3; }
+    .topic-btn.selected {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      color: var(--color-white);
+    }
+
+    /* ---------- Dynamic question blocks ---------- */
+    .qblock {
+      border: 0.5px solid var(--color-card-border);
+      border-radius: 8px;
+      padding: 18px 20px 20px;
+      margin-top: 16px;
+      background: var(--color-white);
+    }
+    .qblock-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: 14px;
+    }
+    [hidden] { display: none !important; }
+
+    /* ---------- Contact preference (dark band) ---------- */
+    .pref-band {
+      background: var(--color-primary);
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 20px;
+    }
+    .pref-intro {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--color-text-on-dark);
+      margin-bottom: 14px;
+    }
+    .pref-label {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--color-text-on-dark);
+      margin-bottom: 6px;
+    }
+    .pref-label .req { color: var(--color-lime); margin-left: 2px; }
+    .methods { display: flex; flex-wrap: wrap; gap: 9px; }
+    .method-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 16px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-white);
+      background: transparent;
+      border: 1px solid var(--color-ghost-border);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+    .method-btn i { font-size: 16px; }
+    .method-btn:hover { border-color: var(--color-lime); }
+    .method-btn.selected {
+      background: var(--color-lime);
+      border-color: var(--color-lime);
+      color: var(--color-primary);
+    }
+    .pref-conditional { margin-top: 14px; }
+    .pref-conditional .field-label { color: var(--color-text-on-dark); }
+    .pref-conditional .field-label .req { color: var(--color-lime); }
+    .pref-band .field-error { color: #ffd2cc; }
+
+    /* ---------- Submit ---------- */
+    .submit-btn {
+      width: 100%;
+      margin-top: 22px;
+      padding: 11px 24px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--color-primary);
+      background: var(--color-lime);
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .submit-btn:hover { filter: brightness(0.97); }
+
+    /* ---------- Success message ---------- */
+    .success-msg {
+      border: 0.5px solid var(--color-card-border);
+      border-radius: 8px;
+      background: var(--color-section-sage);
+      padding: 32px 28px;
+      text-align: center;
+    }
+    .success-msg i { font-size: 34px; color: var(--color-icon); margin-bottom: 12px; display: block; }
+    .success-msg p { font-size: 15px; color: var(--color-text); line-height: 1.6; }
+
+    /* ---------- Mobile ---------- */
+    @media (max-width: 768px) {
+      .zone1 { grid-template-columns: 1fr; gap: 18px; }
+      .zone2 { width: 100%; }
+      .col-right { order: -1; } /* photo + trust above the form on small screens */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== 1. Nav ===== -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="nav-brand" href="index.html" aria-label="Surpath">
+        <svg class="nav-icon" width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Surpath">
+          <rect width="32" height="32" rx="6" fill="#4A9E8E"/>
+          <text x="16" y="22" text-anchor="middle" font-family="'Avenir','Avenir Next','Nunito',sans-serif" font-size="18" font-weight="600" fill="#ffffff">S</text>
+        </svg>
+        <span class="nav-wordmark">surpath.</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+        <i class="ti ti-menu-2"></i>
+      </button>
+      <div class="nav-menu" id="navMenu">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="services.html">Services</a>
+        <a class="nav-link" href="partners.html">Partners</a>
+        <a class="nav-link active" href="contact.html">Contact</a>
+        <a class="nav-cta" href="contact.html">Get started</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== 2. Hero ===== -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Get in touch</p>
+      <h1>Tell us what you're <span class="accent">working on.</span></h1>
+      <p class="hero-body">We'll get back to you within 2 business days with a plan — not a pitch.</p>
+    </div>
+  </section>
+
+  <form id="contactForm" novalidate>
+
+    <!-- ===== 3. Zone 1 — Your details ===== -->
+    <section class="section section-white">
+      <div class="container">
+        <div class="zone1">
+
+          <!-- Left: Your details -->
+          <div class="panel">
+            <h2 class="panel-title">Your details</h2>
+
+            <div class="field">
+              <label class="field-label" for="name">Name<span class="req">*</span></label>
+              <input class="text-input" type="text" id="name" name="name" autocomplete="name">
+              <p class="field-error" data-error-for="name">Please enter your name.</p>
+            </div>
+
+            <div class="field">
+              <label class="field-label" for="email">Email<span class="req">*</span></label>
+              <input class="text-input" type="email" id="email" name="email" autocomplete="email">
+              <p class="field-error" data-error-for="email">Please enter a valid email address.</p>
+            </div>
+
+            <div class="field">
+              <label class="field-label" for="company">Company</label>
+              <input class="text-input" type="text" id="company" name="company" autocomplete="organization">
+            </div>
+
+            <div class="field">
+              <label class="field-label">Company type<span class="req">*</span></label>
+              <div class="checks" id="companyType">
+                <label class="check"><input type="checkbox" name="companyType" value="e-Commerce Seller"> e-Commerce Seller</label>
+                <label class="check"><input type="checkbox" name="companyType" value="Brick & Mortar Retailer"> Brick &amp; Mortar Retailer</label>
+                <label class="check"><input type="checkbox" name="companyType" value="Brand Owner"> Brand Owner</label>
+                <label class="check"><input type="checkbox" name="companyType" value="I'm also a 3PL"> I'm also a 3PL</label>
+                <label class="check"><input type="checkbox" name="companyType" value="Others" data-other-toggle="companyTypeOther"> Others</label>
+              </div>
+              <div class="field" id="companyTypeOther" hidden style="margin-top:10px;margin-bottom:0;">
+                <input class="text-input" type="text" id="companyTypeOtherInput" placeholder="Please specify">
+                <p class="field-error" data-error-for="companyTypeOtherInput">Please specify your company type.</p>
+              </div>
+              <p class="field-error" data-error-for="companyType">Please select at least one company type.</p>
+            </div>
+          </div>
+
+          <!-- Right: team photo + trust card -->
+          <div class="col-right">
+            <img class="team-photo" src="asset/surpath-team-01.webp" alt="The Surpath operations team">
+            <div class="trust-card">
+              <div class="trust-item">
+                <i class="ti ti-clock"></i>
+                <span>Response within 2 business days — no automated replies.</span>
+              </div>
+              <div class="trust-item">
+                <i class="ti ti-users"></i>
+                <span>You'll hear from a real ops person, not a sales rep.</span>
+              </div>
+              <div class="trust-item">
+                <i class="ti ti-shield-check"></i>
+                <span>Free consultation included — no commitment required.</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 4. Zone 2 — Topics + dynamic questions + contact preference ===== -->
+    <section class="section section-sage">
+      <div class="container">
+        <div class="zone2" id="zone2">
+
+          <!-- Topic selector -->
+          <p class="eyebrow">what can we help with?</p>
+          <h2 class="section-title">Select all that apply</h2>
+          <p class="section-subtitle">Select all that apply — we'll tailor the questions.</p>
+
+          <div class="topics" id="topics">
+            <button type="button" class="topic-btn" data-topic="fulfillment" aria-pressed="false"><i class="ti ti-building-warehouse"></i> Fulfillment / Warehousing</button>
+            <button type="button" class="topic-btn" data-topic="shipping" aria-pressed="false"><i class="ti ti-truck-delivery"></i> Shipping Rates</button>
+            <button type="button" class="topic-btn" data-topic="forwarding" aria-pressed="false"><i class="ti ti-ship"></i> Global Forwarding</button>
+            <button type="button" class="topic-btn" data-topic="consultation" aria-pressed="false"><i class="ti ti-chart-dots"></i> Supply Chain Consultation</button>
+            <button type="button" class="topic-btn" data-topic="general" aria-pressed="false"><i class="ti ti-message"></i> General Inquiry</button>
+          </div>
+          <p class="field-error" data-error-for="topics" style="margin-top:10px;">Please select at least one topic.</p>
+
+          <!-- Topic-specific blocks (stack in topic order) -->
+
+          <!-- Fulfillment / Warehousing -->
+          <div class="qblock" id="block-fulfillment" hidden>
+            <p class="qblock-title">Fulfillment / Warehousing</p>
+            <div class="field">
+              <label class="field-label">Service needs<span class="req">*</span></label>
+              <div class="checks" id="fulfillmentNeeds">
+                <label class="check"><input type="checkbox" name="fulfillmentNeeds" value="Storage"> Storage</label>
+                <label class="check"><input type="checkbox" name="fulfillmentNeeds" value="B2C Shipping (UPS/FedEx/USPS)" data-need="b2c"> B2C Shipping (UPS/FedEx/USPS)</label>
+                <label class="check"><input type="checkbox" name="fulfillmentNeeds" value="B2B Shipping (LTL/FTL)" data-need="b2b"> B2B Shipping (LTL/FTL)</label>
+                <label class="check"><input type="checkbox" name="fulfillmentNeeds" value="Dedicated Operations"> Dedicated Operations</label>
+                <label class="check"><input type="checkbox" name="fulfillmentNeeds" value="Light Manufacturing"> Light Manufacturing</label>
+              </div>
+              <p class="field-error" data-error-for="fulfillmentNeeds">Please select at least one service need.</p>
+            </div>
+          </div>
+
+          <!-- Shipping Rates -->
+          <div class="qblock" id="block-shipping" hidden>
+            <p class="qblock-title">Shipping Rates</p>
+            <p class="field-hint" style="margin-bottom:0;">Tell us your outbound volume below so we can quote accurate rates.</p>
+          </div>
+
+          <!-- Outbound volumes (de-duplicated across Fulfillment + Shipping Rates) -->
+          <div class="qblock" id="block-outbound" hidden>
+            <div class="field" id="field-b2cOutbound" hidden>
+              <label class="field-label" for="b2cOutbound">B2C outbound volume<span class="req">*</span></label>
+              <input class="text-input" type="text" id="b2cOutbound" name="b2cOutbound" placeholder="## packs per month">
+              <p class="field-error" data-error-for="b2cOutbound">Please enter your B2C outbound volume.</p>
+            </div>
+            <div class="field" id="field-b2bOutbound" hidden style="margin-bottom:0;">
+              <label class="field-label" for="b2bOutbound">B2B outbound volume<span class="req">*</span></label>
+              <input class="text-input" type="text" id="b2bOutbound" name="b2bOutbound" placeholder="## pallets per month">
+              <p class="field-error" data-error-for="b2bOutbound">Please enter your B2B outbound volume.</p>
+            </div>
+          </div>
+
+          <!-- Global Forwarding -->
+          <div class="qblock" id="block-forwarding" hidden>
+            <p class="qblock-title">Global Forwarding</p>
+            <div class="field">
+              <label class="field-label">Service needs<span class="req">*</span></label>
+              <div class="checks" id="forwardingNeeds">
+                <label class="check"><input type="checkbox" name="forwardingNeeds" value="Ocean Freight"> Ocean Freight</label>
+                <label class="check"><input type="checkbox" name="forwardingNeeds" value="Airfreight"> Airfreight</label>
+                <label class="check"><input type="checkbox" name="forwardingNeeds" value="US/MX Trucking"> US/MX Trucking</label>
+                <label class="check"><input type="checkbox" name="forwardingNeeds" value="Need to switch to DDP"> Need to switch to DDP</label>
+                <label class="check"><input type="checkbox" name="forwardingNeeds" value="Others"> Others</label>
+              </div>
+              <p class="field-error" data-error-for="forwardingNeeds">Please select at least one service need.</p>
+            </div>
+          </div>
+
+          <!-- Supply Chain Consultation -->
+          <div class="qblock" id="block-consultation" hidden>
+            <p class="qblock-title">Supply Chain Consultation</p>
+            <div class="field">
+              <label class="field-label">Service needs<span class="req">*</span></label>
+              <div class="checks" id="consultationNeeds">
+                <label class="check"><input type="checkbox" name="consultationNeeds" value="Customized SC Design"> Customized SC Design</label>
+                <label class="check"><input type="checkbox" name="consultationNeeds" value="e-Commerce Operations"> e-Commerce Operations</label>
+                <label class="check"><input type="checkbox" name="consultationNeeds" value="Others"> Others</label>
+              </div>
+              <p class="field-error" data-error-for="consultationNeeds">Please select at least one service need.</p>
+            </div>
+          </div>
+
+          <!-- General Inquiry (no extra fields beyond shared) -->
+          <div class="qblock" id="block-general" hidden>
+            <p class="qblock-title">General Inquiry</p>
+            <p class="field-hint" style="margin-bottom:0;">Tell us a little about what you need in the "Describe your situation" box below.</p>
+          </div>
+
+          <!-- Shared fields (de-duplicated — shown once) -->
+          <div class="qblock" id="block-shared" hidden>
+            <p class="qblock-title">About your products</p>
+
+            <div class="field" id="field-productDescription">
+              <label class="field-label" for="productDescription">Product description<span class="req" data-req-mark>*</span></label>
+              <input class="text-input" type="text" id="productDescription" name="productDescription" placeholder="e.g. ceramic kitchenware, 2–8 lb, sold on Amazon + Shopify">
+              <p class="field-error" data-error-for="productDescription">Please describe your product.</p>
+            </div>
+
+            <div class="field" id="field-productFeature">
+              <label class="field-label">Product feature<span class="req">*</span></label>
+              <div class="checks" id="productFeature">
+                <label class="check"><input type="checkbox" name="productFeature" value="General Goods"> General Goods</label>
+                <label class="check"><input type="checkbox" name="productFeature" value="DG Goods"> DG Goods</label>
+                <label class="check"><input type="checkbox" name="productFeature" value="Require OGA Compliance"> Require OGA Compliance</label>
+                <label class="check"><input type="checkbox" name="productFeature" value="Others" data-other-toggle="productFeatureOther"> Others</label>
+              </div>
+              <div class="field" id="productFeatureOther" hidden style="margin-top:10px;margin-bottom:0;">
+                <input class="text-input" type="text" id="productFeatureOtherInput" placeholder="Please specify">
+                <p class="field-error" data-error-for="productFeatureOtherInput">Please specify the product feature.</p>
+              </div>
+              <p class="field-error" data-error-for="productFeature">Please select at least one product feature.</p>
+            </div>
+
+            <div class="field" id="field-inboundVolume">
+              <label class="field-label" for="inboundVolume">Inbound volume<span class="req" data-req-mark>*</span></label>
+              <input class="text-input" type="text" id="inboundVolume" name="inboundVolume" placeholder="## loads per month">
+              <p class="field-error" data-error-for="inboundVolume">Please enter your inbound volume.</p>
+            </div>
+
+            <div class="field" id="field-situation" style="margin-bottom:0;">
+              <label class="field-label" for="situation">Describe your situation<span class="req" data-req-mark>*</span></label>
+              <textarea class="text-input" id="situation" name="situation" placeholder="What are you trying to solve? Where are the bottlenecks today?"></textarea>
+              <p class="field-error" data-error-for="situation">Please describe your situation.</p>
+            </div>
+          </div>
+
+          <!-- Contact preference (always shown) -->
+          <div class="pref-band">
+            <p class="pref-intro">We'll get back to you within 2 business days. What's the best way to reach you?</p>
+
+            <span class="pref-label">Contact method<span class="req">*</span></span>
+            <div class="methods" id="methods">
+              <button type="button" class="method-btn" data-method="Email" aria-pressed="false"><i class="ti ti-mail"></i> Email</button>
+              <button type="button" class="method-btn" data-method="Phone" aria-pressed="false"><i class="ti ti-phone"></i> Phone</button>
+              <button type="button" class="method-btn" data-method="Zoom Call" aria-pressed="false"><i class="ti ti-video"></i> Zoom Call</button>
+            </div>
+            <p class="field-error" data-error-for="methods" style="margin-top:8px;">Please choose a contact method.</p>
+
+            <div class="pref-conditional" id="field-phone" hidden>
+              <label class="field-label" for="phone">Phone number<span class="req">*</span></label>
+              <input class="text-input" type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+              <p class="field-error" data-error-for="phone">Please enter a valid phone number.</p>
+            </div>
+
+            <div class="pref-conditional" id="field-timezone" hidden style="margin-top:14px;">
+              <label class="field-label" for="timezone">Time zone<span class="req">*</span></label>
+              <select class="text-input" id="timezone" name="timezone">
+                <option value="">Select your time zone…</option>
+                <optgroup label="United States">
+                  <option value="US - Eastern">Eastern</option>
+                  <option value="US - Central">Central</option>
+                  <option value="US - Mountain">Mountain</option>
+                  <option value="US - Pacific">Pacific</option>
+                  <option value="US - Alaska">Alaska</option>
+                  <option value="US - Hawaii">Hawaii</option>
+                </optgroup>
+                <optgroup label="Asia">
+                  <option value="Mainland China (UTC+8)">Mainland China (UTC+8)</option>
+                  <option value="Taiwan (UTC+8)">Taiwan (UTC+8)</option>
+                  <option value="Vietnam (UTC+7)">Vietnam (UTC+7)</option>
+                </optgroup>
+              </select>
+              <p class="field-error" data-error-for="timezone">Please select your time zone.</p>
+            </div>
+          </div>
+
+          <!-- Submit -->
+          <button type="submit" class="submit-btn">Send inquiry →</button>
+
+        </div>
+      </div>
+    </section>
+
+  </form>
+
+  <!-- ===== 5. Footer ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p>© 2025 Surpath Inc.</p>
+    </div>
+  </footer>
+
+  <script>
+    // ---- Hamburger menu toggle (vanilla JS, matches other pages) ----
+    (function () {
+      var toggle = document.getElementById('navToggle');
+      var menu = document.getElementById('navMenu');
+      toggle.addEventListener('click', function () {
+        var open = menu.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      menu.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          menu.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    })();
+
+    // ===================== Contact form =====================
+    (function () {
+      var WEBHOOK_URL = "PLACEHOLDER_APPS_SCRIPT_URL";
+      var EMAIL_ENDPOINT = "PLACEHOLDER_EMAIL_ENDPOINT";
+
+      var form = document.getElementById('contactForm');
+      var zone2 = document.getElementById('zone2');
+
+      // Topic state
+      var selectedTopics = new Set();
+      var PROD = ['fulfillment', 'shipping', 'forwarding']; // product-handling topics
+      var topicButtons = document.querySelectorAll('.topic-btn');
+      var methodButtons = document.querySelectorAll('.method-btn');
+      var selectedMethod = null;
+
+      function anyProd() { return PROD.some(function (t) { return selectedTopics.has(t); }); }
+      function has(t) { return selectedTopics.has(t); }
+
+      // ---- "Others (specify)" reveal toggles ----
+      document.querySelectorAll('[data-other-toggle]').forEach(function (cb) {
+        cb.addEventListener('change', function () {
+          var target = document.getElementById(cb.getAttribute('data-other-toggle'));
+          if (target) target.hidden = !cb.checked;
+        });
+      });
+
+      // ---- Fulfillment B2C/B2B service-need checkboxes drive outbound volume fields ----
+      document.getElementById('fulfillmentNeeds').addEventListener('change', updateVisibility);
+
+      // ---- Topic toggle ----
+      topicButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var topic = btn.getAttribute('data-topic');
+          if (selectedTopics.has(topic)) { selectedTopics.delete(topic); btn.classList.remove('selected'); btn.setAttribute('aria-pressed', 'false'); }
+          else { selectedTopics.add(topic); btn.classList.add('selected'); btn.setAttribute('aria-pressed', 'true'); }
+          clearError('topics');
+          updateVisibility();
+        });
+      });
+
+      // ---- Contact method toggle (single select) ----
+      methodButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          selectedMethod = btn.getAttribute('data-method');
+          methodButtons.forEach(function (b) {
+            var on = b === btn;
+            b.classList.toggle('selected', on);
+            b.setAttribute('aria-pressed', on ? 'true' : 'false');
+          });
+          clearError('methods');
+          updateVisibility();
+        });
+      });
+
+      // ---- Visibility engine: recompute which blocks/fields are shown ----
+      function updateVisibility() {
+        var anyTopic = selectedTopics.size > 0;
+
+        // Topic-specific blocks
+        document.getElementById('block-fulfillment').hidden = !has('fulfillment');
+        document.getElementById('block-shipping').hidden = !has('shipping');
+        document.getElementById('block-forwarding').hidden = !has('forwarding');
+        document.getElementById('block-consultation').hidden = !has('consultation');
+        document.getElementById('block-general').hidden = !has('general');
+
+        // Outbound volumes (de-duplicated)
+        var b2cChecked = document.querySelector('#fulfillmentNeeds input[data-need="b2c"]').checked;
+        var b2bChecked = document.querySelector('#fulfillmentNeeds input[data-need="b2b"]').checked;
+        var showB2C = has('shipping') || (has('fulfillment') && b2cChecked);
+        var showB2B = has('fulfillment') && b2bChecked;
+        document.getElementById('field-b2cOutbound').hidden = !showB2C;
+        document.getElementById('field-b2bOutbound').hidden = !showB2B;
+        document.getElementById('block-outbound').hidden = !(showB2C || showB2B);
+
+        // Shared fields
+        document.getElementById('block-shared').hidden = !anyTopic;
+        document.getElementById('field-productFeature').hidden = !anyProd();
+        // required markers reflect current requirement (visual only; validation re-checks)
+        setReqMark('productDescription', anyProd());
+        setReqMark('inboundVolume', has('fulfillment') || has('forwarding'));
+        setReqMark('situation', has('consultation') || has('general'));
+
+        // Contact-preference conditionals
+        document.getElementById('field-phone').hidden = !(selectedMethod === 'Phone');
+        document.getElementById('field-timezone').hidden = !(selectedMethod === 'Phone' || selectedMethod === 'Zoom Call');
+      }
+
+      function setReqMark(fieldId, required) {
+        var label = document.querySelector('label[for="' + fieldId + '"] [data-req-mark]');
+        if (label) label.style.visibility = required ? 'visible' : 'hidden';
+      }
+
+      // ---- Validation helpers ----
+      function showError(key) {
+        var el = document.querySelector('.field-error[data-error-for="' + key + '"]');
+        if (el) el.classList.add('show');
+        var input = document.getElementById(key);
+        if (input) input.classList.add('invalid');
+      }
+      function clearError(key) {
+        var el = document.querySelector('.field-error[data-error-for="' + key + '"]');
+        if (el) el.classList.remove('show');
+        var input = document.getElementById(key);
+        if (input) input.classList.remove('invalid');
+      }
+      function clearAllErrors() {
+        document.querySelectorAll('.field-error.show').forEach(function (e) { e.classList.remove('show'); });
+        document.querySelectorAll('.text-input.invalid').forEach(function (e) { e.classList.remove('invalid'); });
+      }
+      function checkedValues(name) {
+        return Array.prototype.map.call(
+          document.querySelectorAll('input[name="' + name + '"]:checked'),
+          function (i) { return i.value; }
+        );
+      }
+      function isVisible(el) { return el && !el.closest('[hidden]') && !el.hidden; }
+      var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      var PHONE_RE = /^[+]?[\d\s().-]{7,}$/;
+
+      // Clear an error as soon as the user edits the field
+      form.addEventListener('input', function (e) {
+        if (e.target.id) clearError(e.target.id);
+      });
+      form.addEventListener('change', function (e) {
+        if (e.target.name) clearError(e.target.name);
+        if (e.target.id) clearError(e.target.id);
+      });
+
+      // ---- Validate ----
+      function validate() {
+        clearAllErrors();
+        var errors = [];
+
+        // Name
+        if (!document.getElementById('name').value.trim()) { showError('name'); errors.push('name'); }
+        // Email
+        var email = document.getElementById('email').value.trim();
+        if (!email || !EMAIL_RE.test(email)) { showError('email'); errors.push('email'); }
+        // Company type (>=1)
+        if (checkedValues('companyType').length === 0) { showError('companyType'); errors.push('companyType'); }
+        // Company type "Others" specify
+        var ctOther = document.querySelector('#companyType input[data-other-toggle]');
+        if (ctOther && ctOther.checked && !document.getElementById('companyTypeOtherInput').value.trim()) {
+          showError('companyTypeOtherInput'); errors.push('companyTypeOtherInput');
+        }
+
+        // At least one topic
+        if (selectedTopics.size === 0) { showError('topics'); errors.push('topics'); }
+
+        // Per-topic service needs
+        if (has('fulfillment') && checkedValues('fulfillmentNeeds').length === 0) { showError('fulfillmentNeeds'); errors.push('fulfillmentNeeds'); }
+        if (has('forwarding') && checkedValues('forwardingNeeds').length === 0) { showError('forwardingNeeds'); errors.push('forwardingNeeds'); }
+        if (has('consultation') && checkedValues('consultationNeeds').length === 0) { showError('consultationNeeds'); errors.push('consultationNeeds'); }
+
+        // Outbound volumes (only if visible/required)
+        if (isVisible(document.getElementById('field-b2cOutbound')) && !document.getElementById('b2cOutbound').value.trim()) { showError('b2cOutbound'); errors.push('b2cOutbound'); }
+        if (isVisible(document.getElementById('field-b2bOutbound')) && !document.getElementById('b2bOutbound').value.trim()) { showError('b2bOutbound'); errors.push('b2bOutbound'); }
+
+        // Shared fields
+        if (anyProd()) {
+          if (!document.getElementById('productDescription').value.trim()) { showError('productDescription'); errors.push('productDescription'); }
+          if (checkedValues('productFeature').length === 0) { showError('productFeature'); errors.push('productFeature'); }
+          var pfOther = document.querySelector('#productFeature input[data-other-toggle]');
+          if (pfOther && pfOther.checked && !document.getElementById('productFeatureOtherInput').value.trim()) {
+            showError('productFeatureOtherInput'); errors.push('productFeatureOtherInput');
+          }
+        }
+        if ((has('fulfillment') || has('forwarding')) && !document.getElementById('inboundVolume').value.trim()) { showError('inboundVolume'); errors.push('inboundVolume'); }
+        if ((has('consultation') || has('general')) && !document.getElementById('situation').value.trim()) { showError('situation'); errors.push('situation'); }
+
+        // Contact method
+        if (!selectedMethod) { showError('methods'); errors.push('methods'); }
+        if (selectedMethod === 'Phone') {
+          var phone = document.getElementById('phone').value.trim();
+          if (!phone || !PHONE_RE.test(phone)) { showError('phone'); errors.push('phone'); }
+        }
+        if (selectedMethod === 'Phone' || selectedMethod === 'Zoom Call') {
+          if (!document.getElementById('timezone').value) { showError('timezone'); errors.push('timezone'); }
+        }
+
+        return errors;
+      }
+
+      // ---- Build payload ----
+      function buildPayload() {
+        function otherVal(toggleSel, inputId) {
+          var cb = document.querySelector(toggleSel);
+          return (cb && cb.checked) ? document.getElementById(inputId).value.trim() : null;
+        }
+        return {
+          name: document.getElementById('name').value.trim(),
+          email: document.getElementById('email').value.trim(),
+          company: document.getElementById('company').value.trim() || null,
+          companyType: checkedValues('companyType'),
+          companyTypeOther: otherVal('#companyType input[data-other-toggle]', 'companyTypeOtherInput'),
+          topics: Array.from(selectedTopics),
+          fulfillmentNeeds: has('fulfillment') ? checkedValues('fulfillmentNeeds') : [],
+          forwardingNeeds: has('forwarding') ? checkedValues('forwardingNeeds') : [],
+          consultationNeeds: has('consultation') ? checkedValues('consultationNeeds') : [],
+          b2cOutboundVolume: isVisible(document.getElementById('field-b2cOutbound')) ? document.getElementById('b2cOutbound').value.trim() : null,
+          b2bOutboundVolume: isVisible(document.getElementById('field-b2bOutbound')) ? document.getElementById('b2bOutbound').value.trim() : null,
+          productDescription: document.getElementById('productDescription').value.trim() || null,
+          productFeature: checkedValues('productFeature'),
+          productFeatureOther: otherVal('#productFeature input[data-other-toggle]', 'productFeatureOtherInput'),
+          inboundVolume: document.getElementById('inboundVolume').value.trim() || null,
+          situation: document.getElementById('situation').value.trim() || null,
+          contactMethod: selectedMethod,
+          phone: selectedMethod === 'Phone' ? document.getElementById('phone').value.trim() : null,
+          timezone: (selectedMethod === 'Phone' || selectedMethod === 'Zoom Call') ? document.getElementById('timezone').value : null,
+          submittedAt: new Date().toISOString()
+        };
+      }
+
+      // ---- Submit ----
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var errors = validate();
+        if (errors.length) {
+          var first = document.querySelector('.field-error.show');
+          if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return;
+        }
+
+        var payload = buildPayload();
+
+        // Fire-and-forget POSTs to placeholder endpoints; errors are logged only.
+        try {
+          fetch(WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          }).catch(function (err) { console.error('Webhook submission error:', err); });
+
+          fetch(EMAIL_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          }).catch(function (err) { console.error('Email submission error:', err); });
+        } catch (err) {
+          console.error('Submission error:', err);
+        }
+
+        // Replace the form (Zone 2 area) with the success message.
+        zone2.innerHTML =
+          '<div class="success-msg">' +
+          '<i class="ti ti-circle-check"></i>' +
+          '<p>Thank you — we\'ll be in touch within 2 business days.</p>' +
+          '</div>';
+        zone2.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+
+      // Initial paint
+      updateVisibility();
+    })();
+  </script>
+
+</body>
+</html>

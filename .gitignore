@@ -1,0 +1,23 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+# Thumbnails / Finder
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# Local Claude Code config (keep machine-local settings out of the repo)
+.claude/settings.local.json
