@@ -807,3 +807,221 @@ a { text-decoration: none; }
   .svc-block-media img { height: 200px; }
   .svc-block-content { padding: 24px 16px; }
 }
+
+/* ==========================================================================
+   Whitepaper Sample Page  (standalone — not in main nav; see style.md ›
+   Whitepaper Sample Page)
+   Document-style layout: line-number gutter, selective blur, cost tables,
+   and an inline data-flow diagram. Self-contained literals match the spec's
+   document palette; existing tokens/styles are left untouched.
+   ========================================================================== */
+
+/* Page backdrop — sets the white document off as a floating page */
+.wp-page {
+  background: #eef1f4;
+  padding: 32px 16px;
+}
+
+/* Document container (extra left padding houses the line-number gutter) */
+.wp-doc {
+  max-width: 720px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 48px 36px 48px 80px;
+  position: relative;
+  counter-reset: wpline;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.10);
+  border-radius: 2px;
+}
+
+/* Document header block */
+.wp-badge {
+  display: inline-block;
+  background: #2C4F5C;
+  color: #A8D44F;
+  font-family: 'Avenir', 'Avenir Next', 'Nunito', sans-serif;
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+.wp-doc-title {
+  font-family: 'Avenir', 'Avenir Next', 'Nunito', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1E1E1E;
+  margin-top: 14px;
+}
+.wp-doc-meta {
+  font-size: 11px;
+  color: #888;
+  margin-top: 4px;
+}
+
+/* Thin divider line (header→body and between blocks) */
+.wp-divider {
+  border: none;
+  border-top: 1px solid #e0e0e0;
+  margin: 18px 0;
+}
+
+/* Section + sub-section titles — always clear regardless of surrounding blur */
+.wp-section-title {
+  font-family: 'Avenir', 'Avenir Next', 'Nunito', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1E1E1E;
+  margin-top: 24px;
+}
+.wp-subtitle {
+  font-family: 'Avenir', 'Avenir Next', 'Nunito', sans-serif;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #1E1E1E;
+  margin-top: 14px;
+}
+
+/* Body lines, each carrying an auto-numbered gutter marker */
+.wp-line {
+  position: relative;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 12px;
+  line-height: 1.75;
+  color: #1E1E1E;
+  margin: 8px 0 0;
+}
+.wp-line::before {
+  counter-increment: wpline;
+  content: counter(wpline);
+  position: absolute;
+  left: -44px;
+  top: 3px;
+  width: 30px;
+  text-align: right;
+  font-family: 'SFMono-Regular', Menlo, Consolas, monospace;
+  font-size: 10px;
+  color: #ccc;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
+}
+
+/* Blur modifier — applied to whole lines (the gutter number stays crisp) */
+.wp-blur {
+  filter: blur(2.5px);
+  color: #bbb;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
+}
+
+/* [client] redaction token: teal italic when clear, grey when blurred */
+.wp-client {
+  color: #4A9E8E;
+  font-style: italic;
+}
+.wp-blur .wp-client { color: #ccc; }
+
+/* Numbered action list (executive summary) */
+.wp-ol {
+  margin: 4px 0 0 18px;
+  padding: 0;
+}
+.wp-ol li { margin: 2px 0; }
+
+/* Page-break markers (visual separators only — not print page breaks) */
+.wp-pagebreak {
+  border-top: 1px dashed #c8c8c8;
+  margin: 28px 0;
+  padding-top: 6px;
+  font-family: 'Avenir', 'Avenir Next', 'Nunito', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #aaa;
+}
+
+/* Cost tables */
+.wp-table-label {
+  font-family: 'Avenir', 'Avenir Next', 'Nunito', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: #555;
+  margin-top: 16px;
+  margin-bottom: 4px;
+}
+.wp-table-wrap { overflow-x: auto; }
+.wp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 11px;
+}
+.wp-table th,
+.wp-table td {
+  border: 1px solid #e0e0e0;
+  padding: 4px 8px;
+  text-align: right;
+  white-space: nowrap;
+}
+.wp-table th {
+  font-family: 'Avenir', 'Avenir Next', 'Nunito', sans-serif;
+  font-weight: 700;
+  background: #f7f9fa;
+  color: #1E1E1E;
+}
+.wp-table th:first-child,
+.wp-table td:first-child {
+  text-align: left;
+  white-space: normal;
+}
+/* Per-cell blur inside tables */
+.wp-cell-blur {
+  filter: blur(2.5px);
+  color: #bbb;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
+}
+/* Clear red tariff cells (stay legible amid blurred data) */
+.wp-cell-tariff {
+  color: #c0392b;
+  font-weight: 700;
+}
+/* Clear red optimized-unit-cost cells */
+.wp-cell-red { color: #c0392b; }
+/* Optimized-cost highlight row */
+.wp-row-green td {
+  background: #2C4F5C;
+  color: #ffffff;
+}
+.wp-row-green td:first-child { color: #A8D44F; }
+
+/* Inline data-flow diagram */
+.wp-diagram {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 10px 0 4px;
+}
+
+/* Bottom CTA */
+.wp-cta-wrap {
+  text-align: center;
+  margin-top: 32px;
+}
+.wp-cta {
+  display: inline-block;
+  background: #2C4F5C;
+  color: #ffffff;
+  font-family: 'Avenir', 'Avenir Next', 'Nunito', sans-serif;
+  font-size: 12px;
+  padding: 10px 24px;
+  border-radius: 6px;
+}
+
+/* Mobile — tighten the gutter and let wide tables scroll */
+@media (max-width: 768px) {
+  .wp-page { padding: 20px 0; }
+  .wp-doc { padding: 32px 18px 32px 52px; border-radius: 0; }
+  .wp-line::before { left: -34px; width: 24px; }
+}
