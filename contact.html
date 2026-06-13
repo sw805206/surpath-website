@@ -352,6 +352,20 @@
               </div>
               <p class="field-error" data-error-for="companyType">Please select at least one company type.</p>
             </div>
+
+            <!-- Topic selection (moved here from the dynamic section) -->
+            <div class="field" style="margin-bottom:0;">
+              <label class="field-label">What can we help with?<span class="req">*</span></label>
+              <p class="field-hint">Select all that apply — we'll tailor the questions.</p>
+              <div class="topics" id="topics">
+                <button type="button" class="topic-btn" data-topic="fulfillment" aria-pressed="false"><i class="ti ti-building-warehouse"></i> Fulfillment / Warehousing</button>
+                <button type="button" class="topic-btn" data-topic="shipping" aria-pressed="false"><i class="ti ti-truck-delivery"></i> Shipping Rates</button>
+                <button type="button" class="topic-btn" data-topic="forwarding" aria-pressed="false"><i class="ti ti-ship"></i> Global Forwarding</button>
+                <button type="button" class="topic-btn" data-topic="consultation" aria-pressed="false"><i class="ti ti-chart-dots"></i> Supply Chain Consultation</button>
+                <button type="button" class="topic-btn" data-topic="general" aria-pressed="false"><i class="ti ti-message"></i> General Inquiry</button>
+              </div>
+              <p class="field-error" data-error-for="topics" style="margin-top:10px;">Please select at least one topic.</p>
+            </div>
           </div>
 
           <!-- Right: team photo + trust card -->
@@ -382,19 +396,10 @@
       <div class="container">
         <div class="zone2" id="zone2">
 
-          <!-- Topic selector -->
-          <p class="eyebrow">what can we help with?</p>
-          <h2 class="section-title">Select all that apply</h2>
-          <p class="section-subtitle">Select all that apply — we'll tailor the questions.</p>
-
-          <div class="topics" id="topics">
-            <button type="button" class="topic-btn" data-topic="fulfillment" aria-pressed="false"><i class="ti ti-building-warehouse"></i> Fulfillment / Warehousing</button>
-            <button type="button" class="topic-btn" data-topic="shipping" aria-pressed="false"><i class="ti ti-truck-delivery"></i> Shipping Rates</button>
-            <button type="button" class="topic-btn" data-topic="forwarding" aria-pressed="false"><i class="ti ti-ship"></i> Global Forwarding</button>
-            <button type="button" class="topic-btn" data-topic="consultation" aria-pressed="false"><i class="ti ti-chart-dots"></i> Supply Chain Consultation</button>
-            <button type="button" class="topic-btn" data-topic="general" aria-pressed="false"><i class="ti ti-message"></i> General Inquiry</button>
-          </div>
-          <p class="field-error" data-error-for="topics" style="margin-top:10px;">Please select at least one topic.</p>
+          <!-- Tell us more (dynamic section — hidden entirely until a topic is selected) -->
+          <div id="tellMore" hidden>
+            <h2 class="section-title">Tell us more</h2>
+            <p class="section-subtitle">Based on your selections above.</p>
 
           <!-- Topic-specific blocks (stack in topic order) -->
 
@@ -464,12 +469,6 @@
             </div>
           </div>
 
-          <!-- General Inquiry (no extra fields beyond shared) -->
-          <div class="qblock" id="block-general" hidden>
-            <p class="qblock-title">General Inquiry</p>
-            <p class="field-hint" style="margin-bottom:0;">Tell us a little about what you need in the "Describe your situation" box below.</p>
-          </div>
-
           <!-- Shared fields (de-duplicated — shown once) -->
           <div class="qblock" id="block-shared" hidden>
             <p class="qblock-title">About your products</p>
@@ -495,18 +494,23 @@
               <p class="field-error" data-error-for="productFeature">Please select at least one product feature.</p>
             </div>
 
-            <div class="field" id="field-inboundVolume">
+            <div class="field" id="field-inboundVolume" style="margin-bottom:0;">
               <label class="field-label" for="inboundVolume">Inbound volume<span class="req" data-req-mark>*</span></label>
               <input class="text-input" type="text" id="inboundVolume" name="inboundVolume" placeholder="## loads per month">
               <p class="field-error" data-error-for="inboundVolume">Please enter your inbound volume.</p>
             </div>
+          </div>
 
-            <div class="field" id="field-situation" style="margin-bottom:0;">
+          <!-- Describe your situation (standalone — always shown at the bottom of the dynamic section) -->
+          <div class="qblock" id="block-situation">
+            <div class="field" style="margin-bottom:0;">
               <label class="field-label" for="situation">Describe your situation<span class="req" data-req-mark>*</span></label>
-              <textarea class="text-input" id="situation" name="situation" placeholder="What are you trying to solve? Where are the bottlenecks today?"></textarea>
+              <textarea class="text-input" id="situation" name="situation" placeholder="Anything else we should know…"></textarea>
               <p class="field-error" data-error-for="situation">Please describe your situation.</p>
             </div>
           </div>
+
+          </div><!-- /#tellMore -->
 
           <!-- Contact preference (always shown) -->
           <div class="pref-band">
@@ -639,12 +643,14 @@
       function updateVisibility() {
         var anyTopic = selectedTopics.size > 0;
 
+        // Dynamic "Tell us more" section — hidden entirely until a topic is selected
+        document.getElementById('tellMore').hidden = !anyTopic;
+
         // Topic-specific blocks
         document.getElementById('block-fulfillment').hidden = !has('fulfillment');
         document.getElementById('block-shipping').hidden = !has('shipping');
         document.getElementById('block-forwarding').hidden = !has('forwarding');
         document.getElementById('block-consultation').hidden = !has('consultation');
-        document.getElementById('block-general').hidden = !has('general');
 
         // Outbound volumes (de-duplicated)
         var b2cChecked = document.querySelector('#fulfillmentNeeds input[data-need="b2c"]').checked;
@@ -661,7 +667,8 @@
         // required markers reflect current requirement (visual only; validation re-checks)
         setReqMark('productDescription', anyProd());
         setReqMark('inboundVolume', has('fulfillment') || has('forwarding'));
-        setReqMark('situation', has('consultation') || has('general'));
+        // Situation is required only when General Inquiry is the sole selected topic
+        setReqMark('situation', selectedTopics.size === 1 && has('general'));
 
         // Contact-preference conditionals
         document.getElementById('field-phone').hidden = !(selectedMethod === 'Phone');
@@ -749,7 +756,7 @@
           }
         }
         if ((has('fulfillment') || has('forwarding')) && !document.getElementById('inboundVolume').value.trim()) { showError('inboundVolume'); errors.push('inboundVolume'); }
-        if ((has('consultation') || has('general')) && !document.getElementById('situation').value.trim()) { showError('situation'); errors.push('situation'); }
+        if (selectedTopics.size === 1 && has('general') && !document.getElementById('situation').value.trim()) { showError('situation'); errors.push('situation'); }
 
         // Contact method
         if (!selectedMethod) { showError('methods'); errors.push('methods'); }
