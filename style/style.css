@@ -62,6 +62,7 @@ a { text-decoration: none; }
 .btn-lime    { background: var(--color-lime); color: var(--color-primary); }
 .btn-ghost   { background: transparent; border: 1px solid var(--color-ghost-border); color: var(--color-white); }
 .btn-outline { background: transparent; border: 1.5px solid var(--color-primary); color: var(--color-primary); }
+.btn-block   { width: 100%; display: block; } /* width modifier — full-width button */
 /* Hover states: PLACEHOLDER in style.md — intentionally not styled. */
 
 /* ---------- Navigation (style.md › Navigation) ---------- */
