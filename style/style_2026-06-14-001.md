@@ -329,7 +329,7 @@ Two unified rules govern text in the contact form so block headings and entry te
 
 ### Topic selector
 - `.topics`: **2-column equal-width grid** (`grid-template-columns: 1fr 1fr`), gap 10px, margin-top 14px. Each `.topic-btn` stretches to fill its column, so all buttons are equal width; the 5 buttons fill rows top→bottom, with "General inquiry" in the left column of the last row.
-- `.topic-btn`: inline-flex pill, gap 9px, padding 11px 16px, 13px / weight 500 / #2C4F5C, sage bg, 1px #d4e8c8 border, 8px radius; icon 17px; hover border #bcd9a3; `.selected` → #2C4F5C bg / #fff text.
+- `.topic-btn`: inline-flex pill, left-aligned (`justify-content: flex-start`, `text-align: left`), single-line (`white-space: nowrap`), gap 8px, padding 11px 9px, 13px / weight 500 / #2C4F5C, sage bg, 1px #d4e8c8 border, 8px radius; icon 17px (flex-shrink 0); hover border #bcd9a3; `.selected` → #2C4F5C bg / #fff text. The tightened padding/gap + nowrap keep the longest label ("Supply chain consultation") on one line within the ~197px grid column, with a uniform icon→text gap across all buttons.
 - **Button text is sentence case** (first word capitalized only): "Fulfillment / warehousing", "Last mile rates", "Global forwarding", "Supply chain consultation", "General inquiry".
 - **Restart link** (`.topics-restart`): a plain `<span>` (role="button", tabindex 0) in the right column of the last grid row — `justify-self: end`, `align-self: center`, 12px / #4A9E8E / underline / cursor pointer. Clicking (or Enter/Space) clears all topic-button selections, hides every dynamic question block, and clears all field values inside those blocks. It does **not** reset Zone 1 fields (name, company, email, etc.).
 

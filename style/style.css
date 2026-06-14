@@ -1274,11 +1274,14 @@ textarea.text-input { min-height: 92px; resize: vertical; line-height: 1.6; }
 .topic-btn {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
-  padding: 11px 16px;
+  justify-content: flex-start;
+  gap: 8px;
+  padding: 11px 9px;
   font-family: inherit;
   font-size: 13px;
   font-weight: 500;
+  text-align: left;
+  white-space: nowrap;
   color: var(--color-primary);
   background: var(--color-section-sage);
   border: 1px solid var(--color-card-border);
@@ -1286,7 +1289,7 @@ textarea.text-input { min-height: 92px; resize: vertical; line-height: 1.6; }
   cursor: pointer;
   transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
-.topic-btn i { font-size: 17px; }
+.topic-btn i { font-size: 17px; flex-shrink: 0; }
 .topic-btn:hover { border-color: #bcd9a3; }
 .topic-btn.selected {
   background: var(--color-primary);
