@@ -47,14 +47,14 @@
 
   <form id="contactForm" novalidate>
 
-    <!-- ===== 3. Zone 1 — Your details ===== -->
+    <!-- ===== 3. Zone 1 — Basic information ===== -->
     <section class="section section-white">
       <div class="container">
         <div class="zone1">
 
-          <!-- Left: Your details -->
+          <!-- Left: Basic information -->
           <div class="panel">
-            <h2 class="panel-title">Your details</h2>
+            <h2 class="panel-title">Basic information</h2>
 
             <div class="field">
               <label class="field-label" for="name">Name<span class="req">*</span></label>
@@ -74,30 +74,29 @@
             </div>
 
             <div class="field">
-              <label class="field-label">Company type<span class="req">*</span></label>
+              <label class="field-label">Business type<span class="req">*</span></label>
               <div class="checks" id="companyType">
-                <label class="check"><input type="checkbox" name="companyType" value="e-Commerce Seller"> e-Commerce Seller</label>
-                <label class="check"><input type="checkbox" name="companyType" value="Brick & Mortar Retailer"> Brick &amp; Mortar Retailer</label>
-                <label class="check"><input type="checkbox" name="companyType" value="Brand Owner"> Brand Owner</label>
-                <label class="check"><input type="checkbox" name="companyType" value="I'm also a 3PL"> I'm also a 3PL</label>
+                <label class="check"><input type="checkbox" name="companyType" value="e-Commerce Seller" data-group="A"> e-Commerce Seller</label>
+                <label class="check"><input type="checkbox" name="companyType" value="Brick & Mortar Retailer" data-group="A"> Brick &amp; Mortar Retailer</label>
+                <label class="check"><input type="checkbox" name="companyType" value="Brand Owner" data-group="A"> Brand Owner</label>
+                <label class="check"><input type="checkbox" name="companyType" value="Logistics service provider" data-group="B"> Logistics service provider</label>
                 <label class="check"><input type="checkbox" name="companyType" value="Others" data-other-toggle="companyTypeOther"> Others</label>
               </div>
               <div class="field" id="companyTypeOther" hidden style="margin-top:10px;margin-bottom:0;">
                 <input class="text-input" type="text" id="companyTypeOtherInput" placeholder="Please specify">
-                <p class="field-error" data-error-for="companyTypeOtherInput">Please specify your company type.</p>
+                <p class="field-error" data-error-for="companyTypeOtherInput">Please specify your business type.</p>
               </div>
-              <p class="field-error" data-error-for="companyType">Please select at least one company type.</p>
+              <p class="field-error" data-error-for="companyType">Please select at least one business type.</p>
             </div>
 
-            <!-- Topic selection (moved here from the dynamic section) -->
+            <!-- Topic selection -->
             <div class="field" style="margin-bottom:0;">
               <label class="field-label">What can we help with?<span class="req">*</span></label>
-              <p class="field-hint">Select all that apply — we'll tailor the questions.</p>
               <div class="topics" id="topics">
                 <button type="button" class="topic-btn" data-topic="fulfillment" aria-pressed="false"><i class="ti ti-building-warehouse"></i> Fulfillment / Warehousing</button>
                 <button type="button" class="topic-btn" data-topic="shipping" aria-pressed="false"><i class="ti ti-truck-delivery"></i> Shipping Rates</button>
                 <button type="button" class="topic-btn" data-topic="forwarding" aria-pressed="false"><i class="ti ti-ship"></i> Global Forwarding</button>
-                <button type="button" class="topic-btn" data-topic="consultation" aria-pressed="false"><i class="ti ti-chart-dots"></i> Supply Chain Consultation</button>
+                <button type="button" class="topic-btn" data-topic="consultation" aria-pressed="false"><i class="ti ti-chart-dots"></i> SC Consultation</button>
                 <button type="button" class="topic-btn" data-topic="general" aria-pressed="false"><i class="ti ti-message"></i> General Inquiry</button>
               </div>
               <p class="field-error" data-error-for="topics" style="margin-top:10px;">Please select at least one topic.</p>
@@ -127,168 +126,220 @@
       </div>
     </section>
 
-    <!-- ===== 4. Zone 2 — Topics + dynamic questions + contact preference ===== -->
+    <!-- ===== 4. Zone 2 — Conditional questions + contact preference ===== -->
     <section class="section section-sage">
       <div class="container">
         <div class="zone2" id="zone2">
 
-          <!-- Tell us more (dynamic section — hidden entirely until a topic is selected) -->
+          <!-- Conditional "Tell us more" section -->
           <div id="tellMore" hidden>
             <h2 class="section-title">Tell us more</h2>
-            <p class="section-subtitle">Based on your selections above.</p>
 
-          <!-- Topic-specific blocks (stack in topic order) -->
-
-          <!-- Fulfillment / Warehousing -->
-          <div class="qblock" id="block-fulfillment" hidden>
-            <p class="qblock-title">Fulfillment / Warehousing</p>
-            <div class="field">
-              <label class="field-label">Service needs<span class="req">*</span></label>
-              <div class="checks" id="fulfillmentNeeds">
-                <label class="check"><input type="checkbox" name="fulfillmentNeeds" value="Storage"> Storage</label>
-                <label class="check"><input type="checkbox" name="fulfillmentNeeds" value="B2C Shipping (UPS/FedEx/USPS)" data-need="b2c"> B2C Shipping (UPS/FedEx/USPS)</label>
-                <label class="check"><input type="checkbox" name="fulfillmentNeeds" value="B2B Shipping (LTL/FTL)" data-need="b2b"> B2B Shipping (LTL/FTL)</label>
-                <label class="check"><input type="checkbox" name="fulfillmentNeeds" value="Dedicated Operations"> Dedicated Operations</label>
-                <label class="check"><input type="checkbox" name="fulfillmentNeeds" value="Light Manufacturing"> Light Manufacturing</label>
+            <!-- 1. Product description (shown for seller business types) -->
+            <div class="qblock" id="block-productDesc" hidden>
+              <p class="qblock-title">Product description</p>
+              <div class="field" style="margin-bottom:0;">
+                <label class="field-label" for="productDescription">What do you sell?<span class="req">*</span></label>
+                <input class="text-input" type="text" id="productDescription" name="productDescription" placeholder="e.g. ceramic kitchenware, 2–8 lbs">
+                <p class="field-error" data-error-for="productDescription">Please describe your product.</p>
               </div>
-              <p class="field-error" data-error-for="fulfillmentNeeds">Please select at least one service need.</p>
             </div>
-          </div>
 
-          <!-- Shipping Rates -->
-          <div class="qblock" id="block-shipping" hidden>
-            <p class="qblock-title">Shipping Rates</p>
-            <p class="field-hint" style="margin-bottom:0;">Tell us your outbound volume below so we can quote accurate rates.</p>
-          </div>
-
-          <!-- Outbound volumes (de-duplicated across Fulfillment + Shipping Rates) -->
-          <div class="qblock" id="block-outbound" hidden>
-            <div class="field" id="field-b2cOutbound" hidden>
-              <label class="field-label" for="b2cOutbound">B2C outbound volume<span class="req">*</span></label>
-              <input class="text-input" type="text" id="b2cOutbound" name="b2cOutbound" placeholder="## packs per month">
-              <p class="field-error" data-error-for="b2cOutbound">Please enter your B2C outbound volume.</p>
-            </div>
-            <div class="field" id="field-b2bOutbound" hidden style="margin-bottom:0;">
-              <label class="field-label" for="b2bOutbound">B2B outbound volume<span class="req">*</span></label>
-              <input class="text-input" type="text" id="b2bOutbound" name="b2bOutbound" placeholder="## pallets per month">
-              <p class="field-error" data-error-for="b2bOutbound">Please enter your B2B outbound volume.</p>
-            </div>
-          </div>
-
-          <!-- Global Forwarding -->
-          <div class="qblock" id="block-forwarding" hidden>
-            <p class="qblock-title">Global Forwarding</p>
-            <div class="field">
-              <label class="field-label">Service needs<span class="req">*</span></label>
-              <div class="checks" id="forwardingNeeds">
-                <label class="check"><input type="checkbox" name="forwardingNeeds" value="Ocean Freight"> Ocean Freight</label>
-                <label class="check"><input type="checkbox" name="forwardingNeeds" value="Airfreight"> Airfreight</label>
-                <label class="check"><input type="checkbox" name="forwardingNeeds" value="US/MX Trucking"> US/MX Trucking</label>
-                <label class="check"><input type="checkbox" name="forwardingNeeds" value="Need to switch to DDP"> Need to switch to DDP</label>
-                <label class="check"><input type="checkbox" name="forwardingNeeds" value="Others"> Others</label>
+            <!-- 2. Fulfillment / Warehousing -->
+            <div class="qblock" id="block-fulfillment" hidden>
+              <p class="qblock-title">Fulfillment / Warehousing</p>
+              <div class="field" style="margin-bottom:0;">
+                <label class="field-label">Service needs<span class="req">*</span></label>
+                <div class="checks" id="fulfillmentNeeds">
+                  <label class="check"><input type="checkbox" name="fulfillmentNeeds" value="Storage" data-need="storage"> Storage</label>
+                  <label class="check"><input type="checkbox" name="fulfillmentNeeds" value="B2C Shipping (UPS/FedEx/USPS)" data-need="b2c"> B2C Shipping (UPS/FedEx/USPS)</label>
+                  <label class="check"><input type="checkbox" name="fulfillmentNeeds" value="B2B Shipping (LTL/FTL)" data-need="b2b"> B2B Shipping (LTL/FTL)</label>
+                  <label class="check"><input type="checkbox" name="fulfillmentNeeds" value="Transload" data-need="transload"> Transload</label>
+                  <label class="check"><input type="checkbox" name="fulfillmentNeeds" value="Dedicated Operations" data-need="dedicated"> Dedicated Operations</label>
+                  <label class="check"><input type="checkbox" name="fulfillmentNeeds" value="Light Manufacturing" data-need="lightmfg"> Light Manufacturing</label>
+                  <label class="check"><input type="checkbox" name="fulfillmentNeeds" value="Others" data-need="others" data-other-toggle="fulfillmentOther"> Others</label>
+                </div>
+                <div class="field" id="fulfillmentOther" hidden style="margin-top:10px;margin-bottom:0;">
+                  <input class="text-input" type="text" id="fulfillmentOtherInput" placeholder="Please specify">
+                  <p class="field-error" data-error-for="fulfillmentOtherInput">Please specify your fulfillment need.</p>
+                </div>
+                <p class="field-error" data-error-for="fulfillmentNeeds">Please select at least one service need.</p>
+                <div class="field" id="field-fulfillmentDetails" hidden style="margin-top:14px;margin-bottom:0;">
+                  <label class="field-label" for="fulfillmentServiceDetails">Please describe<span class="req">*</span></label>
+                  <textarea class="text-input" id="fulfillmentServiceDetails" name="fulfillmentServiceDetails" placeholder="Tell us more about your dedicated operations, light manufacturing, or other needs."></textarea>
+                  <p class="field-error" data-error-for="fulfillmentServiceDetails">Please describe your needs.</p>
+                </div>
               </div>
-              <p class="field-error" data-error-for="forwardingNeeds">Please select at least one service need.</p>
             </div>
-          </div>
 
-          <!-- Supply Chain Consultation -->
-          <div class="qblock" id="block-consultation" hidden>
-            <p class="qblock-title">Supply Chain Consultation</p>
-            <div class="field">
-              <label class="field-label">Service needs<span class="req">*</span></label>
-              <div class="checks" id="consultationNeeds">
-                <label class="check"><input type="checkbox" name="consultationNeeds" value="Customized SC Design"> Customized SC Design</label>
-                <label class="check"><input type="checkbox" name="consultationNeeds" value="e-Commerce Operations"> e-Commerce Operations</label>
-                <label class="check"><input type="checkbox" name="consultationNeeds" value="Others"> Others</label>
+            <!-- 3. Shipping Rates -->
+            <div class="qblock" id="block-shipping" hidden>
+              <p class="qblock-title">Shipping Rates</p>
+              <div class="field">
+                <label class="field-label">Which carriers would you like rates for?<span class="req">*</span></label>
+                <div class="checks" id="shippingCarriers">
+                  <label class="check"><input type="checkbox" name="shippingCarriers" value="UPS"> UPS</label>
+                  <label class="check"><input type="checkbox" name="shippingCarriers" value="FedEx"> FedEx</label>
+                  <label class="check"><input type="checkbox" name="shippingCarriers" value="Any cheap rates"> Any cheap rates</label>
+                  <label class="check"><input type="checkbox" name="shippingCarriers" value="Others" data-other-toggle="shippingCarrierOther"> Others</label>
+                </div>
+                <div class="field" id="shippingCarrierOther" hidden style="margin-top:10px;margin-bottom:0;">
+                  <input class="text-input" type="text" id="shippingCarrierOtherInput" placeholder="Please specify">
+                  <p class="field-error" data-error-for="shippingCarrierOtherInput">Please specify the carrier.</p>
+                </div>
+                <p class="field-error" data-error-for="shippingCarriers">Please select at least one carrier.</p>
               </div>
-              <p class="field-error" data-error-for="consultationNeeds">Please select at least one service need.</p>
-            </div>
-          </div>
-
-          <!-- Shared fields (de-duplicated — shown once) -->
-          <div class="qblock" id="block-shared" hidden>
-            <p class="qblock-title">About your products</p>
-
-            <div class="field" id="field-productDescription">
-              <label class="field-label" for="productDescription">Product description<span class="req" data-req-mark>*</span></label>
-              <input class="text-input" type="text" id="productDescription" name="productDescription" placeholder="e.g. ceramic kitchenware, 2–8 lb, sold on Amazon + Shopify">
-              <p class="field-error" data-error-for="productDescription">Please describe your product.</p>
-            </div>
-
-            <div class="field" id="field-productFeature">
-              <label class="field-label">Product feature<span class="req">*</span></label>
-              <div class="checks" id="productFeature">
-                <label class="check"><input type="checkbox" name="productFeature" value="General Goods"> General Goods</label>
-                <label class="check"><input type="checkbox" name="productFeature" value="DG Goods"> DG Goods</label>
-                <label class="check"><input type="checkbox" name="productFeature" value="Require OGA Compliance"> Require OGA Compliance</label>
-                <label class="check"><input type="checkbox" name="productFeature" value="Others" data-other-toggle="productFeatureOther"> Others</label>
+              <div class="field">
+                <label class="field-label">Package size<span class="req">*</span></label>
+                <div class="checks" id="shippingPackageSizes">
+                  <label class="check"><input type="checkbox" name="shippingPackageSizes" value="<1 lb"> &lt;1 lb</label>
+                  <label class="check"><input type="checkbox" name="shippingPackageSizes" value="1–20 lb"> 1–20 lb</label>
+                  <label class="check"><input type="checkbox" name="shippingPackageSizes" value="20–50 lb"> 20–50 lb</label>
+                  <label class="check"><input type="checkbox" name="shippingPackageSizes" value="50–150 lb"> 50–150 lb</label>
+                  <label class="check"><input type="checkbox" name="shippingPackageSizes" value="Oversize"> Oversize</label>
+                  <label class="check" title="Additional Handling Service"><input type="checkbox" name="shippingPackageSizes" value="AHS required"> AHS required</label>
+                </div>
+                <p class="field-error" data-error-for="shippingPackageSizes">Please select at least one package size.</p>
               </div>
-              <div class="field" id="productFeatureOther" hidden style="margin-top:10px;margin-bottom:0;">
-                <input class="text-input" type="text" id="productFeatureOtherInput" placeholder="Please specify">
-                <p class="field-error" data-error-for="productFeatureOtherInput">Please specify the product feature.</p>
+              <div class="field" style="margin-bottom:0;">
+                <label class="field-label">Where will goods ship from?</label>
+                <div class="checks" id="shippingShipFrom">
+                  <label class="check"><input type="radio" name="shippingShipFrom" value="Surpath warehouse"> Surpath warehouse</label>
+                  <label class="check"><input type="radio" name="shippingShipFrom" value="Other warehouse"> Other warehouse</label>
+                </div>
               </div>
-              <p class="field-error" data-error-for="productFeature">Please select at least one product feature.</p>
             </div>
 
-            <div class="field" id="field-inboundVolume" style="margin-bottom:0;">
-              <label class="field-label" for="inboundVolume">Inbound volume<span class="req" data-req-mark>*</span></label>
-              <input class="text-input" type="text" id="inboundVolume" name="inboundVolume" placeholder="## loads per month">
-              <p class="field-error" data-error-for="inboundVolume">Please enter your inbound volume.</p>
+            <!-- 4. Global Forwarding -->
+            <div class="qblock" id="block-forwarding" hidden>
+              <p class="qblock-title">Global Forwarding</p>
+              <div class="field" style="margin-bottom:0;">
+                <label class="field-label">Service needs<span class="req">*</span></label>
+                <div class="checks" id="forwardingNeeds">
+                  <label class="check"><input type="checkbox" name="forwardingNeeds" value="Ocean Freight"> Ocean Freight</label>
+                  <label class="check"><input type="checkbox" name="forwardingNeeds" value="Airfreight"> Airfreight</label>
+                  <label class="check"><input type="checkbox" name="forwardingNeeds" value="Drayage or Trucking"> Drayage or Trucking</label>
+                  <label class="check"><input type="checkbox" name="forwardingNeeds" value="Transition to DDP"> Transition to DDP</label>
+                  <label class="check"><input type="checkbox" name="forwardingNeeds" value="Customs Brokerage"> Customs Brokerage</label>
+                  <label class="check"><input type="checkbox" name="forwardingNeeds" value="Others" data-other-toggle="forwardingOther"> Others</label>
+                </div>
+                <div class="field" id="forwardingOther" hidden style="margin-top:10px;margin-bottom:0;">
+                  <input class="text-input" type="text" id="forwardingOtherInput" placeholder="Please specify">
+                  <p class="field-error" data-error-for="forwardingOtherInput">Please specify your forwarding need.</p>
+                </div>
+                <p class="field-error" data-error-for="forwardingNeeds">Please select at least one service need.</p>
+              </div>
             </div>
-          </div>
 
-          <!-- Describe your situation (standalone — always shown at the bottom of the dynamic section) -->
-          <div class="qblock" id="block-situation">
-            <div class="field" style="margin-bottom:0;">
-              <label class="field-label" for="situation">Describe your situation<span class="req" data-req-mark>*</span></label>
-              <textarea class="text-input" id="situation" name="situation" placeholder="Anything else we should know…"></textarea>
-              <p class="field-error" data-error-for="situation">Please describe your situation.</p>
+            <!-- 5. SC Consultation -->
+            <div class="qblock" id="block-consultation" hidden>
+              <p class="qblock-title">SC Consultation</p>
+              <div class="field" style="margin-bottom:0;">
+                <label class="field-label">Service needs<span class="req">*</span></label>
+                <div class="checks" id="consultationNeeds">
+                  <label class="check"><input type="checkbox" name="consultationNeeds" value="Customized Whitepaper"> Customized Whitepaper</label>
+                  <label class="check"><input type="checkbox" name="consultationNeeds" value="e-Commerce Operations"> e-Commerce Operations</label>
+                  <label class="check"><input type="checkbox" name="consultationNeeds" value="Others" data-other-toggle="consultationOther"> Others</label>
+                </div>
+                <div class="field" id="consultationOther" hidden style="margin-top:10px;margin-bottom:0;">
+                  <input class="text-input" type="text" id="consultationOtherInput" placeholder="Please specify">
+                  <p class="field-error" data-error-for="consultationOtherInput">Please specify your consultation need.</p>
+                </div>
+                <p class="field-error" data-error-for="consultationNeeds">Please select at least one service need.</p>
+              </div>
             </div>
-          </div>
+
+            <!-- 6. Volume fields (shared, each shown independently) -->
+            <div class="qblock" id="block-volume" hidden>
+              <p class="qblock-title">Volume</p>
+              <div class="field" id="field-inboundVolume" hidden>
+                <label class="field-label" for="inboundVolume">Inbound volume<span class="req">*</span></label>
+                <div class="volume-row">
+                  <input class="text-input" type="number" min="0" step="1" id="inboundVolume" name="inboundVolume" placeholder="0">
+                  <span class="volume-unit">loads / month</span>
+                </div>
+                <p class="field-error" data-error-for="inboundVolume">Please enter your inbound volume.</p>
+              </div>
+              <div class="field" id="field-b2cOutbound" hidden>
+                <label class="field-label" for="b2cOutbound">B2C outbound volume<span class="req">*</span></label>
+                <div class="volume-row">
+                  <input class="text-input" type="number" min="0" step="1" id="b2cOutbound" name="b2cOutbound" placeholder="0">
+                  <span class="volume-unit">packages / month</span>
+                </div>
+                <p class="field-error" data-error-for="b2cOutbound">Please enter your B2C outbound volume.</p>
+              </div>
+              <div class="field" id="field-b2bOutbound" hidden style="margin-bottom:0;">
+                <label class="field-label" for="b2bOutbound">B2B outbound volume<span class="req">*</span></label>
+                <div class="volume-row">
+                  <input class="text-input" type="number" min="0" step="1" id="b2bOutbound" name="b2bOutbound" placeholder="0">
+                  <span class="volume-unit">pallets / month</span>
+                </div>
+                <p class="field-error" data-error-for="b2bOutbound">Please enter your B2B outbound volume.</p>
+              </div>
+            </div>
+
+            <!-- 7. Additional comments -->
+            <div class="qblock" id="block-comments">
+              <div class="field" style="margin-bottom:0;">
+                <label class="field-label" for="situation">Additional comments<span class="req" data-req-mark>*</span></label>
+                <textarea class="text-input" id="situation" name="situation" placeholder="Describe your situation, any special requirements, or product characteristics (e.g. DG, oversized, temperature-sensitive)"></textarea>
+                <p class="field-error" data-error-for="situation">Please add a few details so we can help.</p>
+              </div>
+            </div>
 
           </div><!-- /#tellMore -->
 
-          <!-- Contact preference (always shown) -->
+          <!-- 8. Contact preference (always shown) -->
           <div class="pref-band">
-            <p class="pref-intro">We'll get back to you within 2 business days. What's the best way to reach you?</p>
+            <p class="pref-intro">What's the best way to reach you?</p>
 
-            <span class="pref-label">Contact method<span class="req">*</span></span>
-            <div class="methods" id="methods">
-              <button type="button" class="method-btn" data-method="Email" aria-pressed="false"><i class="ti ti-mail"></i> Email</button>
-              <button type="button" class="method-btn" data-method="Phone" aria-pressed="false"><i class="ti ti-phone"></i> Phone</button>
-              <button type="button" class="method-btn" data-method="Zoom Call" aria-pressed="false"><i class="ti ti-video"></i> Zoom Call</button>
-            </div>
-            <p class="field-error" data-error-for="methods" style="margin-top:8px;">Please choose a contact method.</p>
-
-            <div class="pref-conditional" id="field-phone" hidden>
-              <label class="field-label" for="phone">Phone number<span class="req">*</span></label>
-              <input class="text-input" type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
-              <p class="field-error" data-error-for="phone">Please enter a valid phone number.</p>
-            </div>
-
-            <div class="pref-conditional" id="field-timezone" hidden style="margin-top:14px;">
-              <label class="field-label" for="timezone">Time zone<span class="req">*</span></label>
+            <div class="pref-conditional" id="field-timezone" style="margin-top:0;">
+              <label class="field-label" for="timezone">Your time zone<span class="req">*</span></label>
+              <p class="field-note">We'll do our best to reach you during your business hours.</p>
               <select class="text-input" id="timezone" name="timezone">
-                <option value="">Select your time zone…</option>
+                <option value="">Select your timezone</option>
                 <optgroup label="United States">
-                  <option value="US - Eastern">Eastern</option>
-                  <option value="US - Central">Central</option>
-                  <option value="US - Mountain">Mountain</option>
-                  <option value="US - Pacific">Pacific</option>
-                  <option value="US - Alaska">Alaska</option>
-                  <option value="US - Hawaii">Hawaii</option>
+                  <option value="Pacific (UTC-8/-7)">Pacific (UTC-8/-7)</option>
+                  <option value="Mountain (UTC-7/-6)">Mountain (UTC-7/-6)</option>
+                  <option value="Central (UTC-6/-5)">Central (UTC-6/-5)</option>
+                  <option value="Eastern (UTC-5/-4)">Eastern (UTC-5/-4)</option>
                 </optgroup>
                 <optgroup label="Asia">
                   <option value="Mainland China (UTC+8)">Mainland China (UTC+8)</option>
                   <option value="Taiwan (UTC+8)">Taiwan (UTC+8)</option>
                   <option value="Vietnam (UTC+7)">Vietnam (UTC+7)</option>
                 </optgroup>
+                <optgroup label="Other">
+                  <option value="Others">Others</option>
+                </optgroup>
               </select>
+              <p class="tz-mismatch" id="tzMismatch">This differs from your detected timezone.</p>
               <p class="field-error" data-error-for="timezone">Please select your time zone.</p>
+            </div>
+
+            <div class="methods" id="methods" style="margin-top:14px;">
+              <button type="button" class="method-btn" data-method="Email" aria-pressed="false"><i class="ti ti-mail"></i> Email</button>
+              <button type="button" class="method-btn" data-method="Phone" aria-pressed="false"><i class="ti ti-phone"></i> Phone</button>
+              <button type="button" class="method-btn" data-method="Zoom Call" aria-pressed="false"><i class="ti ti-video"></i> Zoom Call</button>
+            </div>
+
+            <div class="pref-conditional" id="field-phone" hidden>
+              <label class="field-label" for="phone">Phone number<span class="req">*</span></label>
+              <div class="phone-row">
+                <select class="text-input" id="phoneCountryCode" name="phoneCountryCode">
+                  <option value="China (+86)">China (+86)</option>
+                  <option value="Taiwan (+886)">Taiwan (+886)</option>
+                  <option value="Vietnam (+84)">Vietnam (+84)</option>
+                  <option value="United States (+1)" selected>United States (+1)</option>
+                  <option value="Canada (+1)">Canada (+1)</option>
+                </select>
+                <input class="text-input" type="tel" id="phone" name="phone" placeholder="Phone number">
+              </div>
+              <p class="field-error" data-error-for="phone">Please enter a valid phone number.</p>
             </div>
           </div>
 
-          <!-- Submit -->
+          <!-- 9. Submit -->
           <button type="submit" class="btn btn-lime btn-block" style="margin-top:22px;">Send inquiry →</button>
 
         </div>
@@ -328,39 +379,97 @@
       var form = document.getElementById('contactForm');
       var zone2 = document.getElementById('zone2');
 
-      // Topic state
+      // ---- State ----
       var selectedTopics = new Set();
-      var PROD = ['fulfillment', 'shipping', 'forwarding']; // product-handling topics
+      var selectedMethod = 'Email'; // Email is pre-selected on load
+      var detectedTimezone = null;  // IANA string from Intl, for reference
+      var detectedTzValue = '';     // mapped <option> value, '' if no match
+
+      var SELLER_TYPES = ['e-Commerce Seller', 'Brick & Mortar Retailer', 'Brand Owner'];
+
+      // IANA timezone → <option> value mapping for silent auto-detection
+      var TZ_MAP = {
+        'America/Los_Angeles': 'Pacific (UTC-8/-7)',
+        'America/Vancouver':   'Pacific (UTC-8/-7)',
+        'America/Denver':      'Mountain (UTC-7/-6)',
+        'America/Phoenix':     'Mountain (UTC-7/-6)',
+        'America/Chicago':     'Central (UTC-6/-5)',
+        'America/Winnipeg':    'Central (UTC-6/-5)',
+        'America/New_York':    'Eastern (UTC-5/-4)',
+        'America/Toronto':     'Eastern (UTC-5/-4)',
+        'Asia/Shanghai':       'Mainland China (UTC+8)',
+        'Asia/Chongqing':      'Mainland China (UTC+8)',
+        'Asia/Urumqi':         'Mainland China (UTC+8)',
+        'Asia/Taipei':         'Taiwan (UTC+8)',
+        'Asia/Ho_Chi_Minh':    'Vietnam (UTC+7)',
+        'Asia/Hanoi':          'Vietnam (UTC+7)'
+      };
+
       var topicButtons = document.querySelectorAll('.topic-btn');
       var methodButtons = document.querySelectorAll('.method-btn');
-      var selectedMethod = null;
 
-      function anyProd() { return PROD.some(function (t) { return selectedTopics.has(t); }); }
+      // ---- Small helpers ----
+      function byId(id) { return document.getElementById(id); }
+      function val(id) { var el = byId(id); return el ? el.value.trim() : ''; }
       function has(t) { return selectedTopics.has(t); }
+      function checkedValues(name) {
+        return Array.prototype.map.call(
+          document.querySelectorAll('input[name="' + name + '"]:checked'),
+          function (i) { return i.value; }
+        );
+      }
+      function isVisible(el) { return el && !el.closest('[hidden]') && !el.hidden; }
+      function isSeller() {
+        return checkedValues('companyType').some(function (v) { return SELLER_TYPES.indexOf(v) !== -1; });
+      }
+      function needChecked(need) {
+        var el = document.querySelector('#fulfillmentNeeds input[data-need="' + need + '"]');
+        return !!(el && el.checked);
+      }
+      function otherChecked(groupSel) {
+        var cb = document.querySelector(groupSel + ' input[data-other-toggle]');
+        return !!(cb && cb.checked);
+      }
+
+      var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      var PHONE_RE = /^[+]?[\d\s().-]{7,}$/;
 
       // ---- "Others (specify)" reveal toggles ----
       document.querySelectorAll('[data-other-toggle]').forEach(function (cb) {
         cb.addEventListener('change', function () {
-          var target = document.getElementById(cb.getAttribute('data-other-toggle'));
+          var target = byId(cb.getAttribute('data-other-toggle'));
           if (target) target.hidden = !cb.checked;
         });
       });
 
-      // ---- Fulfillment B2C/B2B service-need checkboxes drive outbound volume fields ----
-      document.getElementById('fulfillmentNeeds').addEventListener('change', updateVisibility);
+      // ---- Business type mutual exclusivity (Group A sellers vs Group B 3PL) ----
+      byId('companyType').addEventListener('change', function (e) {
+        var cb = e.target;
+        if (!cb || cb.type !== 'checkbox' || !cb.checked) return;
+        var group = cb.getAttribute('data-group');
+        if (group === 'A') {
+          document.querySelectorAll('#companyType input[data-group="B"]').forEach(function (b) { b.checked = false; });
+        } else if (group === 'B') {
+          document.querySelectorAll('#companyType input[data-group="A"]').forEach(function (a) { a.checked = false; });
+        }
+        // "Others" is always free — no exclusivity applied.
+      });
 
-      // ---- Topic toggle ----
+      // ---- Topic toggle (multi-select) ----
       topicButtons.forEach(function (btn) {
         btn.addEventListener('click', function () {
           var topic = btn.getAttribute('data-topic');
-          if (selectedTopics.has(topic)) { selectedTopics.delete(topic); btn.classList.remove('selected'); btn.setAttribute('aria-pressed', 'false'); }
-          else { selectedTopics.add(topic); btn.classList.add('selected'); btn.setAttribute('aria-pressed', 'true'); }
+          if (selectedTopics.has(topic)) {
+            selectedTopics.delete(topic); btn.classList.remove('selected'); btn.setAttribute('aria-pressed', 'false');
+          } else {
+            selectedTopics.add(topic); btn.classList.add('selected'); btn.setAttribute('aria-pressed', 'true');
+          }
           clearError('topics');
           updateVisibility();
         });
       });
 
-      // ---- Contact method toggle (single select) ----
+      // ---- Contact method toggle (single-select) ----
       methodButtons.forEach(function (btn) {
         btn.addEventListener('click', function () {
           selectedMethod = btn.getAttribute('data-method');
@@ -369,174 +478,216 @@
             b.classList.toggle('selected', on);
             b.setAttribute('aria-pressed', on ? 'true' : 'false');
           });
-          clearError('methods');
           updateVisibility();
         });
       });
 
-      // ---- Visibility engine: recompute which blocks/fields are shown ----
+      // ---- Timezone mismatch note ----
+      byId('timezone').addEventListener('change', updateTzMismatch);
+      function updateTzMismatch() {
+        var differs = !!detectedTzValue && byId('timezone').value !== detectedTzValue;
+        byId('tzMismatch').classList.toggle('show', differs);
+      }
+
+      // ---- Required-asterisk visibility (visual only; validate() re-checks) ----
+      function setReqMark(fieldId, required) {
+        var mark = document.querySelector('label[for="' + fieldId + '"] [data-req-mark]');
+        if (mark) mark.style.visibility = required ? 'visible' : 'hidden';
+      }
+
+      // ====================================================================
+      //  Single state-driven visibility engine
+      // ====================================================================
       function updateVisibility() {
         var anyTopic = selectedTopics.size > 0;
+        var seller = isSeller();
 
-        // Dynamic "Tell us more" section — hidden entirely until a topic is selected
-        document.getElementById('tellMore').hidden = !anyTopic;
+        // 1. Product description — seller business types only
+        byId('block-productDesc').hidden = !seller;
 
-        // Topic-specific blocks
-        document.getElementById('block-fulfillment').hidden = !has('fulfillment');
-        document.getElementById('block-shipping').hidden = !has('shipping');
-        document.getElementById('block-forwarding').hidden = !has('forwarding');
-        document.getElementById('block-consultation').hidden = !has('consultation');
+        // 2–5. Service question blocks
+        byId('block-fulfillment').hidden = !has('fulfillment');
+        byId('block-shipping').hidden = !has('shipping');
+        byId('block-forwarding').hidden = !has('forwarding');
+        byId('block-consultation').hidden = !has('consultation');
 
-        // Outbound volumes (de-duplicated)
-        var b2cChecked = document.querySelector('#fulfillmentNeeds input[data-need="b2c"]').checked;
-        var b2bChecked = document.querySelector('#fulfillmentNeeds input[data-need="b2b"]').checked;
-        var showB2C = has('shipping') || (has('fulfillment') && b2cChecked);
-        var showB2B = has('fulfillment') && b2bChecked;
-        document.getElementById('field-b2cOutbound').hidden = !showB2C;
-        document.getElementById('field-b2bOutbound').hidden = !showB2B;
-        document.getElementById('block-outbound').hidden = !(showB2C || showB2B);
+        // Fulfillment fine-grained needs
+        var storage   = needChecked('storage');
+        var transload = needChecked('transload');
+        var b2c       = needChecked('b2c');
+        var b2b       = needChecked('b2b');
+        var dedicated = needChecked('dedicated');
+        var lightmfg  = needChecked('lightmfg');
+        var fOthers   = needChecked('others');
 
-        // Shared fields
-        document.getElementById('block-shared').hidden = !anyTopic;
-        document.getElementById('field-productFeature').hidden = !anyProd();
-        // required markers reflect current requirement (visual only; validation re-checks)
-        setReqMark('productDescription', anyProd());
-        setReqMark('inboundVolume', has('fulfillment') || has('forwarding'));
-        // Situation is required only when General Inquiry is the sole selected topic
-        setReqMark('situation', selectedTopics.size === 1 && has('general'));
+        // Shared "Please describe" field (dedicated / light mfg / others)
+        byId('field-fulfillmentDetails').hidden = !(has('fulfillment') && (dedicated || lightmfg || fOthers));
 
-        // Contact-preference conditionals
-        document.getElementById('field-phone').hidden = !(selectedMethod === 'Phone');
-        document.getElementById('field-timezone').hidden = !(selectedMethod === 'Phone' || selectedMethod === 'Zoom Call');
+        var anyForwarding = has('forwarding') && checkedValues('forwardingNeeds').length > 0;
+
+        // 6. Volume fields (each independent)
+        var showInbound = anyForwarding || (has('fulfillment') && (storage || transload));
+        var showB2C     = (has('fulfillment') && b2c) || has('shipping');
+        var showB2B     = has('fulfillment') && (b2b || transload);
+
+        byId('field-inboundVolume').hidden = !showInbound;
+        byId('field-b2cOutbound').hidden   = !showB2C;
+        byId('field-b2bOutbound').hidden   = !showB2B;
+        byId('block-volume').hidden        = !(showInbound || showB2C || showB2B);
+
+        // 7. Additional comments — always present; toggle required asterisk
+        setReqMark('situation', commentsRequired());
+
+        // "Tell us more" wrapper — visible once anything inside can show
+        byId('tellMore').hidden = !(anyTopic || seller);
+
+        // 8. Contact preference — phone fields only when Phone is selected
+        byId('field-phone').hidden = !(selectedMethod === 'Phone');
       }
 
-      function setReqMark(fieldId, required) {
-        var label = document.querySelector('label[for="' + fieldId + '"] [data-req-mark]');
-        if (label) label.style.visibility = required ? 'visible' : 'hidden';
+      // Additional comments required when SC Consultation is selected (alone or with
+      // others), OR when General Inquiry is the only selected topic.
+      function commentsRequired() {
+        return has('consultation') || (selectedTopics.size === 1 && has('general'));
       }
 
-      // ---- Validation helpers ----
+      // ---- Error helpers ----
       function showError(key) {
         var el = document.querySelector('.field-error[data-error-for="' + key + '"]');
         if (el) el.classList.add('show');
-        var input = document.getElementById(key);
+        var input = byId(key);
         if (input) input.classList.add('invalid');
       }
       function clearError(key) {
         var el = document.querySelector('.field-error[data-error-for="' + key + '"]');
         if (el) el.classList.remove('show');
-        var input = document.getElementById(key);
+        var input = byId(key);
         if (input) input.classList.remove('invalid');
       }
       function clearAllErrors() {
         document.querySelectorAll('.field-error.show').forEach(function (e) { e.classList.remove('show'); });
         document.querySelectorAll('.text-input.invalid').forEach(function (e) { e.classList.remove('invalid'); });
       }
-      function checkedValues(name) {
-        return Array.prototype.map.call(
-          document.querySelectorAll('input[name="' + name + '"]:checked'),
-          function (i) { return i.value; }
-        );
-      }
-      function isVisible(el) { return el && !el.closest('[hidden]') && !el.hidden; }
-      var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      var PHONE_RE = /^[+]?[\d\s().-]{7,}$/;
 
-      // Clear an error as soon as the user edits the field
+      // Clear errors as the user edits; recompute visibility on any change.
       form.addEventListener('input', function (e) {
         if (e.target.id) clearError(e.target.id);
       });
       form.addEventListener('change', function (e) {
         if (e.target.name) clearError(e.target.name);
         if (e.target.id) clearError(e.target.id);
+        updateVisibility();
       });
 
-      // ---- Validate ----
+      // ====================================================================
+      //  Validation
+      // ====================================================================
       function validate() {
         clearAllErrors();
         var errors = [];
 
-        // Name
-        if (!document.getElementById('name').value.trim()) { showError('name'); errors.push('name'); }
-        // Email
-        var email = document.getElementById('email').value.trim();
+        // Name / Email
+        if (!val('name')) { showError('name'); errors.push('name'); }
+        var email = val('email');
         if (!email || !EMAIL_RE.test(email)) { showError('email'); errors.push('email'); }
-        // Company type (>=1)
+
+        // Business type (>=1) + Others specify
         if (checkedValues('companyType').length === 0) { showError('companyType'); errors.push('companyType'); }
-        // Company type "Others" specify
-        var ctOther = document.querySelector('#companyType input[data-other-toggle]');
-        if (ctOther && ctOther.checked && !document.getElementById('companyTypeOtherInput').value.trim()) {
-          showError('companyTypeOtherInput'); errors.push('companyTypeOtherInput');
-        }
+        if (otherChecked('#companyType') && !val('companyTypeOtherInput')) { showError('companyTypeOtherInput'); errors.push('companyTypeOtherInput'); }
 
         // At least one topic
         if (selectedTopics.size === 0) { showError('topics'); errors.push('topics'); }
 
-        // Per-topic service needs
-        if (has('fulfillment') && checkedValues('fulfillmentNeeds').length === 0) { showError('fulfillmentNeeds'); errors.push('fulfillmentNeeds'); }
-        if (has('forwarding') && checkedValues('forwardingNeeds').length === 0) { showError('forwardingNeeds'); errors.push('forwardingNeeds'); }
-        if (has('consultation') && checkedValues('consultationNeeds').length === 0) { showError('consultationNeeds'); errors.push('consultationNeeds'); }
+        // Product description (required when seller business type)
+        if (isSeller() && !val('productDescription')) { showError('productDescription'); errors.push('productDescription'); }
 
-        // Outbound volumes (only if visible/required)
-        if (isVisible(document.getElementById('field-b2cOutbound')) && !document.getElementById('b2cOutbound').value.trim()) { showError('b2cOutbound'); errors.push('b2cOutbound'); }
-        if (isVisible(document.getElementById('field-b2bOutbound')) && !document.getElementById('b2bOutbound').value.trim()) { showError('b2bOutbound'); errors.push('b2bOutbound'); }
-
-        // Shared fields
-        if (anyProd()) {
-          if (!document.getElementById('productDescription').value.trim()) { showError('productDescription'); errors.push('productDescription'); }
-          if (checkedValues('productFeature').length === 0) { showError('productFeature'); errors.push('productFeature'); }
-          var pfOther = document.querySelector('#productFeature input[data-other-toggle]');
-          if (pfOther && pfOther.checked && !document.getElementById('productFeatureOtherInput').value.trim()) {
-            showError('productFeatureOtherInput'); errors.push('productFeatureOtherInput');
-          }
+        // Fulfillment
+        if (has('fulfillment')) {
+          if (checkedValues('fulfillmentNeeds').length === 0) { showError('fulfillmentNeeds'); errors.push('fulfillmentNeeds'); }
+          if (needChecked('others') && !val('fulfillmentOtherInput')) { showError('fulfillmentOtherInput'); errors.push('fulfillmentOtherInput'); }
+          if (isVisible(byId('field-fulfillmentDetails')) && !val('fulfillmentServiceDetails')) { showError('fulfillmentServiceDetails'); errors.push('fulfillmentServiceDetails'); }
         }
-        if ((has('fulfillment') || has('forwarding')) && !document.getElementById('inboundVolume').value.trim()) { showError('inboundVolume'); errors.push('inboundVolume'); }
-        if (selectedTopics.size === 1 && has('general') && !document.getElementById('situation').value.trim()) { showError('situation'); errors.push('situation'); }
 
-        // Contact method
-        if (!selectedMethod) { showError('methods'); errors.push('methods'); }
+        // Shipping Rates — at least one carrier and one package size
+        if (has('shipping')) {
+          if (checkedValues('shippingCarriers').length === 0) { showError('shippingCarriers'); errors.push('shippingCarriers'); }
+          if (otherChecked('#shippingCarriers') && !val('shippingCarrierOtherInput')) { showError('shippingCarrierOtherInput'); errors.push('shippingCarrierOtherInput'); }
+          if (checkedValues('shippingPackageSizes').length === 0) { showError('shippingPackageSizes'); errors.push('shippingPackageSizes'); }
+        }
+
+        // Global Forwarding
+        if (has('forwarding')) {
+          if (checkedValues('forwardingNeeds').length === 0) { showError('forwardingNeeds'); errors.push('forwardingNeeds'); }
+          if (otherChecked('#forwardingNeeds') && !val('forwardingOtherInput')) { showError('forwardingOtherInput'); errors.push('forwardingOtherInput'); }
+        }
+
+        // SC Consultation
+        if (has('consultation')) {
+          if (checkedValues('consultationNeeds').length === 0) { showError('consultationNeeds'); errors.push('consultationNeeds'); }
+          if (otherChecked('#consultationNeeds') && !val('consultationOtherInput')) { showError('consultationOtherInput'); errors.push('consultationOtherInput'); }
+        }
+
+        // Volume fields (required when visible)
+        if (isVisible(byId('field-inboundVolume')) && !val('inboundVolume')) { showError('inboundVolume'); errors.push('inboundVolume'); }
+        if (isVisible(byId('field-b2cOutbound')) && !val('b2cOutbound')) { showError('b2cOutbound'); errors.push('b2cOutbound'); }
+        if (isVisible(byId('field-b2bOutbound')) && !val('b2bOutbound')) { showError('b2bOutbound'); errors.push('b2bOutbound'); }
+
+        // Additional comments (conditional)
+        if (commentsRequired() && !val('situation')) { showError('situation'); errors.push('situation'); }
+
+        // Timezone (always required)
+        if (!val('timezone')) { showError('timezone'); errors.push('timezone'); }
+
+        // Phone (only when Phone selected — validate the number, not the country code)
         if (selectedMethod === 'Phone') {
-          var phone = document.getElementById('phone').value.trim();
+          var phone = val('phone');
           if (!phone || !PHONE_RE.test(phone)) { showError('phone'); errors.push('phone'); }
-        }
-        if (selectedMethod === 'Phone' || selectedMethod === 'Zoom Call') {
-          if (!document.getElementById('timezone').value) { showError('timezone'); errors.push('timezone'); }
         }
 
         return errors;
       }
 
-      // ---- Build payload ----
+      // ====================================================================
+      //  Payload
+      // ====================================================================
       function buildPayload() {
-        function otherVal(toggleSel, inputId) {
-          var cb = document.querySelector(toggleSel);
-          return (cb && cb.checked) ? document.getElementById(inputId).value.trim() : null;
-        }
+        function otherVal(groupSel, inputId) { return otherChecked(groupSel) ? val(inputId) : null; }
+        var seller = isSeller();
         return {
-          name: document.getElementById('name').value.trim(),
-          email: document.getElementById('email').value.trim(),
-          company: document.getElementById('company').value.trim() || null,
+          name: val('name'),
+          email: val('email'),
+          company: val('company') || null,
           companyType: checkedValues('companyType'),
-          companyTypeOther: otherVal('#companyType input[data-other-toggle]', 'companyTypeOtherInput'),
+          companyTypeOther: otherVal('#companyType', 'companyTypeOtherInput'),
           topics: Array.from(selectedTopics),
+          productDescription: seller ? (val('productDescription') || null) : null,
           fulfillmentNeeds: has('fulfillment') ? checkedValues('fulfillmentNeeds') : [],
+          fulfillmentOther: has('fulfillment') ? otherVal('#fulfillmentNeeds', 'fulfillmentOtherInput') : null,
+          fulfillmentServiceDetails: isVisible(byId('field-fulfillmentDetails')) ? (val('fulfillmentServiceDetails') || null) : null,
+          shippingCarriers: has('shipping') ? checkedValues('shippingCarriers') : [],
+          shippingCarrierOther: has('shipping') ? otherVal('#shippingCarriers', 'shippingCarrierOtherInput') : null,
+          shippingPackageSizes: has('shipping') ? checkedValues('shippingPackageSizes') : [],
+          shippingShipFrom: has('shipping') ? (checkedValues('shippingShipFrom')[0] || null) : null,
           forwardingNeeds: has('forwarding') ? checkedValues('forwardingNeeds') : [],
+          forwardingOther: has('forwarding') ? otherVal('#forwardingNeeds', 'forwardingOtherInput') : null,
           consultationNeeds: has('consultation') ? checkedValues('consultationNeeds') : [],
-          b2cOutboundVolume: isVisible(document.getElementById('field-b2cOutbound')) ? document.getElementById('b2cOutbound').value.trim() : null,
-          b2bOutboundVolume: isVisible(document.getElementById('field-b2bOutbound')) ? document.getElementById('b2bOutbound').value.trim() : null,
-          productDescription: document.getElementById('productDescription').value.trim() || null,
-          productFeature: checkedValues('productFeature'),
-          productFeatureOther: otherVal('#productFeature input[data-other-toggle]', 'productFeatureOtherInput'),
-          inboundVolume: document.getElementById('inboundVolume').value.trim() || null,
-          situation: document.getElementById('situation').value.trim() || null,
+          consultationOther: has('consultation') ? otherVal('#consultationNeeds', 'consultationOtherInput') : null,
+          inboundVolume: isVisible(byId('field-inboundVolume')) ? (val('inboundVolume') || null) : null,
+          b2cOutboundVolume: isVisible(byId('field-b2cOutbound')) ? (val('b2cOutbound') || null) : null,
+          b2bOutboundVolume: isVisible(byId('field-b2bOutbound')) ? (val('b2bOutbound') || null) : null,
+          situation: val('situation') || null,
           contactMethod: selectedMethod,
-          phone: selectedMethod === 'Phone' ? document.getElementById('phone').value.trim() : null,
-          timezone: (selectedMethod === 'Phone' || selectedMethod === 'Zoom Call') ? document.getElementById('timezone').value : null,
+          phone: selectedMethod === 'Phone' ? (val('phone') || null) : null,
+          phoneCountryCode: selectedMethod === 'Phone' ? byId('phoneCountryCode').value : null,
+          timezone: val('timezone') || null,
+          detectedTimezone: detectedTimezone || null,
           submittedAt: new Date().toISOString()
         };
       }
 
-      // ---- Submit ----
+      // ====================================================================
+      //  Submit
+      // ====================================================================
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         var errors = validate();
@@ -548,7 +699,7 @@
 
         var payload = buildPayload();
 
-        // Fire-and-forget POSTs to placeholder endpoints; errors are logged only.
+        // Fire-and-forget POST to the Apps Script webhook (no-cors). Errors are logged only.
         try {
           fetch(WEBHOOK_URL, {
             method: 'POST',
@@ -563,13 +714,35 @@
         // Replace the form (Zone 2 area) with the success message.
         zone2.innerHTML =
           '<div class="success-msg">' +
-          '<i class="ti ti-circle-check"></i>' +
+          '<i class="ti ti-circle-check" style="color:#2C4F5C"></i>' +
           '<p>Thank you — we\'ll be in touch within 2 business days.</p>' +
           '</div>';
         zone2.scrollIntoView({ behavior: 'smooth', block: 'center' });
       });
 
-      // Initial paint
+      // ====================================================================
+      //  Init
+      // ====================================================================
+      function detectTimezone() {
+        try {
+          var iana = Intl.DateTimeFormat().resolvedOptions().timeZone;
+          detectedTimezone = iana || null;
+          detectedTzValue = (iana && TZ_MAP[iana]) ? TZ_MAP[iana] : '';
+          if (detectedTzValue) byId('timezone').value = detectedTzValue;
+        } catch (err) {
+          detectedTimezone = null;
+          detectedTzValue = '';
+        }
+      }
+
+      // Email pre-selected by default
+      methodButtons.forEach(function (b) {
+        var on = b.getAttribute('data-method') === 'Email';
+        b.classList.toggle('selected', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+
+      detectTimezone();
       updateVisibility();
     })();
   </script>

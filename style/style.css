@@ -1368,9 +1368,39 @@ textarea.text-input { min-height: 92px; resize: vertical; line-height: 1.6; }
 .success-msg i { font-size: 34px; color: var(--color-icon); margin-bottom: 12px; display: block; }
 .success-msg p { font-size: 15px; color: var(--color-text); line-height: 1.6; }
 
+/* ---------- Volume fields (number input + inline unit label) ---------- */
+/* Pairs a number input with a unit label rendered OUTSIDE the input box. */
+.volume-row { display: flex; align-items: center; gap: 8px; }
+.volume-row .text-input { flex: 0 1 160px; width: auto; }
+.volume-unit {
+  font-size: 12.5px;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+/* ---------- Phone country code + number row (dark pref band) ---------- */
+.phone-row { display: flex; gap: 8px; }
+.phone-row select.text-input { flex: 0 0 auto; width: auto; min-width: 120px; }
+.phone-row input.text-input { flex: 1; }
+
+/* ---------- Inline field notes (used in the dark pref band) ---------- */
+.field-note { font-size: 11px; line-height: 1.5; margin-top: 4px; }
+.pref-band .field-note { color: var(--color-text-on-dark); }
+/* Non-blocking informational note when the chosen timezone differs from the detected one */
+.tz-mismatch {
+  display: none;
+  font-size: 11px;
+  font-style: italic;
+  color: var(--color-lime);
+  margin-top: 5px;
+}
+.tz-mismatch.show { display: block; }
+
 /* ---------- Contact mobile — max-width 768px ---------- */
 @media (max-width: 768px) {
   .zone1 { grid-template-columns: 1fr; gap: 18px; }
   .zone2 { width: 100%; }
   .col-right { order: -1; } /* photo + trust above the form on small screens */
+  .volume-row .text-input { flex: 0 1 130px; }
 }
