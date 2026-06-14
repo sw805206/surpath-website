@@ -1513,3 +1513,72 @@ textarea.text-input { min-height: 92px; resize: vertical; line-height: 1.6; }
   .col-right { order: -1; } /* photo + trust above the form on small screens */
   .vol-input { flex: 0 0 130px; }
 }
+
+/* ==========================================================================
+   Partner page
+   ========================================================================== */
+
+/* ---------- Partner cards (style.md › Partner Cards) ---------- */
+/* Two stacked grid rows (2-up then 3-up), 16px gap between and within rows. */
+.partner-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.partner-row { display: grid; gap: 16px; }
+.partner-row--2 { grid-template-columns: 1fr 1fr; }
+.partner-row--3 { grid-template-columns: 1fr 1fr 1fr; }
+
+/* Each card is a flex row: square image left, content right. */
+.partner-card {
+  display: flex;
+  background: var(--color-white);
+  border: 0.5px solid var(--color-card-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+/* Image column: fixed 100px wide, stretches to full card height; image crops 1:1. */
+.partner-card-media { flex: 0 0 100px; align-self: stretch; }
+.partner-card-media img {
+  width: 100px;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.partner-card-body { flex: 1; padding: 14px 16px; }
+.partner-card-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 0.5px solid var(--color-card-border);
+}
+
+/* Single-line bullets (no sub-text): small lime dot + 12px text. */
+.partner-bullets { list-style: none; margin: 0; padding: 0; }
+.partner-bullet {
+  position: relative;
+  padding-left: 14px;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  margin-bottom: 6px;
+}
+.partner-bullet:last-child { margin-bottom: 0; }
+.partner-bullet::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-lime);
+}
+
+/* ---------- Partner mobile — max-width 768px ---------- */
+@media (max-width: 768px) {
+  .partner-row--2,
+  .partner-row--3 { grid-template-columns: 1fr; }
+}
