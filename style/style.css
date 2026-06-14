@@ -1350,8 +1350,8 @@ textarea.text-input { min-height: 92px; resize: vertical; line-height: 1.6; }
 .dd-option {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+  justify-content: flex-start;
+  gap: 10px;
   padding: 10px 14px;
   font-size: 13px;
   font-weight: 400;
@@ -1372,14 +1372,30 @@ textarea.text-input { min-height: 92px; resize: vertical; line-height: 1.6; }
   white-space: nowrap;
   border: 0;
 }
-/* Teal checkmark, right-aligned; only visible when the option is checked. */
-.dd-check {
+/* Left-aligned custom checkbox (span before the label text); the native input
+   stays hidden as the state source. Unchecked: white fill, card-border outline.
+   Checked: primary fill + border with a white ti-check icon revealed inside. */
+.dd-cb {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  border: 1.5px solid var(--color-card-border);
+  background: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
-  font-size: 14px;
-  color: var(--color-mid-teal);
+}
+.dd-option:has(input:checked) .dd-cb {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+.dd-cb i {
+  font-size: 11px;
+  color: var(--color-white);
   opacity: 0;
 }
-.dd-option:has(input:checked) .dd-check { opacity: 1; }
+.dd-option:has(input:checked) .dd-cb i { opacity: 1; }
 /* Separator above the trailing "Others" option. */
 .dd-option.dd-sep { border-top: 0.5px solid var(--color-card-border); }
 
@@ -1408,10 +1424,9 @@ textarea.text-input { min-height: 92px; resize: vertical; line-height: 1.6; }
   margin-top: 20px;
 }
 .pref-intro {
-  font-size: 13px;
-  line-height: 1.6;
+  font-size: 15px;
+  font-weight: 600;
   color: var(--color-text-on-dark);
-  margin-bottom: 14px;
 }
 .pref-label {
   display: block;
