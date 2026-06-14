@@ -324,7 +324,6 @@
     // ===================== Contact form =====================
     (function () {
       var WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyPw1GmSvpk0xbcvmRpz7wLyZSQwGzd20yDt3ZWvvdW4yMYikst9wvnXxoHIaMUmwRoLA/exec";
-      var EMAIL_ENDPOINT = "PLACEHOLDER_EMAIL_ENDPOINT";
 
       var form = document.getElementById('contactForm');
       var zone2 = document.getElementById('zone2');
@@ -553,15 +552,10 @@
         try {
           fetch(WEBHOOK_URL, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain' },
             body: JSON.stringify(payload)
           }).catch(function (err) { console.error('Webhook submission error:', err); });
-
-          fetch(EMAIL_ENDPOINT, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          }).catch(function (err) { console.error('Email submission error:', err); });
         } catch (err) {
           console.error('Submission error:', err);
         }
