@@ -825,6 +825,33 @@
       detectTimezone();
       updateCommentsHint();
       updateVisibility();
+
+      // ---- Pre-select a topic from the URL (?topic=…) ----
+      // e.g. contact.html?topic=supply-chain-consultation lands with that topic
+      // already selected and its question block revealed.
+      (function preselectTopicFromURL() {
+        var requested;
+        try { requested = new URLSearchParams(window.location.search).get('topic'); } catch (e) { return; }
+        if (!requested) return;
+        var slugToTopic = {
+          'fulfillment': 'fulfillment',
+          'fulfillment-warehousing': 'fulfillment',
+          'last-mile-rates': 'shipping',
+          'shipping': 'shipping',
+          'global-forwarding': 'forwarding',
+          'forwarding': 'forwarding',
+          'supply-chain-consultation': 'consultation',
+          'consultation': 'consultation',
+          'general-inquiry': 'general',
+          'general': 'general'
+        };
+        var key = requested.trim().toLowerCase();
+        var target = slugToTopic[key] || key;
+        var btn = document.querySelector('.topic-btn[data-topic="' + target + '"]');
+        // Click it so the existing toggle handler runs (selects + reveals the
+        // matching block), exactly as if the user had clicked it manually.
+        if (btn && !selectedTopics.has(target)) btn.click();
+      })();
     })();
   </script>
 
