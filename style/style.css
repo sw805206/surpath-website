@@ -587,13 +587,19 @@ a { text-decoration: none; }
   align-items: stretch;
   gap: 32px;
 }
-.sc-doc-layout > .sc-bullets { flex: 6; }
+.sc-doc-main-col {
+  flex: 6;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
 .sc-doc-col {
   flex: 4;
   min-width: 0; /* allow the column to shrink below the 720px iframe's intrinsic width */
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  justify-content: flex-start;
   gap: 16px;
 }
 /* A. Label — matches the bullet header (.sc-bullet-title): 14px / weight 600 / body text */
@@ -602,13 +608,16 @@ a { text-decoration: none; }
   font-weight: 600;
   color: var(--color-text);
 }
-/* B. Iframe peek box — card border + radius (per .card); fixed height, clipped */
+/* B. Iframe peek box — card border + radius (per .card); fixed height, clipped.
+   Sits just below the label (small margin-top); its bottom edge lines up with
+   the last bullet in the left column. */
 .sc-doc-peek {
   position: relative;
   height: 280px;
   flex: 0 0 auto;
+  margin-top: 8px;
   overflow: hidden;
-  background: var(--color-white);
+  background: var(--color-section-sage);
   border: 0.5px solid var(--color-card-border);
   border-radius: 8px;
   cursor: pointer;
@@ -621,7 +630,9 @@ a { text-decoration: none; }
   pointer-events: none;
   /* transform: scale(...) applied via JS to fit the container width */
 }
-/* Bottom fade — same treatment as .whitepaper-fade, taller (70px) */
+/* Bottom fade — same treatment as .whitepaper-fade, taller (70px).
+   Fades to sage to match the peek box bg; transparent start is sage-toned
+   (rgba of #F5F9F0) so the gradient blends cleanly without a white ghost. */
 .sc-doc-fade {
   position: absolute;
   left: 0;
@@ -629,7 +640,7 @@ a { text-decoration: none; }
   bottom: 0;
   height: 70px;
   pointer-events: none;
-  background: linear-gradient(rgba(255, 255, 255, 0), var(--color-white));
+  background: linear-gradient(rgba(245, 249, 240, 0), var(--color-section-sage));
 }
 /* Hover overlay — faint teal tint with a centered pill CTA */
 .sc-doc-overlay {
@@ -652,15 +663,17 @@ a { text-decoration: none; }
   padding: 7px 16px;
   border-radius: 5px;
 }
-/* C. CTA — reuses .btn.btn-dark (primary dark); full width, pinned to column bottom */
+/* C. CTA — subdued text link in the left column, directly below the bullet list
+   (matches the contact-page .topics-restart treatment) */
 .sc-doc-cta {
-  width: 100%;
-  margin-top: auto;
-  text-align: center;
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--color-mid-teal);
+  text-decoration: underline;
 }
 @media (max-width: 768px) {
   .sc-doc-layout { flex-direction: column; gap: 24px; }
-  .sc-doc-layout > .sc-bullets,
+  .sc-doc-main-col,
   .sc-doc-col { flex: 1 1 auto; }
 }
 
@@ -1296,10 +1309,10 @@ textarea.text-input { min-height: 92px; resize: vertical; line-height: 1.6; }
   border-color: var(--color-primary);
   color: var(--color-white);
 }
-/* Restart link — right column of the last grid row, right-aligned */
+/* Restart link — its own full-width row below the buttons, right-aligned */
 .topics-restart {
+  grid-column: 1 / -1;
   justify-self: end;
-  align-self: center;
   font-size: 12px;
   color: var(--color-mid-teal);
   text-decoration: underline;
