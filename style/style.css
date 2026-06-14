@@ -617,7 +617,7 @@ a { text-decoration: none; }
   flex: 0 0 auto;
   margin-top: 8px;
   overflow: hidden;
-  background: var(--color-white);
+  background: var(--color-section-sage);
   border: 0.5px solid var(--color-card-border);
   border-radius: 8px;
   cursor: pointer;
@@ -630,7 +630,9 @@ a { text-decoration: none; }
   pointer-events: none;
   /* transform: scale(...) applied via JS to fit the container width */
 }
-/* Bottom fade — same treatment as .whitepaper-fade, taller (70px) */
+/* Bottom fade — same treatment as .whitepaper-fade, taller (70px).
+   Fades to sage to match the peek box bg; transparent start is sage-toned
+   (rgba of #F5F9F0) so the gradient blends cleanly without a white ghost. */
 .sc-doc-fade {
   position: absolute;
   left: 0;
@@ -638,7 +640,7 @@ a { text-decoration: none; }
   bottom: 0;
   height: 70px;
   pointer-events: none;
-  background: linear-gradient(rgba(255, 255, 255, 0), var(--color-white));
+  background: linear-gradient(rgba(245, 249, 240, 0), var(--color-section-sage));
 }
 /* Hover overlay — faint teal tint with a centered pill CTA */
 .sc-doc-overlay {
