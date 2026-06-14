@@ -95,7 +95,6 @@
             <!-- Product description — always visible; required state varies by business type -->
             <div class="field">
               <label class="field-label" for="productDescription">Product description<span class="req" data-req-mark>*</span></label>
-              <p class="field-hint">e.g. ceramic kitchenware, 2–8 lbs</p>
               <input class="text-input" type="text" id="productDescription" name="productDescription" placeholder="e.g. ceramic kitchenware, 2–8 lbs">
               <p class="field-error" data-error-for="productDescription">Please describe your product.</p>
             </div>
@@ -107,7 +106,7 @@
                 <button type="button" class="topic-btn" data-topic="fulfillment" aria-pressed="false"><i class="ti ti-building-warehouse"></i> Fulfillment / Warehousing</button>
                 <button type="button" class="topic-btn" data-topic="shipping" aria-pressed="false"><i class="ti ti-truck-delivery"></i> Last mile rates</button>
                 <button type="button" class="topic-btn" data-topic="forwarding" aria-pressed="false"><i class="ti ti-ship"></i> Global Forwarding</button>
-                <button type="button" class="topic-btn" data-topic="consultation" aria-pressed="false"><i class="ti ti-chart-dots"></i> SC Consultation</button>
+                <button type="button" class="topic-btn" data-topic="consultation" aria-pressed="false"><i class="ti ti-chart-dots"></i> Supply Chain Consultation</button>
                 <button type="button" class="topic-btn" data-topic="general" aria-pressed="false"><i class="ti ti-message"></i> General Inquiry</button>
               </div>
               <p class="field-error" data-error-for="topics" style="margin-top:10px;">Please select at least one topic.</p>
@@ -292,7 +291,6 @@
             <div class="qblock" id="block-comments">
               <div class="field" style="margin-bottom:0;">
                 <label class="field-label" for="additionalComments">Additional comments<span class="req" data-req-mark>*</span></label>
-                <p class="field-hint-dynamic" id="commentsHint"></p>
                 <textarea class="text-input" id="additionalComments" name="additionalComments"></textarea>
                 <p class="field-error" data-error-for="additionalComments">Please add a few details so we can help.</p>
               </div>
@@ -645,9 +643,7 @@
       }
       function updateCommentsHint() {
         var text = composeCommentsHint();
-        var hint = byId('commentsHint');
-        if (hint) hint.textContent = text;
-        var ta = byId('additionalComments');
+        var ta = byId('additionalComments') || byId('situation');
         if (ta) ta.placeholder = text;
       }
 
@@ -829,6 +825,7 @@
       });
 
       detectTimezone();
+      updateCommentsHint();
       updateVisibility();
     })();
   </script>
