@@ -35,7 +35,7 @@
   <section class="hero">
     <div class="hero-inner">
       <div class="hero-text">
-        <p class="hero-eyebrow">Get in touch</p>
+        <p class="hero-slogan">One world. Connected.</p>
         <h1>Tell us what you're <span class="accent">working on.</span></h1>
         <p class="hero-body">We'll get back to you within 2 business days with a plan — not a pitch.</p>
       </div>
@@ -100,11 +100,12 @@
             <div class="field" style="margin-bottom:0;">
               <label class="field-label">What can we help with?<span class="req">*</span></label>
               <div class="topics" id="topics">
-                <button type="button" class="topic-btn" data-topic="fulfillment" aria-pressed="false"><i class="ti ti-building-warehouse"></i> Fulfillment / Warehousing</button>
+                <button type="button" class="topic-btn" data-topic="fulfillment" aria-pressed="false"><i class="ti ti-building-warehouse"></i> Fulfillment / warehousing</button>
                 <button type="button" class="topic-btn" data-topic="shipping" aria-pressed="false"><i class="ti ti-truck-delivery"></i> Last mile rates</button>
-                <button type="button" class="topic-btn" data-topic="forwarding" aria-pressed="false"><i class="ti ti-ship"></i> Global Forwarding</button>
-                <button type="button" class="topic-btn" data-topic="consultation" aria-pressed="false"><i class="ti ti-chart-dots"></i> Supply Chain Consultation</button>
-                <button type="button" class="topic-btn" data-topic="general" aria-pressed="false"><i class="ti ti-message"></i> General Inquiry</button>
+                <button type="button" class="topic-btn" data-topic="forwarding" aria-pressed="false"><i class="ti ti-ship"></i> Global forwarding</button>
+                <button type="button" class="topic-btn" data-topic="consultation" aria-pressed="false"><i class="ti ti-chart-dots"></i> Supply chain consultation</button>
+                <button type="button" class="topic-btn" data-topic="general" aria-pressed="false"><i class="ti ti-message"></i> General inquiry</button>
+                <span class="topics-restart" id="topicsRestart" role="button" tabindex="0">Restart</span>
               </div>
               <p class="field-error" data-error-for="topics" style="margin-top:10px;">Please select at least one topic.</p>
             </div>
@@ -299,30 +300,6 @@
           <div class="pref-band">
             <p class="pref-intro">What's the best way to reach you?</p>
 
-            <div class="pref-conditional" id="field-timezone" style="margin-top:0;">
-              <label class="field-label" for="timezone">Your time zone<span class="req">*</span></label>
-              <p class="field-note">We'll do our best to reach you during your business hours.</p>
-              <select class="text-input" id="timezone" name="timezone">
-                <option value="">Select your timezone</option>
-                <optgroup label="United States">
-                  <option value="Pacific (UTC-8/-7)">Pacific (UTC-8/-7)</option>
-                  <option value="Mountain (UTC-7/-6)">Mountain (UTC-7/-6)</option>
-                  <option value="Central (UTC-6/-5)">Central (UTC-6/-5)</option>
-                  <option value="Eastern (UTC-5/-4)">Eastern (UTC-5/-4)</option>
-                </optgroup>
-                <optgroup label="Asia">
-                  <option value="Mainland China (UTC+8)">Mainland China (UTC+8)</option>
-                  <option value="Taiwan (UTC+8)">Taiwan (UTC+8)</option>
-                  <option value="Vietnam (UTC+7)">Vietnam (UTC+7)</option>
-                </optgroup>
-                <optgroup label="Other">
-                  <option value="Others">Others</option>
-                </optgroup>
-              </select>
-              <p class="tz-mismatch" id="tzMismatch">This differs from your detected timezone.</p>
-              <p class="field-error" data-error-for="timezone">Please select your time zone.</p>
-            </div>
-
             <div class="methods" id="methods" style="margin-top:14px;">
               <button type="button" class="method-btn" data-method="Email" aria-pressed="false"><i class="ti ti-mail"></i> Email</button>
               <button type="button" class="method-btn" data-method="Phone" aria-pressed="false"><i class="ti ti-phone"></i> Phone</button>
@@ -330,18 +307,17 @@
             </div>
 
             <div class="pref-conditional" id="field-phone" hidden>
-              <label class="field-label" for="phone">Phone number<span class="req">*</span></label>
-              <div class="phone-row">
-                <select class="text-input phone-cc" id="phoneCountryCode" name="phoneCountryCode">
-                  <option value="China (+86)">China (+86)</option>
-                  <option value="Taiwan (+886)">Taiwan (+886)</option>
-                  <option value="Vietnam (+84)">Vietnam (+84)</option>
-                  <option value="United States (+1)" selected>United States (+1)</option>
-                  <option value="Canada (+1)">Canada (+1)</option>
-                </select>
-                <input class="text-input" type="tel" id="phone" name="phone" placeholder="Phone number">
-              </div>
+              <input class="text-input" type="tel" id="phone" name="phone" placeholder="Include country code, e.g. +86 138 0000 0000">
               <p class="field-error" data-error-for="phone">Please enter a valid phone number.</p>
+            </div>
+
+            <div class="pref-conditional" id="field-timezone" hidden>
+              <label class="field-label" for="timezone">Your time zone<span class="req">*</span></label>
+              <select class="text-input" id="timezone" name="timezone">
+                <option value="Others — see comments">Others — see comments</option>
+              </select>
+              <p class="field-error" data-error-for="timezone">Please select your time zone.</p>
+              <p class="field-note">We'll do our best to reach you during your business hours.</p>
             </div>
           </div>
 
@@ -389,26 +365,8 @@
       var selectedTopics = new Set();
       var selectedMethod = 'Email'; // Email is pre-selected on load
       var detectedTimezone = null;  // IANA string from Intl, for reference
-      var detectedTzValue = '';     // mapped <option> value, '' if no match
 
       var SELLER_TYPES = ['e-Commerce Seller', 'Brick & Mortar Retailer', 'Brand Owner'];
-
-      // IANA timezone → <option> value mapping for silent auto-detection
-      var TZ_MAP = {
-        'America/Los_Angeles': 'Pacific (UTC-8/-7)',
-        'America/Vancouver':   'Pacific (UTC-8/-7)',
-        'America/Denver':      'Mountain (UTC-7/-6)',
-        'America/Phoenix':     'Mountain (UTC-7/-6)',
-        'America/Chicago':     'Central (UTC-6/-5)',
-        'America/Winnipeg':    'Central (UTC-6/-5)',
-        'America/New_York':    'Eastern (UTC-5/-4)',
-        'America/Toronto':     'Eastern (UTC-5/-4)',
-        'Asia/Shanghai':       'Mainland China (UTC+8)',
-        'Asia/Chongqing':      'Mainland China (UTC+8)',
-        'Asia/Taipei':         'Taiwan (UTC+8)',
-        'Asia/Ho_Chi_Minh':    'Vietnam (UTC+7)',
-        'Asia/Hanoi':          'Vietnam (UTC+7)'
-      };
 
       var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       var PHONE_RE = /^[+]?[\d\s().-]{7,}$/;
@@ -545,11 +503,29 @@
         });
       });
 
-      // ---- Timezone mismatch note ----
-      byId('timezone').addEventListener('change', updateTzMismatch);
-      function updateTzMismatch() {
-        var differs = !!detectedTzValue && byId('timezone').value !== detectedTzValue;
-        byId('tzMismatch').classList.toggle('show', differs);
+      // ---- Restart topics (resets topic selection + dynamic question blocks only) ----
+      byId('topicsRestart').addEventListener('click', restartTopics);
+      byId('topicsRestart').addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); restartTopics(); }
+      });
+      function restartTopics() {
+        // Deselect all topic buttons.
+        selectedTopics.clear();
+        topicButtons.forEach(function (b) {
+          b.classList.remove('selected');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        // Clear every field value inside the dynamic question blocks (#tellMore).
+        var tellMore = byId('tellMore');
+        tellMore.querySelectorAll('input, textarea, select').forEach(function (el) {
+          if (el.type === 'checkbox' || el.type === 'radio') el.checked = false;
+          else el.value = '';
+        });
+        // Refresh dropdown summaries so they revert to their placeholders.
+        tellMore.querySelectorAll('.dd-wrap').forEach(function (w) { refreshSummary(w); });
+        clearAllErrors();
+        // No topics selected → updateVisibility hides every question block.
+        updateVisibility();
       }
 
       // ---- Required-asterisk visibility (visual only; validate() re-checks) ----
@@ -598,8 +574,10 @@
         // "Tell us more" wrapper — visible once a topic is chosen.
         byId('tellMore').hidden = !anyTopic;
 
-        // Contact preference — phone fields only when Phone is selected.
+        // Contact preference — phone field only when Phone is selected;
+        // timezone only when Phone or Zoom is selected (hidden for Email).
         byId('field-phone').hidden = !(selectedMethod === 'Phone');
+        byId('field-timezone').hidden = !(selectedMethod === 'Phone' || selectedMethod === 'Zoom Call');
       }
 
       // ---- Additional comments: mandatory conditions + composed hint ----
@@ -722,10 +700,12 @@
         // Additional comments (conditional)
         if (commentsRequired() && !val('additionalComments')) { showError('additionalComments'); errors.push('additionalComments'); }
 
-        // Timezone (always required)
-        if (!val('timezone')) { showError('timezone'); errors.push('timezone'); }
+        // Timezone (required only when Phone or Zoom is selected)
+        if (selectedMethod === 'Phone' || selectedMethod === 'Zoom Call') {
+          if (!val('timezone')) { showError('timezone'); errors.push('timezone'); }
+        }
 
-        // Phone (only when Phone selected — validate the number, not the country code)
+        // Phone (only when Phone selected)
         if (selectedMethod === 'Phone') {
           var phone = val('phone');
           if (!phone || !PHONE_RE.test(phone)) { showError('phone'); errors.push('phone'); }
@@ -756,9 +736,8 @@
           productDescription: val('productDescription') || null,
           additionalComments: val('additionalComments') || null,
           contactMethod: selectedMethod,
-          phoneCountryCode: selectedMethod === 'Phone' ? byId('phoneCountryCode').value : null,
           phone: selectedMethod === 'Phone' ? (val('phone') || null) : null,
-          timezone: val('timezone') || null,
+          timezone: (selectedMethod === 'Phone' || selectedMethod === 'Zoom Call') ? (val('timezone') || null) : null,
           detectedTimezone: detectedTimezone || null,
           submittedAt: new Date().toISOString()
         };
@@ -803,15 +782,37 @@
       //  Init
       // ====================================================================
       function detectTimezone() {
+        var sel = byId('timezone');
+        var label = 'Your timezone';
+        var utc = '';
+        // Readable timezone label from the browser's Intl API.
         try {
           var iana = Intl.DateTimeFormat().resolvedOptions().timeZone;
           detectedTimezone = iana || null;
-          detectedTzValue = (iana && TZ_MAP[iana]) ? TZ_MAP[iana] : '';
-          if (detectedTzValue) byId('timezone').value = detectedTzValue;
+          try {
+            var parts = new Intl.DateTimeFormat('en-US', { timeZoneName: 'long' }).formatToParts(new Date());
+            parts.forEach(function (p) { if (p.type === 'timeZoneName' && p.value) label = p.value; });
+          } catch (e) {}
+          if (label === 'Your timezone' && iana) label = iana.split('/').pop().replace(/_/g, ' ');
         } catch (err) {
           detectedTimezone = null;
-          detectedTzValue = '';
         }
+        // UTC offset, e.g. "UTC+8", "UTC-7", "UTC+5:30".
+        try {
+          var offsetMin = -new Date().getTimezoneOffset();
+          var sign = offsetMin >= 0 ? '+' : '-';
+          var abs = Math.abs(offsetMin);
+          var hh = Math.floor(abs / 60);
+          var mm = abs % 60;
+          utc = 'UTC' + sign + hh + (mm ? ':' + (mm < 10 ? '0' : '') + mm : '');
+        } catch (e2) {}
+        // Insert the detected option as the first option and pre-select it.
+        var optText = utc ? (label + ' — ' + utc) : label;
+        var opt = document.createElement('option');
+        opt.value = optText;
+        opt.textContent = optText;
+        sel.insertBefore(opt, sel.firstChild);
+        sel.value = optText;
       }
 
       // Email pre-selected by default.

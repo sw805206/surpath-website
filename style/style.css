@@ -1266,8 +1266,8 @@ textarea.text-input { min-height: 92px; resize: vertical; line-height: 1.6; }
 
 /* ---------- Topic selector (multi-select pill/card buttons) ---------- */
 .topics {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 10px;
   margin-top: 14px;
 }
@@ -1292,6 +1292,15 @@ textarea.text-input { min-height: 92px; resize: vertical; line-height: 1.6; }
   background: var(--color-primary);
   border-color: var(--color-primary);
   color: var(--color-white);
+}
+/* Restart link — right column of the last grid row, right-aligned */
+.topics-restart {
+  justify-self: end;
+  align-self: center;
+  font-size: 12px;
+  color: var(--color-mid-teal);
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 /* ---------- Custom dropdown (multi-select) ---------- */
@@ -1490,23 +1499,9 @@ textarea.text-input { min-height: 92px; resize: vertical; line-height: 1.6; }
 .vol-input::-webkit-inner-spin-button,
 .vol-input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 
-/* ---------- Phone country code + number row (dark pref band) ---------- */
-.phone-row { display: flex; gap: 8px; align-items: center; }
-.phone-cc { flex: 0 0 140px; }
-.phone-row input.text-input { flex: 1; }
-
 /* ---------- Inline field notes (used in the dark pref band) ---------- */
 .field-note { font-size: 11px; line-height: 1.5; margin-top: 4px; }
 .pref-band .field-note { color: var(--color-text-on-dark); }
-/* Non-blocking informational note when the chosen timezone differs from the detected one */
-.tz-mismatch {
-  display: none;
-  font-size: 11.5px;
-  font-style: italic;
-  color: var(--color-footnote);
-  margin-top: 5px;
-}
-.tz-mismatch.show { display: block; }
 
 /* ---------- Contact mobile — max-width 768px ---------- */
 @media (max-width: 768px) {
