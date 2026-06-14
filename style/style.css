@@ -383,7 +383,7 @@ a { text-decoration: none; }
 }
 /* nth-of-type targets the card <a>, surviving the interleaved arrow spans */
 .service-card:nth-of-type(1) img {
-  object-position: 65% center; /* Global Freight Forwarding — nudged 15% right */
+  object-position: 85% center; /* Global Freight Forwarding — nudged right to show more of the boat */
 }
 .service-card:nth-of-type(3) img {
   object-position: center 40%;
