@@ -35,128 +35,74 @@
     <div class="hero-inner">
       <div class="hero-text">
         <p class="hero-slogan">One world. Connected.</p>
-        <h1>Connect to our expert network to support your growth</h1>
-        <p class="hero-body">From business setup to retail expansion — our trusted partner network covers every stage of your e-commerce journey.</p>
-      </div>
-      <div class="hero-cta">
-        <a class="btn btn-lime" href="contact.html">Contact us</a>
+        <h1>Explore our <span class="highlight-h1">expert network</span> and get help for your growth.</h1>
+        <p class="hero-body">We'll help you find the right partner for every stage of your business.</p>
       </div>
     </div>
   </section>
 
-  <!-- ===== 3. Partner blocks (reuse .svc-block from the Services page) ===== -->
-
-  <!-- Block 01 — Business Foundation -->
-  <section class="band-white">
+  <!-- ===== 3. Partners banner ===== -->
+  <section class="partners-banner">
     <div class="container">
-      <div class="svc-block">
-        <div class="svc-block-media">
-          <img src="asset/professional-01.webp" alt="Business Foundation" />
-        </div>
-        <div class="svc-block-content">
-          <p class="svc-block-eyebrow">01</p>
-          <h3 class="svc-block-title">Business Foundation</h3>
-          <ul class="svc-bullets">
-            <li>Entity formation &amp; registration</li>
-            <li>Accounting &amp; bookkeeping</li>
-            <li>Tax compliance</li>
-            <li>Insurance</li>
-            <li>Legal services</li>
-          </ul>
-        </div>
-      </div>
+      <p class="partners-banner-eyebrow">Our partner network</p>
+      <p class="partners-banner-body">Growing an e-commerce business takes more than logistics. We've spent years building a network of trusted specialists that are vetted, reliable, and ready to work with your business from day one.</p>
     </div>
   </section>
 
-  <!-- Block 02 — Sourcing -->
-  <section class="band-sage">
+  <!-- ===== 4. Partners list + carousel ===== -->
+  <section class="section section-white">
     <div class="container">
-      <div class="svc-block">
-        <div class="svc-block-media">
-          <img src="asset/sourcing-01.webp" alt="Sourcing" />
+      <div class="partners-layout">
+
+        <!-- Left column — firm list (each group maps to a carousel card via data-card) -->
+        <div class="partners-list-col">
+          <div class="partners-group" data-card="0">
+            <p class="partners-group-title">Business Foundation</p>
+            <p class="partners-firm">Consulting firms</p>
+            <p class="partners-firm">Law firms</p>
+            <p class="partners-firm">Certified accountants</p>
+            <p class="partners-firm">Customs brokers</p>
+            <p class="partners-firm">Insurance services</p>
+          </div>
+          <div class="partners-group" data-card="1">
+            <p class="partners-group-title">Sourcing</p>
+            <p class="partners-firm">Sourcing agencies</p>
+            <p class="partners-firm">Trading companies</p>
+            <p class="partners-firm">Manufacturing consultants</p>
+          </div>
+          <div class="partners-group" data-card="2">
+            <p class="partners-group-title">Marketing</p>
+            <p class="partners-firm">Marketing agencies</p>
+            <p class="partners-firm">PR firms</p>
+            <p class="partners-firm">Branding studios</p>
+            <p class="partners-firm">Content creators</p>
+          </div>
+          <div class="partners-group" data-card="3">
+            <p class="partners-group-title">Online marketplace</p>
+            <p class="partners-firm">Online account management</p>
+            <p class="partners-firm">ERP selection and integration</p>
+          </div>
+          <div class="partners-group" data-card="4">
+            <p class="partners-group-title">Retail Channels</p>
+            <p class="partners-firm">Channel management firms</p>
+            <p class="partners-firm">Retail distributors</p>
+          </div>
         </div>
-        <div class="svc-block-content">
-          <p class="svc-block-eyebrow">02</p>
-          <h3 class="svc-block-title">Sourcing</h3>
-          <ul class="svc-bullets">
-            <li>Factory &amp; supplier identification</li>
-            <li>Product development</li>
-            <li>Quality inspection</li>
-            <li>Compliance testing</li>
-            <li>Packaging design</li>
-          </ul>
+
+        <!-- Right column — carousel (single card; JS swaps content) -->
+        <div class="partners-carousel-col">
+          <div class="partners-carousel-controls">
+            <button class="partners-arrow" id="partnersPrev" type="button" aria-label="Previous category">&laquo;</button>
+            <button class="partners-arrow" id="partnersNext" type="button" aria-label="Next category">&raquo;</button>
+          </div>
+          <div class="partners-card" id="partnersCard"></div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- Block 03 — Marketing -->
-  <section class="band-white">
-    <div class="container">
-      <div class="svc-block">
-        <div class="svc-block-media">
-          <img src="asset/social-media-03.webp" alt="Marketing" />
-        </div>
-        <div class="svc-block-content">
-          <p class="svc-block-eyebrow">03</p>
-          <h3 class="svc-block-title">Marketing</h3>
-          <ul class="svc-bullets">
-            <li>Amazon PPC &amp; sponsored ads</li>
-            <li>Social media advertising</li>
-            <li>Influencer partnerships</li>
-            <li>Content creation</li>
-            <li>SEO &amp; listing optimization</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Block 04 — Online Operations -->
-  <section class="band-sage">
-    <div class="container">
-      <div class="svc-block">
-        <div class="svc-block-media">
-          <img src="asset/e-commerce-02.webp" alt="Online Operations" />
-        </div>
-        <div class="svc-block-content">
-          <p class="svc-block-eyebrow">04</p>
-          <h3 class="svc-block-title">Online Operations</h3>
-          <ul class="svc-bullets">
-            <li>Amazon store management</li>
-            <li>Multi-channel listing</li>
-            <li>Customer service</li>
-            <li>Returns management</li>
-            <li>Analytics &amp; reporting</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Block 05 — Retail Channels -->
-  <section class="band-white">
-    <div class="container">
-      <div class="svc-block">
-        <div class="svc-block-media">
-          <img src="asset/offline-retailer-02.webp" alt="Retail Channels" />
-        </div>
-        <div class="svc-block-content">
-          <p class="svc-block-eyebrow">05</p>
-          <h3 class="svc-block-title">Retail Channels</h3>
-          <ul class="svc-bullets">
-            <li>Walmart &amp; Target expansion</li>
-            <li>Retail buyer outreach</li>
-            <li>EDI compliance</li>
-            <li>Brick-and-mortar distribution</li>
-            <li>Trade show representation</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== 4. Footer ===== -->
+  <!-- ===== 5. Footer ===== -->
   <footer class="footer">
     <div class="footer-inner">
       <p>© 2026 Surpath Inc.</p>
@@ -164,7 +110,7 @@
   </footer>
 
   <script>
-    // Hamburger menu toggle (vanilla JS)
+    // ---- Mobile nav toggle (shared pattern) ----
     (function () {
       var toggle = document.getElementById('navToggle');
       var menu = document.getElementById('navMenu');
@@ -172,13 +118,150 @@
         var open = menu.classList.toggle('open');
         toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
       });
-      // Close the menu after tapping a link on mobile
       menu.querySelectorAll('a').forEach(function (link) {
         link.addEventListener('click', function () {
           menu.classList.remove('open');
           toggle.setAttribute('aria-expanded', 'false');
         });
       });
+    })();
+
+    // ---- Partner carousel + left-list highlighting ----
+    (function () {
+      var cards = [
+        { img: 'asset/professional-01.webp',     alt: 'Business foundation', title: 'Business Foundation',
+          extraBullets: [
+            'Set up your business right — consult an accountant and a lawyer before you register.',
+            'Your brand is your identity — file your logomark and trademark early to protect it.',
+            'Navigate import compliance with confidence — a licensed customs broker makes it manageable.',
+            "Don't overlook the essentials — licenses, bonds, certifications, and insurance matter more than you think.",
+            "Tap into local resources — your small business association can open doors you didn't know existed."
+          ] },
+        { img: 'asset/flea-market-01.webp',       alt: 'Sourcing',            title: 'Sourcing',
+          extraBullets: [
+            'Sourcing agency — finds the right products, arranges samples, and matches your specifications.',
+            "Independent consulting firm — vets your vendors, negotiates terms, and manages QC inspections so you don't have to.",
+            'Premium manufacturer networks — accessed through industry experts with established relationships on the ground.',
+            'Right packaging — protects your product and strengthens your brand before you scale.',
+            "Trading company — handles global shipping and tariff payments end to end, so you don't have to."
+          ] },
+        { img: 'asset/social-media-03.webp',      alt: 'Marketing',           title: 'Marketing',
+          extraBullets: [
+            'Brand & visual identity — built by real creative professionals, not AI, to reflect what your brand truly stands for.',
+            'Digital marketing — from website creation to social media management, establishes your presence and grows your audience.',
+            'PR & communications — protect your content and formalize your brand voice with experienced professionals.',
+            'Content creators & influencers — turn them into brand ambassadors who bring your story to the right audience.'
+          ] },
+        { img: 'asset/e-commerce-02.webp',        alt: 'Online marketplace',  title: 'Online Marketplace',
+          extraBullets: [
+            'Major marketplaces — Amazon, eBay, Walmart, Etsy, Temu, TikTok Shop, and more, each with its own rules and opportunities.',
+            'E-commerce expert — helps you find the right marketplace to start and a clear path to expand to the next.',
+            'Online account management — handles everything from listing creation to order management and resupply, professionally.',
+            'ERP & platform selection — critical to get right from the start; find the system that fits your operations, not the other way around.'
+          ] },
+        { img: 'asset/offline-retailer-02.webp',  alt: 'Retail channels',     title: 'Retail Channels',
+          extraBullets: [
+            'Trade shows — increase your company and brand exposure by putting your products in front of the right buyers.',
+            'Retail store launch — it takes more than a real estate agent; get the right team to set you up for success.',
+            'Channel management — gets your products listed as a vendor with major retailers, handling the complexity for you.',
+            "Retail e-commerce — sell on big retailers' online stores first, before committing to becoming a full vendor."
+          ] }
+      ];
+
+      var card    = document.getElementById('partnersCard');
+      var prevBtn = document.getElementById('partnersPrev');
+      var nextBtn = document.getElementById('partnersNext');
+      var groups  = Array.prototype.slice.call(document.querySelectorAll('.partners-group'));
+      var index   = 0;
+
+      // Build the visible card via DOM nodes (textContent avoids manual escaping)
+      function renderCard(c) {
+        card.innerHTML = '';
+        var img = document.createElement('img');
+        img.className = 'partners-card-img';
+        img.src = c.img;
+        img.alt = c.alt;
+        var body = document.createElement('div');
+        body.className = 'partners-card-body';
+        var title = document.createElement('p');
+        title.className = 'partners-card-title';
+        title.textContent = c.title;
+        body.appendChild(title);
+        if (c.extraBullets) {
+          // Cards with a full bullet block (Business Foundation, Sourcing, Marketing):
+          // bullet list + referrals line only — no short item list, no divider.
+          var bullets = document.createElement('ul');
+          bullets.className = 'svc-bullets';
+          c.extraBullets.forEach(function (text) {
+            var li = document.createElement('li');
+            li.textContent = text;
+            bullets.appendChild(li);
+          });
+          body.appendChild(bullets);
+
+          var note = document.createElement('p');
+          note.style.fontSize = '12px';
+          note.style.color = '#555';
+          note.style.marginTop = '12px';
+          note.appendChild(document.createTextNode('Need referrals? We can help — '));
+          var link = document.createElement('a');
+          link.href = 'contact.html';
+          link.style.fontSize = '12px';
+          link.style.color = '#4A9E8E';
+          link.style.textDecoration = 'underline';
+          link.textContent = 'contact us';
+          note.appendChild(link);
+          note.appendChild(document.createTextNode('.'));
+          body.appendChild(note);
+        } else {
+          // Remaining cards (Online marketplace, Retail channels): short item list.
+          c.items.forEach(function (text) {
+            var item = document.createElement('p');
+            item.className = 'partners-card-item';
+            item.textContent = text;
+            body.appendChild(item);
+          });
+        }
+        card.appendChild(img);
+        card.appendChild(body);
+      }
+
+      // Highlight the firms of the active group; clear all others
+      function syncList() {
+        groups.forEach(function (g) {
+          var on = (parseInt(g.getAttribute('data-card'), 10) === index);
+          g.querySelectorAll('.partners-firm').forEach(function (firm) {
+            firm.classList.toggle('active', on);
+          });
+        });
+      }
+
+      function render() {
+        renderCard(cards[index]);
+        prevBtn.disabled = (index === 0);
+        nextBtn.disabled = (index === cards.length - 1);
+        syncList();
+      }
+
+      prevBtn.addEventListener('click', function () {
+        if (index > 0) { index--; render(); }
+      });
+      nextBtn.addEventListener('click', function () {
+        if (index < cards.length - 1) { index++; render(); }
+      });
+
+      // Clicking any firm jumps the carousel to that firm's group card
+      groups.forEach(function (g) {
+        var target = parseInt(g.getAttribute('data-card'), 10);
+        g.querySelectorAll('.partners-firm').forEach(function (firm) {
+          firm.addEventListener('click', function () {
+            index = target;
+            render();
+          });
+        });
+      });
+
+      render(); // Card 1 active on load; prev disabled
     })();
   </script>
 
