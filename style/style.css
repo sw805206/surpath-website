@@ -1526,3 +1526,11 @@ textarea.text-input { min-height: 92px; resize: vertical; line-height: 1.6; }
   .col-right { order: -1; } /* photo + trust above the form on small screens */
   .vol-input { flex: 0 0 130px; }
 }
+
+/* ==========================================================================
+   Partner page
+   ========================================================================== */
+
+/* Partner blocks reuse the .svc-block / .band-white / .band-sage / .svc-bullets
+   pattern from the Services page (see /* Service Blocks */ above) — no
+   partner-specific CSS is needed. Add any partner-only variant here if required. */
