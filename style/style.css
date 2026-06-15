@@ -1602,7 +1602,7 @@ textarea.text-input { min-height: 92px; resize: vertical; line-height: 1.6; }
 /* Right column — carousel */
 .partners-carousel-col {
   flex: 1;
-  padding: 24px;
+  padding: 24px 24px 0; /* no bottom padding so the flex:1 card reaches the column's bottom edge, aligning with the left list column */
   background: var(--color-white);
   display: flex;
   flex-direction: column;
@@ -1643,6 +1643,11 @@ textarea.text-input { min-height: 92px; resize: vertical; line-height: 1.6; }
   object-fit: cover;
   display: block;
   flex-shrink: 0; /* keep the 200px image fixed inside the flex column */
+}
+/* Sourcing card image (flea-market) — anchor to the bottom to show the lower portion.
+   Targeted by src since the carousel reuses one <img> whose src swaps per card. */
+.partners-card-img[src*="flea-market"] {
+  object-position: center bottom;
 }
 .partners-card-body {
   padding: 20px;
