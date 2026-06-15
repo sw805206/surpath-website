@@ -79,8 +79,8 @@
           </div>
           <div class="partners-group" data-card="3">
             <p class="partners-group-title">Online marketplace</p>
-            <p class="partners-firm">ERP &amp; integration partners</p>
-            <p class="partners-firm">Customer service firms</p>
+            <p class="partners-firm">Online account management</p>
+            <p class="partners-firm">ERP selection and integration</p>
           </div>
           <div class="partners-group" data-card="4">
             <p class="partners-group-title">Retail Channels</p>
@@ -129,16 +129,43 @@
     // ---- Partner carousel + left-list highlighting ----
     (function () {
       var cards = [
-        { img: 'asset/professional-01.webp',     alt: 'Business foundation', title: 'Business foundation',
-          items: ['Legal & compliance', 'Accounting & tax', 'Trade consulting'] },
+        { img: 'asset/professional-01.webp',     alt: 'Business foundation', title: 'Business Foundation',
+          extraBullets: [
+            'Set up your business right — consult an accountant and a lawyer before you register.',
+            'Your brand is your identity — file your logomark and trademark early to protect it.',
+            'Navigate import compliance with confidence — a licensed customs broker makes it manageable.',
+            "Don't overlook the essentials — licenses, bonds, certifications, and insurance matter more than you think.",
+            "Tap into local resources — your small business association can open doors you didn't know existed."
+          ] },
         { img: 'asset/flea-market-01.webp',       alt: 'Sourcing',            title: 'Sourcing',
-          items: ['Product sourcing', 'Supplier vetting', 'Manufacturing support', 'Quality control'] },
+          extraBullets: [
+            'Sourcing agency — finds the right products, arranges samples, and matches your specifications.',
+            "Independent consulting firm — vets your vendors, negotiates terms, and manages QC inspections so you don't have to.",
+            'Premium manufacturer networks — accessed through industry experts with established relationships on the ground.',
+            'Right packaging — protects your product and strengthens your brand before you scale.',
+            "Trading company — handles global shipping and tariff payments end to end, so you don't have to."
+          ] },
         { img: 'asset/social-media-03.webp',      alt: 'Marketing',           title: 'Marketing',
-          items: ['Brand building', 'Digital marketing', 'PR & communications', 'Content production'] },
-        { img: 'asset/e-commerce-02.webp',        alt: 'Online marketplace',  title: 'Online marketplace',
-          items: ['Platform integrations', 'ERP systems', 'Customer service'] },
-        { img: 'asset/offline-retailer-02.webp',  alt: 'Retail channels',     title: 'Retail channels',
-          items: ['Marketplace management', 'Channel strategy', 'Retail distribution'] }
+          extraBullets: [
+            'Brand & visual identity — built by real creative professionals, not AI, to reflect what your brand truly stands for.',
+            'Digital marketing — from website creation to social media management, establishes your presence and grows your audience.',
+            'PR & communications — protect your content and formalize your brand voice with experienced professionals.',
+            'Content creators & influencers — turn them into brand ambassadors who bring your story to the right audience.'
+          ] },
+        { img: 'asset/e-commerce-02.webp',        alt: 'Online marketplace',  title: 'Online Marketplace',
+          extraBullets: [
+            'Major marketplaces — Amazon, eBay, Walmart, Etsy, Temu, TikTok Shop, and more, each with its own rules and opportunities.',
+            'E-commerce expert — helps you find the right marketplace to start and a clear path to expand to the next.',
+            'Online account management — handles everything from listing creation to order management and resupply, professionally.',
+            'ERP & platform selection — critical to get right from the start; find the system that fits your operations, not the other way around.'
+          ] },
+        { img: 'asset/offline-retailer-02.webp',  alt: 'Retail channels',     title: 'Retail Channels',
+          extraBullets: [
+            'Trade shows — increase your company and brand exposure by putting your products in front of the right buyers.',
+            'Retail store launch — it takes more than a real estate agent; get the right team to set you up for success.',
+            'Channel management — gets your products listed as a vendor with major retailers, handling the complexity for you.',
+            "Retail e-commerce — sell on big retailers' online stores first, before committing to becoming a full vendor."
+          ] }
       ];
 
       var card    = document.getElementById('partnersCard');
@@ -160,12 +187,41 @@
         title.className = 'partners-card-title';
         title.textContent = c.title;
         body.appendChild(title);
-        c.items.forEach(function (text) {
-          var item = document.createElement('p');
-          item.className = 'partners-card-item';
-          item.textContent = text;
-          body.appendChild(item);
-        });
+        if (c.extraBullets) {
+          // Cards with a full bullet block (Business Foundation, Sourcing, Marketing):
+          // bullet list + referrals line only — no short item list, no divider.
+          var bullets = document.createElement('ul');
+          bullets.className = 'svc-bullets';
+          c.extraBullets.forEach(function (text) {
+            var li = document.createElement('li');
+            li.textContent = text;
+            bullets.appendChild(li);
+          });
+          body.appendChild(bullets);
+
+          var note = document.createElement('p');
+          note.style.fontSize = '12px';
+          note.style.color = '#555';
+          note.style.marginTop = '12px';
+          note.appendChild(document.createTextNode('Need referrals? We can help — '));
+          var link = document.createElement('a');
+          link.href = 'contact.html';
+          link.style.fontSize = '12px';
+          link.style.color = '#4A9E8E';
+          link.style.textDecoration = 'underline';
+          link.textContent = 'contact us';
+          note.appendChild(link);
+          note.appendChild(document.createTextNode('.'));
+          body.appendChild(note);
+        } else {
+          // Remaining cards (Online marketplace, Retail channels): short item list.
+          c.items.forEach(function (text) {
+            var item = document.createElement('p');
+            item.className = 'partners-card-item';
+            item.textContent = text;
+            body.appendChild(item);
+          });
+        }
         card.appendChild(img);
         card.appendChild(body);
       }
